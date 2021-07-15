@@ -2,6 +2,8 @@ package tp.dominio;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Boleto {
 	int numeroBoleto;
@@ -12,6 +14,8 @@ public class Boleto {
 	String destino;
 	ArrayList<Ruta> recorrido;
 	int costo;
+	
+
 	
 	//Getters and Setters
 	public int getNumeroBoleto() {
@@ -70,6 +74,24 @@ public class Boleto {
 		}
 		return;
 	}
+	
+	
+	
+	
+	
+	
+	//esto hay que moverlo
+	Map<Integer, ArrayList<Ruta>> grafo = new HashMap<Integer, ArrayList<Ruta>>();
+	// con cada linea reconstruimos el grafo
+	ArrayList<Linea> lineas; // agregar todas las lineas
+	
+	public void generarGrafo() {
+		for(Linea l : lineas) {
+			ArrayList<Ruta> recorrido = l.getRecorrido();
+			for(Ruta r : recorrido) grafo.get(r.getIdOrigen()).add(r); //agrego las rutas al grafo dirigido
+		}
+	}
+	
 	
 	
 }

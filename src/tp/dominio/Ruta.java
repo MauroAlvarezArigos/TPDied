@@ -3,6 +3,8 @@ package tp.dominio;
 public class Ruta {
 	String origen;
 	String destino;
+	Integer idOrigen;
+	Integer idDestino;
 	Integer distancia;
 	Integer tiempoViaje;
 	Integer maxPasajeros;
@@ -77,6 +79,13 @@ public class Ruta {
 
 	public void setCosto(Double costo) {
 		this.costo = costo;
+	}
+	public Integer getIdOrigen() {
+		return idOrigen;
+	}
+	
+	public Integer getIdDestino() {
+		return idDestino;
 	}
 
 	

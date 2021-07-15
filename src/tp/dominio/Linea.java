@@ -16,6 +16,14 @@ public class Linea {
 		this.estado = estado;
 	}
 
+	public ArrayList<Ruta> getRecorrido() {
+		return recorrido;
+	}
+
+	public void setRecorrido(ArrayList<Ruta> recorrido) {
+		this.recorrido = recorrido;
+	}
+
 	//Getters and Setters
 	public String getNombre() {
 		return nombre;
