@@ -4,19 +4,19 @@ public class Ruta {
 	String origen;
 	String destino;
 	Integer distancia;
-	Integer durViaje;
+	Integer tiempoViaje;
 	Integer maxPasajeros;
 	Boolean estado;
 	Double costo;
 	
 	//Constructor
-	public Ruta(String origen, String destino, Integer distancia, Integer durViaje, Integer maxPasajeros,
+	public Ruta(String origen, String destino, Integer distancia, Integer tiempoViaje, Integer maxPasajeros,
 			Boolean estado, Double costo) {
 		super();
 		this.origen = origen;
 		this.destino = destino;
 		this.distancia = distancia;
-		this.durViaje = durViaje;
+		this.tiempoViaje = tiempoViaje;
 		this.maxPasajeros = maxPasajeros;
 		this.estado = estado;
 		this.costo = costo;
@@ -47,12 +47,12 @@ public class Ruta {
 		this.distancia = distancia;
 	}
 
-	public Integer getDurViaje() {
-		return durViaje;
+	public Integer getTiempoViaje() {
+		return tiempoViaje;
 	}
 
-	public void setDurViaje(Integer durViaje) {
-		this.durViaje = durViaje;
+	public void setTiempoViaje(Integer tiempoViaje) {
+		this.tiempoViaje = tiempoViaje;
 	}
 
 	public Integer getMaxPasajeros() {

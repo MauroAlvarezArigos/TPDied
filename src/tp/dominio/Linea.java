@@ -1,9 +1,12 @@
 package tp.dominio;
 
+import java.util.ArrayList;
+
 public class Linea {
 	String nombre;
 	String color;
 	Boolean estado;
+	ArrayList<Ruta> recorrido;
 	
 	//Constructor
 	public Linea(String nombre, String color, Boolean estado) {
