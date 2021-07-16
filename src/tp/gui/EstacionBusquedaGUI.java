@@ -6,10 +6,12 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 
 
 public class EstacionBusquedaGUI extends JPanel {
 	private JTextField tbxNombre;
+	private JTable resultados;
 	
 	
 
@@ -17,7 +19,7 @@ public class EstacionBusquedaGUI extends JPanel {
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		this.setLayout(gridBagLayout);
 		
-		JLabel lblBuscarEstacion = new JLabel("Buscar Estaci\u00F3n");
+		JLabel lblBuscarEstacion = new JLabel("Buscar Estación");
 		lblBuscarEstacion.setFont(new Font("Tahoma", Font.PLAIN, 22));
 		GridBagConstraints gbc_lblBuscarEstacion = new GridBagConstraints();
 		gbc_lblBuscarEstacion.gridwidth = 2;
@@ -26,6 +28,14 @@ public class EstacionBusquedaGUI extends JPanel {
 		gbc_lblBuscarEstacion.gridx = 3;
 		gbc_lblBuscarEstacion.gridy = 2;
 		this.add(lblBuscarEstacion, gbc_lblBuscarEstacion);
+		
+		JLabel lblResultados = new JLabel("Resultados:");
+		GridBagConstraints gbc_lblResultados = new GridBagConstraints();
+		gbc_lblResultados.insets = new Insets(0, 0, 5, 5);
+		gbc_lblResultados.anchor = GridBagConstraints.LAST_LINE_START;
+		gbc_lblResultados.gridx = 6;
+		gbc_lblResultados.gridy = 2;
+		this.add(lblResultados, gbc_lblResultados);
 		
 		ButtonGroup parametros = new ButtonGroup();
 		
@@ -90,6 +100,24 @@ public class EstacionBusquedaGUI extends JPanel {
 		gbc_btnCancelar.gridx = 4;
 		gbc_btnCancelar.gridy = 6;
 		this.add(btnCancelar, gbc_btnCancelar);
+		
+		resultados = new JTable();
+		resultados.setModel(new DefaultTableModel(
+			new Object[][] {
+			},
+			new String[] {
+				"ID", "Nombre", "Estado"
+			}
+		));
+		
+		resultados.getColumnModel().getColumn(0).setPreferredWidth(44);
+		GridBagConstraints gbc_resultados = new GridBagConstraints();
+		gbc_resultados.gridheight = 4;
+		gbc_resultados.insets = new Insets(0, 0, 5, 5);
+		gbc_resultados.fill = GridBagConstraints.BOTH;
+		gbc_resultados.gridx = 6;
+		gbc_resultados.gridy = 3;
+		add(resultados, gbc_resultados);
 
 	}
 }
