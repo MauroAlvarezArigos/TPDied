@@ -1,5 +1,6 @@
 package tp.gui;
 
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -105,7 +106,7 @@ public class EstacionGUI extends JPanel {
 		this.add(tbxCierre, gbc_tbxCierre);
 		tbxCierre.setColumns(10);
 		
-		
+
 		//Buttons
 		JButton btnBuscar = new JButton();
 		btnBuscar.setIcon(new ImageIcon(".\\res\\buscar.png"));
