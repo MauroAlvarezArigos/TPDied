@@ -23,7 +23,7 @@ public class EstacionGUI extends JPanel {
 		GridBagConstraints gbc_lblEstacion = new GridBagConstraints();
 		gbc_lblEstacion.gridwidth = 5;
 		gbc_lblEstacion.insets = new Insets(0, 0, 5, 5);
-		gbc_lblEstacion.gridx = 5;
+		gbc_lblEstacion.gridx = 4;
 		gbc_lblEstacion.gridy = 4;
 		this.add(lblEstacion, gbc_lblEstacion);
 		
@@ -49,8 +49,8 @@ public class EstacionGUI extends JPanel {
 		GridBagConstraints gbc_lblEstado = new GridBagConstraints();
 		gbc_lblEstado.anchor = GridBagConstraints.EAST;
 		gbc_lblEstado.insets = new Insets(0, 0, 5, 5);
-		gbc_lblEstado.gridx = 6;
-		gbc_lblEstado.gridy = 6;
+		gbc_lblEstado.gridx = 3;
+		gbc_lblEstado.gridy = 7;
 		this.add(lblEstado, gbc_lblEstado);
 		
 		JComboBox<String> cbxEstado = new JComboBox<String>();
@@ -58,18 +58,18 @@ public class EstacionGUI extends JPanel {
 		cbxEstado.addItem("Operativa");
 		cbxEstado.addItem("En Mantenimiento");
 		GridBagConstraints gbc_cbxEstado = new GridBagConstraints();
-		gbc_cbxEstado.gridwidth = 3;
+		gbc_cbxEstado.gridwidth = 2;
 		gbc_cbxEstado.insets = new Insets(0, 0, 5, 5);
 		gbc_cbxEstado.fill = GridBagConstraints.HORIZONTAL;
-		gbc_cbxEstado.gridx = 7;
-		gbc_cbxEstado.gridy = 6;
+		gbc_cbxEstado.gridx = 4;
+		gbc_cbxEstado.gridy = 7;
 		this.add(cbxEstado, gbc_cbxEstado);
 		
 		JLabel lblHorarios = new JLabel("Horarios");
 		GridBagConstraints gbc_lblHorarios = new GridBagConstraints();
 		gbc_lblHorarios.insets = new Insets(0, 0, 5, 5);
 		gbc_lblHorarios.gridx = 7;
-		gbc_lblHorarios.gridy = 8;
+		gbc_lblHorarios.gridy = 7;
 		this.add(lblHorarios, gbc_lblHorarios);
 		
 		JLabel lblApertura = new JLabel("Apertura:");
@@ -77,7 +77,7 @@ public class EstacionGUI extends JPanel {
 		gbc_lblApertura.anchor = GridBagConstraints.EAST;
 		gbc_lblApertura.insets = new Insets(0, 0, 5, 5);
 		gbc_lblApertura.gridx = 6;
-		gbc_lblApertura.gridy = 9;
+		gbc_lblApertura.gridy = 8;
 		this.add(lblApertura, gbc_lblApertura);
 		
 		tbxApertura = new JTextField();
@@ -85,7 +85,7 @@ public class EstacionGUI extends JPanel {
 		gbc_tbxApertura.insets = new Insets(0, 0, 5, 5);
 		gbc_tbxApertura.fill = GridBagConstraints.HORIZONTAL;
 		gbc_tbxApertura.gridx = 7;
-		gbc_tbxApertura.gridy = 9;
+		gbc_tbxApertura.gridy = 8;
 		this.add(tbxApertura, gbc_tbxApertura);
 		tbxApertura.setColumns(10);
 		
@@ -94,7 +94,7 @@ public class EstacionGUI extends JPanel {
 		gbc_lblCierre.anchor = GridBagConstraints.EAST;
 		gbc_lblCierre.insets = new Insets(0, 0, 5, 5);
 		gbc_lblCierre.gridx = 6;
-		gbc_lblCierre.gridy = 10;
+		gbc_lblCierre.gridy = 9;
 		this.add(lblCierre, gbc_lblCierre);
 		
 		tbxCierre = new JTextField();
@@ -102,9 +102,21 @@ public class EstacionGUI extends JPanel {
 		gbc_tbxCierre.insets = new Insets(0, 0, 5, 5);
 		gbc_tbxCierre.fill = GridBagConstraints.HORIZONTAL;
 		gbc_tbxCierre.gridx = 7;
-		gbc_tbxCierre.gridy = 10;
+		gbc_tbxCierre.gridy = 9;
 		this.add(tbxCierre, gbc_tbxCierre);
 		tbxCierre.setColumns(10);
+		
+		JEditorPane dtrpnObservaciones = new JEditorPane();
+		dtrpnObservaciones.setText("Observaciones");
+		GridBagConstraints gbc_dtrpnObservaciones = new GridBagConstraints();
+		gbc_dtrpnObservaciones.gridheight = 5;
+		gbc_dtrpnObservaciones.gridwidth = 4;
+		gbc_dtrpnObservaciones.insets = new Insets(0, 0, 5, 5);
+		gbc_dtrpnObservaciones.fill = GridBagConstraints.BOTH;
+		gbc_dtrpnObservaciones.gridx = 9;
+		gbc_dtrpnObservaciones.gridy = 7;
+		this.add(dtrpnObservaciones, gbc_dtrpnObservaciones);
+	
 		
 
 		//Buttons

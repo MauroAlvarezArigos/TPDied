@@ -13,8 +13,8 @@ public class App extends JFrame{
 		EstacionBusquedaGUI estacionBG = new EstacionBusquedaGUI();
 		
 		
-		//frame.getContentPane().add(estacionGUI);
-		frame.getContentPane().add(estacionBG);
+		frame.getContentPane().add(estacionGUI);
+		//frame.getContentPane().add(estacionBG);
 		
 		frame.pack();
 		frame.setSize(600,300);
