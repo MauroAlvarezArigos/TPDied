@@ -11,10 +11,11 @@ public class App extends JFrame{
 		
 		EstacionGUI estacionGUI = new EstacionGUI();
 		EstacionBusquedaGUI estacionBG = new EstacionBusquedaGUI();
+		LineaGUI lineaGUI = new LineaGUI();
 		
-		
-		frame.getContentPane().add(estacionGUI);
+		//frame.getContentPane().add(estacionGUI);
 		//frame.getContentPane().add(estacionBG);
+		frame.getContentPane().add(lineaGUI);
 		
 		frame.pack();
 		frame.setSize(600,300);

@@ -18,7 +18,7 @@ public class EstacionGUI extends JPanel {
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		this.setLayout(gridBagLayout);
 		
-		JLabel lblEstacion = new JLabel("Gestion de Estaciones");
+		JLabel lblEstacion = new JLabel("Gestión de Estaciones");
 		lblEstacion.setFont(new Font("Tahoma", Font.PLAIN, 22));
 		GridBagConstraints gbc_lblEstacion = new GridBagConstraints();
 		gbc_lblEstacion.gridwidth = 5;
@@ -106,16 +106,15 @@ public class EstacionGUI extends JPanel {
 		this.add(tbxCierre, gbc_tbxCierre);
 		tbxCierre.setColumns(10);
 		
-		JEditorPane dtrpnObservaciones = new JEditorPane();
-		dtrpnObservaciones.setText("Observaciones");
-		GridBagConstraints gbc_dtrpnObservaciones = new GridBagConstraints();
-		gbc_dtrpnObservaciones.gridheight = 5;
-		gbc_dtrpnObservaciones.gridwidth = 4;
-		gbc_dtrpnObservaciones.insets = new Insets(0, 0, 5, 5);
-		gbc_dtrpnObservaciones.fill = GridBagConstraints.BOTH;
-		gbc_dtrpnObservaciones.gridx = 9;
-		gbc_dtrpnObservaciones.gridy = 7;
-		this.add(dtrpnObservaciones, gbc_dtrpnObservaciones);
+		JEditorPane editorObservaciones = new JEditorPane();
+		editorObservaciones.setText("Observaciones");
+		GridBagConstraints gbc_editorObservaciones = new GridBagConstraints();
+		gbc_editorObservaciones.gridheight = 5;
+		gbc_editorObservaciones.insets = new Insets(0, 0, 5, 5);
+		gbc_editorObservaciones.fill = GridBagConstraints.BOTH;
+		gbc_editorObservaciones.gridx = 8;
+		gbc_editorObservaciones.gridy = 7;
+		this.add(editorObservaciones, gbc_editorObservaciones);
 	
 		
 
@@ -128,7 +127,6 @@ public class EstacionGUI extends JPanel {
 		gbc_btnBuscar.insets = new Insets(0, 0, 5, 5);
 		gbc_btnBuscar.gridx = 3;
 		gbc_btnBuscar.gridy = 12;
-		gbc_btnBuscar.fill = GridBagConstraints.LAST_LINE_START;
 		this.add(btnBuscar, gbc_btnBuscar);
 		
 		JButton btnAlta = new JButton();
@@ -136,9 +134,8 @@ public class EstacionGUI extends JPanel {
 		btnAlta.setMargin(new Insets(0, 0, 0, 0));
 		GridBagConstraints gbc_btnAlta = new GridBagConstraints();
 		gbc_btnAlta.insets = new Insets(0, 0, 5, 5);
-		gbc_btnAlta.gridx = 5;
+		gbc_btnAlta.gridx = 4;
 		gbc_btnAlta.gridy = 12;
-		gbc_btnAlta.fill = GridBagConstraints.LINE_END;
 		this.add(btnAlta, gbc_btnAlta);
 		
 		JButton btnModificar = new JButton();
@@ -146,9 +143,8 @@ public class EstacionGUI extends JPanel {
 		btnModificar.setMargin(new Insets(0, 0, 0, 0));
 		GridBagConstraints gbc_btnModificar = new GridBagConstraints();
 		gbc_btnModificar.insets = new Insets(0, 0, 5, 5);
-		gbc_btnModificar.gridx = 6;
+		gbc_btnModificar.gridx = 5;
 		gbc_btnModificar.gridy = 12;
-		gbc_btnModificar.fill = GridBagConstraints.LINE_END;
 		this.add(btnModificar, gbc_btnModificar);
 		
 		JButton btnBaja = new JButton();
@@ -157,9 +153,8 @@ public class EstacionGUI extends JPanel {
 		GridBagConstraints gbc_btnBaja = new GridBagConstraints();
 		gbc_btnBaja.anchor = GridBagConstraints.WEST;
 		gbc_btnBaja.insets = new Insets(0, 0, 5, 5);
-		gbc_btnBaja.gridx = 7;
+		gbc_btnBaja.gridx = 6;
 		gbc_btnBaja.gridy = 12;
-		gbc_btnBaja.fill = GridBagConstraints.LINE_END;
 		this.add(btnBaja, gbc_btnBaja);
 		
 		JButton btnGuardar = new JButton();
@@ -167,9 +162,8 @@ public class EstacionGUI extends JPanel {
 		btnGuardar.setMargin(new Insets(0, 0, 0, 0));
 		GridBagConstraints gbc_btnGuardar = new GridBagConstraints();
 		gbc_btnGuardar.insets = new Insets(0, 0, 5, 5);
-		gbc_btnGuardar.gridx = 9;
+		gbc_btnGuardar.gridx = 7;
 		gbc_btnGuardar.gridy = 12;
-		gbc_btnGuardar.fill = GridBagConstraints.LAST_LINE_END;
 		this.add(btnGuardar, gbc_btnGuardar);
 		
 		JButton btnCancelar = new JButton();
@@ -177,9 +171,8 @@ public class EstacionGUI extends JPanel {
 		btnCancelar.setMargin(new Insets(0, 0, 0, 0));
 		GridBagConstraints gbc_btnCancelar = new GridBagConstraints();
 		gbc_btnCancelar.insets = new Insets(0, 0, 5, 5);
-		gbc_btnCancelar.gridx = 10;
+		gbc_btnCancelar.gridx = 8;
 		gbc_btnCancelar.gridy = 12;
-		gbc_btnCancelar.fill = GridBagConstraints.LAST_LINE_END;
 		this.add(btnCancelar, gbc_btnCancelar);
 		
 		JButton btnSalir = new JButton();
@@ -187,9 +180,8 @@ public class EstacionGUI extends JPanel {
 		btnSalir.setMargin(new Insets(0, 0, 0, 0));
 		GridBagConstraints gbc_btnSalir = new GridBagConstraints();
 		gbc_btnSalir.insets = new Insets(0, 0, 5, 5);
-		gbc_btnSalir.gridx = 11;
+		gbc_btnSalir.gridx = 9;
 		gbc_btnSalir.gridy = 12;
-		gbc_btnSalir.fill = GridBagConstraints.LAST_LINE_END;
 		this.add(btnSalir, gbc_btnSalir);
 		
 	}
