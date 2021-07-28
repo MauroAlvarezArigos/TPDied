@@ -1,26 +1,58 @@
 package tp.gui;
 
-import javax.swing.JFrame;
+import java.awt.event.ActionEvent;
 
-public class App extends JFrame{
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+public class App extends JFrame {
 	
 	public static void main(String[] args) {
 		JFrame frame = new JFrame("Mi JFrame");
 		frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		frame.setTitle("Ejemplo de JFrame");
 		
-		EstacionGUI estacionGUI = new EstacionGUI();
-		EstacionBusquedaGUI estacionBG = new EstacionBusquedaGUI();
-		LineaGUI lineaGUI = new LineaGUI();
+		JPanel menu = new JPanel();
 		
-		//frame.getContentPane().add(estacionGUI);
-		//frame.getContentPane().add(estacionBG);
-		frame.getContentPane().add(lineaGUI);
+		JButton boton = new JButton("Estacion");
+		JButton boton2 = new JButton("Busqueda Estacion");
+		JButton boton3 = new JButton("Linea");
+		JButton boton4 = new JButton("Busqueda Linea");
+
+		menu.add(boton);
+		menu.add(boton2);
+		menu.add(boton3);
+		menu.add(boton4);
+		
+		boton.addActionListener(e -> {
+			EstacionGUI eg = new EstacionGUI();
+			eg.setVisible(true);
+		});
+		
+		boton2.addActionListener(e -> {
+			EstacionBusquedaGUI eb = new EstacionBusquedaGUI();
+			eb.setVisible(true);
+		});
+		
+		boton3.addActionListener(e -> {
+			LineaGUI lg = new LineaGUI();
+			lg.setVisible(true);
+		});
+		
+		boton4.addActionListener(e -> {
+			LineaBusquedaGUI lb = new LineaBusquedaGUI();
+			lb.setVisible(true);
+		});
+		
+		
+
+		frame.setContentPane(menu);
 		
 		frame.pack();
 		frame.setSize(600,300);
 		frame.setVisible(true);
 		
 	}
-
+	
 }
