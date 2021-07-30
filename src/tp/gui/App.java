@@ -17,18 +17,25 @@ public class App extends JFrame {
 		
 		JButton boton = new JButton("Estacion");
 		JButton boton2 = new JButton("Busqueda Estacion");
+		JButton boton3 = new JButton("Linea");
 
 		menu.add(boton);
 		menu.add(boton2);
+		menu.add(boton3);
 		
 		boton.addActionListener(e -> {
-			EstacionGUI eb = new EstacionGUI();
-			eb.setVisible(true);
+			EstacionGUI eg = new EstacionGUI();
+			eg.setVisible(true);
 		});
 		
 		boton2.addActionListener(e -> {
 			EstacionBusquedaGUI eb = new EstacionBusquedaGUI();
 			eb.setVisible(true);
+		});
+
+		boton3.addActionListener(e -> {
+			LineaGUI lg = new LineaGUI();
+			lg.setVisible(true);
 		});
 
 		frame.setContentPane(menu);

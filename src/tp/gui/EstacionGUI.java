@@ -156,13 +156,22 @@ public class EstacionGUI extends JFrame {
 		gbc_btnAlta.gridy = 0;
 		botones.add(btnAlta, gbc_btnAlta);
 		
+		JButton btnModificar = new JButton();
+		btnModificar.setIcon(new ImageIcon("D:\\Facultad\\Programacion\\Java\\TPDied\\res\\modificar.png"));
+		btnModificar.setMargin(new Insets(0, 0, 0, 0));
+		GridBagConstraints gbc_btnModificar = new GridBagConstraints();
+		gbc_btnModificar.insets = new Insets(0, 0, 0, 5);
+		gbc_btnModificar.gridx = 3;
+		gbc_btnModificar.gridy = 0;
+		botones.add(btnModificar, gbc_btnModificar);
+	
 		JButton btnBaja = new JButton();
 		btnBaja.setIcon(new ImageIcon("D:\\Facultad\\Programacion\\Java\\TPDied\\res\\borrar.png"));
 		btnBaja.setMargin(new Insets(0, 0, 0, 0));
 		GridBagConstraints gbc_btnBaja = new GridBagConstraints();
 		gbc_btnBaja.anchor = GridBagConstraints.WEST;
 		gbc_btnBaja.insets = new Insets(0, 0, 0, 5);
-		gbc_btnBaja.gridx = 3;
+		gbc_btnBaja.gridx = 4;
 		gbc_btnBaja.gridy = 0;
 		botones.add(btnBaja, gbc_btnBaja);
 		
@@ -171,7 +180,7 @@ public class EstacionGUI extends JFrame {
 		btnGuardar.setMargin(new Insets(0, 0, 0, 0));
 		GridBagConstraints gbc_btnGuardar = new GridBagConstraints();
 		gbc_btnGuardar.insets = new Insets(0, 0, 0, 5);
-		gbc_btnGuardar.gridx = 4;
+		gbc_btnGuardar.gridx = 6;
 		gbc_btnGuardar.gridy = 0;
 		botones.add(btnGuardar, gbc_btnGuardar);
 		
@@ -180,7 +189,7 @@ public class EstacionGUI extends JFrame {
 		btnCancelar.setMargin(new Insets(0, 0, 0, 0));
 		GridBagConstraints gbc_btnCancelar = new GridBagConstraints();
 		gbc_btnCancelar.insets = new Insets(0, 0, 0, 5);
-		gbc_btnCancelar.gridx = 6;
+		gbc_btnCancelar.gridx = 7;
 		gbc_btnCancelar.gridy = 0;
 		botones.add(btnCancelar, gbc_btnCancelar);
 		
@@ -188,7 +197,7 @@ public class EstacionGUI extends JFrame {
 		btnSalir.setIcon(new ImageIcon("D:\\Facultad\\Programacion\\Java\\TPDied\\res\\salir.png"));
 		btnSalir.setMargin(new Insets(0, 0, 0, 0));
 		GridBagConstraints gbc_btnSalir = new GridBagConstraints();
-		gbc_btnSalir.gridx = 7;
+		gbc_btnSalir.gridx = 9;
 		gbc_btnSalir.gridy = 0;
 		botones.add(btnSalir, gbc_btnSalir);
 		
