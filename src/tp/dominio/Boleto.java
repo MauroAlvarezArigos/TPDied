@@ -83,12 +83,12 @@ public class Boleto {
 	//esto hay que moverlo
 	Map<Integer, ArrayList<Ruta>> grafo = new HashMap<Integer, ArrayList<Ruta>>();
 	// con cada linea reconstruimos el grafo
-	ArrayList<Linea> lineas; // agregar todas las lineas
+	ArrayList<Linea> lineas; // pedir a la BD que me de todas las lineas
 	
 	public void generarGrafo() {
 		for(Linea l : lineas) {
 			ArrayList<Ruta> recorrido = l.getRecorrido();
-			for(Ruta r : recorrido) grafo.get(r.getIdOrigen()).add(r); //agrego las rutas al grafo dirigido
+			for(Ruta r : recorrido) grafo.get(r.getOrigen().getId()).add(r); //agrego las rutas al grafo dirigido
 		}
 	}
 	

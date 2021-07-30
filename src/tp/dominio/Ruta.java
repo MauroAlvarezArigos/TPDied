@@ -1,22 +1,22 @@
 package tp.dominio;
 
 public class Ruta {
-	String origen;
-	String destino;
-	Integer idOrigen;
-	Integer idDestino;
+	Estacion origen;
+	Estacion destino;
 	Integer distancia;
 	Integer tiempoViaje;
 	Integer maxPasajeros;
 	Boolean estado;
-	Double costo;
+	Integer costo;
 	
 	//Constructor
-	public Ruta(String origen, String destino, Integer distancia, Integer tiempoViaje, Integer maxPasajeros,
-			Boolean estado, Double costo) {
+	public Ruta(Estacion origen, Estacion destino, Integer distancia, Integer tiempoViaje, Integer maxPasajeros,
+			Boolean estado, Integer costo) {
 		super();
 		this.origen = origen;
 		this.destino = destino;
+		//al crear una ruta se debe consultar tanto para el origen como para el destino
+		//si ya existen dichas estaciones, en cuyo caso utilizar la info que tenemos
 		this.distancia = distancia;
 		this.tiempoViaje = tiempoViaje;
 		this.maxPasajeros = maxPasajeros;
@@ -25,19 +25,19 @@ public class Ruta {
 	}
 
 	//Getters and Setters
-	public String getOrigen() {
+	public Estacion getOrigen() {
 		return origen;
 	}
 
-	public void setOrigen(String origen) {
+	public void setOrigen(Estacion origen) {
 		this.origen = origen;
 	}
 
-	public String getDestino() {
+	public Estacion getDestino() {
 		return destino;
 	}
 
-	public void setDestino(String destino) {
+	public void setDestino(Estacion destino) {
 		this.destino = destino;
 	}
 
@@ -73,19 +73,12 @@ public class Ruta {
 		this.estado = estado;
 	}
 
-	public Double getCosto() {
+	public Integer getCosto() {
 		return costo;
 	}
 
-	public void setCosto(Double costo) {
+	public void setCosto(Integer costo) {
 		this.costo = costo;
-	}
-	public Integer getIdOrigen() {
-		return idOrigen;
-	}
-	
-	public Integer getIdDestino() {
-		return idDestino;
 	}
 
 	

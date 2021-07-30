@@ -7,7 +7,7 @@ public class Estacion {
 	String nombre;
 	LocalTime horarioApertura;
 	LocalTime horarioCierre;
-	String estado;
+	String estado; //1 operativo, 0 en mantenimiento
 	
 	//Constructor
 	public Estacion(Integer id, String nombre, LocalTime horarioApertura, LocalTime horarioCierre, String estado) {
