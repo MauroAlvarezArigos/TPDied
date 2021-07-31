@@ -18,8 +18,12 @@ public class LineaGUI extends JFrame {
 		
 		JLabel lblLinea = new JLabel("Gestión de Lineas");
 		lblLinea.setFont(new Font("Tahoma", Font.PLAIN, 22));
+<<<<<<< HEAD
 		lblLinea.setHorizontalAlignment(SwingConstants.CENTER);
 		panelFrame.add(lblLinea, BorderLayout.NORTH);
+=======
+		panelFrame.add(lblLinea, BorderLayout.PAGE_START);
+>>>>>>> aeae4cdaec923e60d7fcd607376cdefe3bb6bcfb
 		
 		JPanel datos = new JPanel();
 		datos.setLayout(new GridBagLayout());
@@ -77,12 +81,21 @@ public class LineaGUI extends JFrame {
 		gbc_cbxEstado.gridx = 2;
 		gbc_cbxEstado.gridy = 5;
 		datos.add(cbxEstado, gbc_cbxEstado);
+<<<<<<< HEAD
 		
 		//Buttons
 		JPanel botones = new JPanel();
 		GridBagLayout gbl_botones = new GridBagLayout();
 		gbl_botones.columnWeights = new double[]{0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0};
 		botones.setLayout(gbl_botones);
+=======
+		
+		panelFrame.add(datos, BorderLayout.CENTER);
+		
+		//Buttons
+		JPanel botones = new JPanel();
+		botones.setLayout(new GridBagLayout());
+>>>>>>> aeae4cdaec923e60d7fcd607376cdefe3bb6bcfb
 		
 		JButton btnBuscar = new JButton();
 		btnBuscar.setIcon(new ImageIcon(".\\res\\buscar.png"));
@@ -147,13 +160,20 @@ public class LineaGUI extends JFrame {
 		gbc_btnSalir.gridy = 0;
 		botones.add(btnSalir, gbc_btnSalir);
 		
+<<<<<<< HEAD
 		
 		panelFrame.add(datos, BorderLayout.CENTER);
+=======
+>>>>>>> aeae4cdaec923e60d7fcd607376cdefe3bb6bcfb
 		panelFrame.add(botones, BorderLayout.SOUTH);
 		
 		this.getContentPane().add(panelFrame);
 		this.pack();
+<<<<<<< HEAD
 		this.setSize(500,300);
+=======
+		this.setSize(429,287);
+>>>>>>> aeae4cdaec923e60d7fcd607376cdefe3bb6bcfb
 
 	}
 

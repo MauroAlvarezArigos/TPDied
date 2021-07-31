@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Linea {
 	String nombre;
 	String color;
-	Boolean estado;
+	Boolean estado; // 0 No activa, 1 Activa
 	ArrayList<Ruta> recorrido;
 	
 	//Constructor

@@ -1,0 +1,75 @@
+package tp.dominio;
+
+import java.awt.List;
+import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+
+
+public class PruebaGrafos {
+	
+	public static int rint(int mod) {
+		int ret = (int)Math.random();
+		return ret%mod;
+	}
+	public static double rdb(int mod) {
+		double ret = Math.random() % mod;
+		return ret;
+	}
+	
+	public static void main(String[] args) {
+		
+		
+		
+		//esto hay que moverlo
+		Map<Integer, ArrayList<Ruta>> grafo = new HashMap<Integer, ArrayList<Ruta>>();
+		// con cada linea reconstruimos el grafo
+		ArrayList<Linea> lineas = new ArrayList<Linea>(); // pedir a la BD que me de todas las lineas 
+		
+		//genero 2 lineas
+		Linea l1 = new Linea("linea 1", "azul", true);
+		Linea l2 = new Linea("linea 2", "rojo", true);
+		
+		//genero 8 estaciones
+		ArrayList<Estacion> e = new ArrayList<Estacion>();
+		for(int i=0; i<8; i++) {
+			LocalTime time1 = LocalTime.now();
+			LocalTime time2 = LocalTime.now();
+			String aux = "est ";
+			aux = aux+(char)(i+'0');
+//			System.out.println(aux);
+			Estacion est = new Estacion(1, aux, time1, time2, "op");
+			e.add(est);
+		}
+		
+		//genero ? rutas
+		ArrayList<Ruta> rutas = new ArrayList<Ruta>();
+		for(int i=0; i<8; i++) {
+			int dist = rint(100),t1=rint(100), mxp = rint(100);
+			int ix = rint(8), ix2 = (ix+4)%8;
+			Ruta ruta = new Ruta(e.get(ix), e.get(ix2), dist,t1,mxp,true,rdb(100));
+			rutas.add(ruta);
+		}
+		ArrayList<Ruta> aux = new ArrayList<Ruta>();
+		for(int i=0; i<5; i++) aux.add(rutas.get(rint(8)));
+		l1.setRecorrido(aux);
+		aux.clear();
+		for(int i=0; i<5; i++) aux.add(rutas.get(rint(8)));
+		l2.setRecorrido(aux);
+		lineas.add(l1); lineas.add(l2);
+	
+		
+		for(Linea l : lineas) {
+			ArrayList<Ruta> recorrido = l.getRecorrido();
+			for(Ruta r : recorrido) {
+				System.out.println(r.getOrigen().getId());
+				//grafo.get(r.getOrigen().getId()).add(r); //agrego las rutas al grafo dirigido
+			}
+		}
+		
+		//grafo.forEach((k,v) -> System.out.println("Key" + k + "Value " + v.get(0)));
+		
+	}
+}
