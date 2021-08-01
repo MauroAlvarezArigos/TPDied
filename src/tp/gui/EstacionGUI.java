@@ -133,12 +133,7 @@ public class EstacionGUI extends JFrame {
 		//Buttons
 		JPanel botones = new JPanel();
 		GridBagLayout gbl_botones = new GridBagLayout();
-<<<<<<< HEAD
-		gbl_botones.columnWeights = new double[]{0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0};
-=======
 		gbl_botones.columnWeights = new double[]{0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0};
-		gbl_botones.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0, 0};
->>>>>>> aeae4cdaec923e60d7fcd607376cdefe3bb6bcfb
 		botones.setLayout(gbl_botones);
 		
 		JButton btnBuscar = new JButton();
@@ -167,14 +162,9 @@ public class EstacionGUI extends JFrame {
 		gbc_btnModificar.insets = new Insets(0, 0, 0, 5);
 		gbc_btnModificar.gridx = 3;
 		gbc_btnModificar.gridy = 0;
-<<<<<<< HEAD
-		botones.add(btnModificar, gbc_btnModificar);		
-		
-=======
 		botones.add(btnModificar, gbc_btnModificar);
-	
->>>>>>> aeae4cdaec923e60d7fcd607376cdefe3bb6bcfb
-		JButton btnBaja = new JButton();
+
+	JButton btnBaja = new JButton();
 		btnBaja.setIcon(new ImageIcon("D:\\Facultad\\Programacion\\Java\\TPDied\\res\\borrar.png"));
 		btnBaja.setMargin(new Insets(0, 0, 0, 0));
 		GridBagConstraints gbc_btnBaja = new GridBagConstraints();
@@ -214,11 +204,7 @@ public class EstacionGUI extends JFrame {
 		
 		this.getContentPane().add(panelFrame);
 		this.pack();
-<<<<<<< HEAD
 		this.setSize(500,300);	
-=======
-		this.setSize(429,287);	
->>>>>>> aeae4cdaec923e60d7fcd607376cdefe3bb6bcfb
-		
+
 	}
 }

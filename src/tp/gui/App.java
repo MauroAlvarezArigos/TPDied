@@ -18,24 +18,17 @@ public class App extends JFrame {
 		JButton boton = new JButton("Estacion");
 		JButton boton2 = new JButton("Busqueda Estacion");
 		JButton boton3 = new JButton("Linea");
-<<<<<<< HEAD
 		JButton boton4 = new JButton("Busqueda Linea");
-=======
->>>>>>> aeae4cdaec923e60d7fcd607376cdefe3bb6bcfb
 
 		menu.add(boton);
 		menu.add(boton2);
 		menu.add(boton3);
-<<<<<<< HEAD
 		menu.add(boton4);
-=======
->>>>>>> aeae4cdaec923e60d7fcd607376cdefe3bb6bcfb
 		
 		boton.addActionListener(e -> {
 			EstacionGUI eg = new EstacionGUI();
 			eg.setVisible(true);
 		});
-<<<<<<< HEAD
 		
 		boton2.addActionListener(e -> {
 			EstacionBusquedaGUI eb = new EstacionBusquedaGUI();
@@ -52,20 +45,6 @@ public class App extends JFrame {
 			lb.setVisible(true);
 		});
 		
-		
-=======
-		
-		boton2.addActionListener(e -> {
-			EstacionBusquedaGUI eb = new EstacionBusquedaGUI();
-			eb.setVisible(true);
-		});
-
-		boton3.addActionListener(e -> {
-			LineaGUI lg = new LineaGUI();
-			lg.setVisible(true);
-		});
->>>>>>> aeae4cdaec923e60d7fcd607376cdefe3bb6bcfb
-
 		frame.setContentPane(menu);
 		
 		frame.pack();
