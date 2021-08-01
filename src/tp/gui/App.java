@@ -19,11 +19,14 @@ public class App extends JFrame {
 		JButton boton2 = new JButton("Busqueda Estacion");
 		JButton boton3 = new JButton("Linea");
 		JButton boton4 = new JButton("Busqueda Linea");
+		JButton boton5 = new JButton("Registrar Trayecto");
+		
 
 		menu.add(boton);
 		menu.add(boton2);
 		menu.add(boton3);
 		menu.add(boton4);
+		menu.add(boton5);
 		
 		boton.addActionListener(e -> {
 			EstacionGUI eg = new EstacionGUI();
@@ -44,6 +47,12 @@ public class App extends JFrame {
 			LineaBusquedaGUI lb = new LineaBusquedaGUI();
 			lb.setVisible(true);
 		});
+		
+		boton5.addActionListener(e -> {
+			RegistrarTrayectoGUI rt = new RegistrarTrayectoGUI();
+			rt.setVisible(true);
+		});
+
 		
 		frame.setContentPane(menu);
 		
