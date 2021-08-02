@@ -26,17 +26,6 @@ public class PruebaGrafos {
 		PriorityQueue<long[]> pq = new PriorityQueue<long[]>((x,y)->Long.compare(x[1], y[1]));
 		dist[src] = 0;
 		pq.add(new long[] {src,0});
-		while(!pq.isEmpty())
-		{
-			long[] cur = pq.remove();
-			int node=(int)cur[0];
-			long cost=cur[1];
-			if(cost > dist[node]) 			//lazy deletion
-				continue;
-			for(int[] nxt: grafo[node])
-				if(cost + nxt[1] < dist[nxt[0]])
-					pq.add(new long[] {nxt[0], dist[nxt[0]] = cost + nxt[1] });
-		}
 		return dist[to];
 	}
 	
