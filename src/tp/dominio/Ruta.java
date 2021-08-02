@@ -8,6 +8,7 @@ public class Ruta {
 	Integer maxPasajeros;
 	Boolean estado;
 	Integer costo;
+	long[] datos = new long[4]; // 0 tiempo, 1 dist, 2 costo, 3 flow;
 	
 	//Constructor
 	public Ruta(Estacion origen, Estacion destino, Integer distancia, Integer tiempoViaje, Integer maxPasajeros,
@@ -22,6 +23,10 @@ public class Ruta {
 		this.maxPasajeros = maxPasajeros;
 		this.estado = estado;
 		this.costo = costo;
+		this.datos[0] = (long)tiempoViaje;
+		this.datos[1] = (long) distancia;
+		this.datos[2] = (long) costo;
+		this.datos[3] = (long) maxPasajeros;
 	}
 
 	//Getters and Setters
@@ -81,5 +86,8 @@ public class Ruta {
 		this.costo = costo;
 	}
 
-	
+	public long getDato(int tipo) {
+		return this.datos[tipo];
+	}
+
 }

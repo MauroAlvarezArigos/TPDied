@@ -7,10 +7,10 @@ public class Estacion {
 	String nombre;
 	LocalTime horarioApertura;
 	LocalTime horarioCierre;
-	String estado; //1 operativo, 0 en mantenimiento
+	Boolean estado; //1 operativo, 0 en mantenimiento
 	
 	//Constructor
-	public Estacion(Integer id, String nombre, LocalTime horarioApertura, LocalTime horarioCierre, String estado) {
+	public Estacion(Integer id, String nombre, LocalTime horarioApertura, LocalTime horarioCierre, Boolean estado) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
@@ -45,10 +45,10 @@ public class Estacion {
 	public void setHorarioCierre(LocalTime horarioCierre) {
 		this.horarioCierre = horarioCierre;
 	}
-	public String getEstado() {
+	public Boolean getEstado() {
 		return estado;
 	}
-	public void setEstado(String estado) {
+	public void setEstado(Boolean estado) {
 		this.estado = estado;
 	}
 	

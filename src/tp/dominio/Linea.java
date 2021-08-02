@@ -6,7 +6,7 @@ public class Linea {
 	String nombre;
 	String color;
 	Boolean estado; // 0 No activa, 1 Activa
-	ArrayList<Ruta> recorrido;
+	ArrayList<Ruta> recorrido = new ArrayList<Ruta>();
 	
 	//Constructor
 	public Linea(String nombre, String color, Boolean estado) {
@@ -20,8 +20,8 @@ public class Linea {
 		return recorrido;
 	}
 
-	public void setRecorrido(ArrayList<Ruta> recorrido) {
-		this.recorrido = recorrido;
+	public void setRecorrido(ArrayList<Ruta> nuevoRecorrido) {
+		this.recorrido.addAll(nuevoRecorrido);
 	}
 
 	//Getters and Setters
