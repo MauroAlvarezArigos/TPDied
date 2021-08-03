@@ -28,6 +28,18 @@ public class Ruta {
 		this.datos[2] = (long) costo;
 		this.datos[3] = (long) maxPasajeros;
 	}
+	
+	public Ruta(Estacion destino, Integer maxPasajeros) {
+		super();
+		this.destino = destino;
+		this.maxPasajeros=maxPasajeros;
+		this.datos[3]=maxPasajeros;
+	}
+	public Ruta( Integer maxPasajeros) {
+		super();
+		this.maxPasajeros=maxPasajeros;
+		this.datos[3]=maxPasajeros;
+	}
 
 	//Getters and Setters
 	public Estacion getOrigen() {
@@ -88,6 +100,11 @@ public class Ruta {
 
 	public long getDato(int tipo) {
 		return this.datos[tipo];
+	}
+	
+	public void changeFlow(int delta) {
+		this.maxPasajeros += delta;
+		this.datos[3] += delta;
 	}
 
 }
