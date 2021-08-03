@@ -9,7 +9,6 @@ import tp.dominio.Estacion;
 public interface EstacionDao {
 	public Estacion saveOrUpdate(Estacion e);
 	public void borrar(Estacion e);
-	public List<Estacion> buscarTodos();
 	public List<Estacion> buscarPorAtributos(Map<String, ?> atributos);
 
 }

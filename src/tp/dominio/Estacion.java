@@ -1,22 +1,26 @@
 package tp.dominio;
 
-import java.time.LocalTime;
+import java.sql.Time;
 
 public class Estacion {
 	Integer id;
 	String nombre;
-	LocalTime horarioApertura;
-	LocalTime horarioCierre;
+	Time horarioApertura;
+	Time horarioCierre;
 	Boolean estado; //1 operativo, 0 en mantenimiento
 	
 	//Constructor
-	public Estacion(Integer id, String nombre, LocalTime horarioApertura, LocalTime horarioCierre, Boolean estado) {
+	public Estacion(Integer id, String nombre, Time horarioApertura, Time horarioCierre, Boolean estado) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
 		this.horarioApertura = horarioApertura;
 		this.horarioCierre = horarioCierre;
 		this.estado = estado;
+	}
+	
+	public Estacion () {
+		
 	}
 	
 	
@@ -33,16 +37,16 @@ public class Estacion {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	public LocalTime getHorarioApertura() {
+	public Time getHorarioApertura() {
 		return horarioApertura;
 	}
-	public void setHorarioApertura(LocalTime horarioApertura) {
+	public void setHorarioApertura(Time horarioApertura) {
 		this.horarioApertura = horarioApertura;
 	}
-	public LocalTime getHorarioCierre() {
+	public Time getHorarioCierre() {
 		return horarioCierre;
 	}
-	public void setHorarioCierre(LocalTime horarioCierre) {
+	public void setHorarioCierre(Time horarioCierre) {
 		this.horarioCierre = horarioCierre;
 	}
 	public Boolean getEstado() {
@@ -51,6 +55,9 @@ public class Estacion {
 	public void setEstado(Boolean estado) {
 		this.estado = estado;
 	}
+
+
+	
 	
 	
 }

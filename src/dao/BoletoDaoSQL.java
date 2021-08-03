@@ -1,6 +1,7 @@
 package dao;
 
 import java.sql.Connection;
+
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,8 +11,6 @@ import java.util.List;
 import java.util.Map;
 
 import dao.utils.DB;
-import dominio.Camion;
-import dominio.Modelo;
 import tp.dominio.Boleto;
 
 public class BoletoDaoSQL implements BoletoDao{
@@ -42,12 +41,12 @@ public class BoletoDaoSQL implements BoletoDao{
 		Connection conn = DB.getConexion();
 		PreparedStatement pstmt = null;
 		try{
-			if(checkNull(b.getPatente(), conn)) {
+			if(checkNull(b.getNumeroBoleto(), conn)) {
 				pstmt = conn.prepareStatement(UPDATE_BOLETO);
 				pstmt.setInt(1, b.getNumeroBoleto());
 				pstmt.setString(2, b.getCorreo());
 				pstmt.setString(3, b.getNombreCliente());
-				pstmt.setDate(4, b.getFechaVenta());
+				pstmt.setDate(4, (Date) b.getFechaVenta());
 				pstmt.setString(5, b.getOrigen());
 				pstmt.setString(6, b.getDestino());
 				pstmt.setArrayList(7, b.getRecorrido());
@@ -59,7 +58,7 @@ public class BoletoDaoSQL implements BoletoDao{
 				pstmt.setInt(1, b.getNumeroBoleto());
 				pstmt.setString(2, b.getCorreo());
 				pstmt.setString(3, b.getNombreCliente());
-				pstmt.setDate(4, b.getFechaVenta());
+				pstmt.setDate(4, (Date) b.getFechaVenta());
 				pstmt.setString(5, b.getOrigen());
 				pstmt.setString(6, b.getDestino());
 				pstmt.setArrayList(7, b.getRecorrido());
@@ -82,13 +81,37 @@ public class BoletoDaoSQL implements BoletoDao{
 		return null;
 	}
 
+	private boolean checkNull(int numeroBoleto, Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Boolean ret = false;
+		try {
+			pstmt = conn.prepareStatement(SELECT_BOLETO, ResultSet.TYPE_SCROLL_INSENSITIVE,	ResultSet.CONCUR_UPDATABLE);
+			pstmt.setInt(1, numeroBoleto);
+			rs = pstmt.executeQuery();
+			ret = rs.first();
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				if(pstmt!=null) pstmt.close();
+			}
+			catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return ret;
+	}
+
 	@Override
 	public void borrar(Boleto b) {
 		Connection conn = DB.getConexion();
 		PreparedStatement pstmt = null;
 		try {
 			pstmt = conn.prepareStatement(DELETE_BOLETO);
-			pstmt.setString(1, b.getNumeroBoleto());
+			pstmt.setInt(1, b.getNumeroBoleto());
 			pstmt.execute();
 		}
 		catch(SQLException e) {
@@ -102,84 +125,16 @@ public class BoletoDaoSQL implements BoletoDao{
 			catch(SQLException e) {
 				e.printStackTrace();
 			}
-		}b
+		}
 		
-	}
-
-	@Override
-	public List<Boleto> buscarTodos() {
-		List<Boleto> lista = new ArrayList<Boleto>();
-		Connection conn = DB.getConexion();
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		
-		try {
-			pstmt = conn.prepareStatement(SELECT_ALL_BOLETO);
-			rs = pstmt.executeQuery();
-			while(rs.next()) {
-				Boleto b = new Boleto();
-				b.setNumeroBoleto(rs.getInt("NUMERO_BOLETO"));
-				b.setCorreo(rs.getString("CORREO"));
-				b.setNombreCliente(rs.getString("NOMBRE_CLIENTE"));
-				b.setFechaVenta(rs.getDate("FECHA_VENTA"));
-			  	b.setOrigen(rs.getString("ORIGEN"));
-			  	b.setDestino(rs.getString("DESTINO"));
-			  	b.setRecorrido(rs.getArrayList("RECORRIDO"));
-			  	b.setCosto(rs.getInt("COSTO"));
-				lista.add(b);
-			}
-		}
-			catch(SQLException e) {
-				e.printStackTrace();
-			}
-		finally {
-			try {
-			if(pstmt!=null) pstmt.close();
-			if(conn!=null) conn.close();
-			}
-			catch(SQLException e) {
-				e.printStackTrace();
-			}
-		}
-		return lista;
-	}
-
-	@Override
-	public List<Boleto> buscarPorAtributos(Map<String, ?> atributos) {
-		List<Boleto> lista = new ArrayList<Boleto>();
-		Connection conn = DB.getConexion();
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		
-		try {
-			pstmt = conn.prepareStatement(SELECT_ALL_BOLETO);
-			rs = pstmt.executeQuery();
-			while(rs.next()) {
-				Boleto b = new Boleto();
-				b.setNumeroBoleto(rs.getInt("NUMERO_BOLETO"));
-				b.setCorreo(rs.getString("CORREO"));
-				b.setNombreCliente(rs.getString("NOMBRE_CLIENTE"));
-				b.setFechaVenta(rs.getDate("FECHA_VENTA"));
-			  	b.setOrigen(rs.getString("ORIGEN"));
-			  	b.setDestino(rs.getString("DESTINO"));
-			  	b.setRecorrido(rs.getArrayList("RECORRIDO"));
-				lista.add(b);
-			}
-		}
-			catch(SQLException e) {
-				e.printStackTrace();
-			}
-		finally {
-			try {
-			if(pstmt!=null) pstmt.close();
-			if(conn!=null) conn.close();
-			}
-			catch(SQLException e) {
-				e.printStackTrace();
-			}
-		}
-		return lista;
 	}
 	
+	
 
+
+	
+	
 }
+	
+
+
