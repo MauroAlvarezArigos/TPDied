@@ -175,5 +175,6 @@ public class PruebaFlujo {
 		}
 		// con un BFS obtengo todos los Edges validos
 		System.out.println(maxFlow(0, 2, grafoBFS, N));
+		//pruebo algo
 	}
 }
