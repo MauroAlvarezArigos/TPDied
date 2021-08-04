@@ -1,37 +1,10 @@
 package tp.dominio;
 
-import java.time.LocalTime;
-import java.util.*;
+import java.sql.Time;
+import java.util.ArrayList;
 
-
-public class PruebaFlujo {
-	
-	public static ArrayList<ArrayList<Ruta>> grafoValido(int src, ArrayList<ArrayList<Ruta>> grafo,int N){
-		ArrayList<ArrayList<Ruta>> ret = new ArrayList<ArrayList<Ruta>>();
-		LinkedList<Integer> q = new LinkedList<Integer>();
-		q.add(src);
-		Boolean[] visited = new Boolean[N];
-		for(int i=0; i<N; i++) visited[i] = false;
-		for(int i=0; i<N; i++) ret.add(new ArrayList<Ruta>());
-		visited[src] = true;
-		while(!q.isEmpty()) {
-			int aux = q.getFirst();
-			System.out.println("Procesando " + aux);
-			q.pollFirst();
-			for(Ruta nxt : grafo.get(aux)) {
-				if(!visited[nxt.getDestino().getId()]) ret.get(aux).add(nxt);
-			}
-			for(Ruta nxt : grafo.get(aux)) {
-				if(!visited[nxt.getDestino().getId()]) {
-					visited[nxt.getDestino().getId()] = true;
-					q.push(nxt.getDestino().getId());
-				}
-			}
-		}
-		return ret;
-	}
-	
-	public static void main(String[] args) {
+public class GenerarGrafo {
+	public ArrayList<ArrayList<Ruta>> getGrafo(){
 		ArrayList<Linea> lineas = new ArrayList<Linea>(); // pedir a la BD que me de todas las lineas 
 		//genero 3 lineas
 		lineas.add(new Linea("linea 1", "azul", true));
@@ -39,8 +12,8 @@ public class PruebaFlujo {
 		lineas.add(new Linea("linea 3", "roja", true));
 		ArrayList<Estacion> estaciones = new ArrayList<Estacion>();
 		//genero 6 estaciones
-		LocalTime time1 = LocalTime.now();
-		LocalTime time2 = LocalTime.now();
+		Time time1 = new Time(System.currentTimeMillis());
+		Time time2 = new Time(System.currentTimeMillis()+60000);
 		estaciones.add(new Estacion(0, "Est 0", time1, time2, true));
 		estaciones.add(new Estacion(1, "Est 1", time1, time2, true));
 		estaciones.add(new Estacion(2, "Est 2", time1, time2, true));
@@ -63,8 +36,14 @@ public class PruebaFlujo {
 		recorridoLinea.add(new Ruta(estaciones.get(4), estaciones.get(5), 65, 96,17,true,49));
 		recorridoLinea.add(new Ruta(estaciones.get(5), estaciones.get(3), 40, 52,22,true,29));
 		lineas.get(2).setRecorrido(recorridoLinea);
-		
-		int N=6;
+		int N = 1;
+		for(Linea l :lineas) {
+			ArrayList<Ruta> recorrido = l.getRecorrido();
+			for(Ruta r : recorrido) {
+				N = Math.max(N, r.getOrigen().getId()+1);
+				N = Math.max(N, r.getDestino().getId()+1);
+			}
+		}
 		ArrayList<ArrayList<Ruta>> grafo = new ArrayList<ArrayList<Ruta>>();
 		for(int i=0; i<N; i++) grafo.add(new ArrayList<Ruta>());
 		for(Linea l : lineas) {
@@ -77,28 +56,9 @@ public class PruebaFlujo {
 					activas&=r.getDestino().getEstado();
 				}
 				if(!activas) continue;
-				System.out.println("Rutas de " + l.getNombre());
-				for(Ruta r : recorrido) {
-					System.out.println("from " + r.getOrigen().getId() + " to " + r.getDestino().getId());
-					grafo.get(r.getOrigen().getId()).add(r);
-				}
+				for(Ruta r : recorrido) grafo.get(r.getOrigen().getId()).add(r);
 			}
 		}
-		System.out.println("Cant nodos " + N);
-		for(int i=0; i<N; i++) {
-			System.out.println("Aristas salientes del nodo " + i);
-			for(Ruta j : grafo.get(i)) {
-				System.out.println("Edge to " + j.getDestino().getId() + " dist:" + j.getDato(1) + " tiempo:" + j.getDato(0) + " costo:" + j.getDato(2) + " maxFlow:" + j.getDato(3));
-			}          
-		}
-		ArrayList<ArrayList<Ruta>> grafoConBFS = grafoValido(0, grafo, N);
-		System.out.println(" Grafo BFSeado");
-		for(int i=0; i<N; i++) {
-			System.out.println("Aristas salientes del nodo " + i);
-			for(Ruta j : grafoConBFS.get(i)) {
-				System.out.println("Edge to " + j.getDestino().getId() + " dist:" + j.getDato(1) + " tiempo:" + j.getDato(0) + " costo:" + j.getDato(2) + " maxFlow:" + j.getDato(3));
-			} 
-		}
-		// con un BFS obtengo todos los Edges validos
+		return grafo;
 	}
 }

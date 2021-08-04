@@ -8,6 +8,7 @@ public class Estacion {
 	Time horarioApertura;
 	Time horarioCierre;
 	Boolean estado; //1 operativo, 0 en mantenimiento
+	Time ultimoMantenimiento = null;
 	
 	//Constructor
 	public Estacion(Integer id, String nombre, Time horarioApertura, Time horarioCierre, Boolean estado) {
@@ -18,11 +19,6 @@ public class Estacion {
 		this.horarioCierre = horarioCierre;
 		this.estado = estado;
 	}
-	
-	public Estacion () {
-		
-	}
-	
 	
 	//Getters and Setters
 	public Integer getId() {
@@ -55,9 +51,15 @@ public class Estacion {
 	public void setEstado(Boolean estado) {
 		this.estado = estado;
 	}
+	public void setUltimoMantenimiento(Time ult) {
+		this.ultimoMantenimiento = ult;
+	}
+	public Time getUltimoMantenimiento() {
+		return this.ultimoMantenimiento;
+	}
 
+	public static int compare(Estacion x, Estacion y) {
+		return (x.ultimoMantenimiento.compareTo(y.ultimoMantenimiento));
+	}
 
-	
-	
-	
 }
