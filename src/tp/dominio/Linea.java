@@ -15,6 +15,10 @@ public class Linea {
 		this.color = color;
 		this.estado = estado;
 	}
+	
+	public Linea () {
+		
+	}
 
 	public ArrayList<Ruta> getRecorrido() {
 		return recorrido;

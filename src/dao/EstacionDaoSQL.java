@@ -2,7 +2,6 @@ package dao;
 
 import java.sql.Connection;
 
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -40,10 +39,6 @@ public class EstacionDaoSQL implements EstacionDao{
 			"SELECT ID, FECHA_INICIO_M, FECHA_FIN_M"
 			+ "FROM ESTACION E, MANTENIMIENTO M"
 			+ "WHERE E.ID = M.ID " ;
-	
-	private static final String INSERT_ESTACION_M =
-			"INSERT INTO MANTENIMIENTO (ID, FECHA_INICIO_M, FECHA_FIN_M)"
-			+ "VALUES (?,?,?)";
 
 	@Override
 	public Estacion saveOrUpdate(Estacion es) {
@@ -170,20 +165,28 @@ public class EstacionDaoSQL implements EstacionDao{
 	//FALTA CORREGIR
 	private String prepararSentencia(Map<String, ?> atrib) {
 		String p1 = "SELECT * FROM ESTACION E "
-				+ "WHERE ID_ESTACION = ?";
+				+ "WHERE ID = ?";
 		String values = "";
 		for (Map.Entry<String,?> entry : atrib.entrySet()) {
 			
 			switch(entry.getKey()) {
 					
+				case "ID":
+				values = values.concat(" AND E.ID= "+entry.getValue());
+					break;
+				
 				case "NOMBRE":
 					values = values.concat(" AND "+"E."+entry.getKey()+" LIKE '%"+entry.getValue() + "%'");
 					break;
-					
-				case "ID":
-					values = values.concat(" AND "+"E."+entry.getKey()+"='"+entry.getValue() + "'");
-					break;
-					
+				
+				case "HORARIO_APERTURA":
+					values = values.concat(" AND E.HORARIO_APERTURA = " +entry.getValue());
+						break;
+				
+				case "HORARIO_CIERRE":
+					values = values.concat(" AND E.HORARIO_CIERRE = " +entry.getValue());
+						break;
+						
 				default:
 					if(entry!=null)
 					values = values.concat(" AND "+"E."+entry.getKey()+"='"+entry.getValue() + "'");
