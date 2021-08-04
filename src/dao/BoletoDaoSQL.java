@@ -1,5 +1,6 @@
 package dao;
 
+import java.sql.Array;
 import java.sql.Connection;
 
 import java.sql.Date;
@@ -49,7 +50,7 @@ public class BoletoDaoSQL implements BoletoDao{
 				pstmt.setDate(4, (Date) b.getFechaVenta());
 				pstmt.setString(5, b.getOrigen());
 				pstmt.setString(6, b.getDestino());
-				pstmt.setArrayList(7, b.getRecorrido());
+				pstmt.setArray(7, (Array) b.getRecorrido());
 				pstmt.setInt(8, b.getCosto());
 				
 			}
@@ -61,7 +62,7 @@ public class BoletoDaoSQL implements BoletoDao{
 				pstmt.setDate(4, (Date) b.getFechaVenta());
 				pstmt.setString(5, b.getOrigen());
 				pstmt.setString(6, b.getDestino());
-				pstmt.setArrayList(7, b.getRecorrido());
+				pstmt.setArray(7, (Array) b.getRecorrido());
 				pstmt.setInt(8, b.getCosto());
 			}
 			pstmt.executeUpdate();
