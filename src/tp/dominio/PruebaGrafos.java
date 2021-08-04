@@ -1,6 +1,6 @@
 package tp.dominio;
 
-import java.time.LocalTime;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.PriorityQueue;
@@ -89,8 +89,8 @@ public class PruebaGrafos {
 		//genero 8 estaciones
 		ArrayList<Estacion> e = new ArrayList<Estacion>();
 		for(int i=0; i<8; i++) {
-			LocalTime time1 = LocalTime.now();
-			LocalTime time2 = LocalTime.now();
+			Time time1 = new Time(System.currentTimeMillis());
+			Time time2 = new Time(System.currentTimeMillis()+60000);
 			String aux = "est ";
 			aux = aux+(char)(i+'0');
 			Estacion est = new Estacion(i, aux, time1, time2, true);

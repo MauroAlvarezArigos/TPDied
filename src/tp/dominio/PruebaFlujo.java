@@ -1,6 +1,6 @@
 package tp.dominio;
 
-import java.time.LocalTime;
+import java.sql.Time;
 import java.util.*;
 
 
@@ -113,8 +113,8 @@ public class PruebaFlujo {
 		lineas.add(new Linea("linea 3", "roja", true));
 		ArrayList<Estacion> estaciones = new ArrayList<Estacion>();
 		//genero 6 estaciones
-		LocalTime time1 = LocalTime.now();
-		LocalTime time2 = LocalTime.now();
+		Time time1 = new Time(System.currentTimeMillis());
+		Time time2 = new Time(System.currentTimeMillis()+60000);
 		estaciones.add(new Estacion(0, "Est 0", time1, time2, true));
 		estaciones.add(new Estacion(1, "Est 1", time1, time2, true));
 		estaciones.add(new Estacion(2, "Est 2", time1, time2, true));

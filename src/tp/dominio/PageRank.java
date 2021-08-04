@@ -1,9 +1,9 @@
 package tp.dominio;
 
-import java.time.LocalTime;
-import java.util.ArrayList;
+import java.sql.Time;
+import java.util.*;
 
-public class PruebaFlujo {
+public class PageRank {
 	public static void main(String[] args) {
 		ArrayList<Linea> lineas = new ArrayList<Linea>(); // pedir a la BD que me de todas las lineas 
 		//genero 3 lineas
@@ -12,8 +12,8 @@ public class PruebaFlujo {
 		lineas.add(new Linea("linea 3", "roja", true));
 		ArrayList<Estacion> estaciones = new ArrayList<Estacion>();
 		//genero 6 estaciones
-		LocalTime time1 = LocalTime.now();
-		LocalTime time2 = LocalTime.now();
+		Time time1 = new Time(System.currentTimeMillis());
+		Time time2 = new Time(System.currentTimeMillis()+60000);
 		estaciones.add(new Estacion(0, "Est 0", time1, time2, true));
 		estaciones.add(new Estacion(1, "Est 1", time1, time2, true));
 		estaciones.add(new Estacion(2, "Est 2", time1, time2, true));
@@ -36,33 +36,34 @@ public class PruebaFlujo {
 		recorridoLinea.add(new Ruta(estaciones.get(4), estaciones.get(5), 65, 96,17,true,49));
 		recorridoLinea.add(new Ruta(estaciones.get(5), estaciones.get(3), 40, 52,22,true,29));
 		lineas.get(2).setRecorrido(recorridoLinea);
-		
-		int N=6;
-		ArrayList<ArrayList<Ruta>> grafo = new ArrayList<ArrayList<Ruta>>();
-		for(int i=0; i<N; i++) grafo.add(new ArrayList<Ruta>());
-		for(Linea l : lineas) {
-			if(l.getEstado()) { // si la linea esta activa
-				ArrayList<Ruta> recorrido = l.getRecorrido();
-				Boolean activas = true; // rutas y estaciones activas?
-				for(Ruta r : recorrido) {
-					activas&=r.getEstado();
-					activas&=r.getOrigen().getEstado();
-					activas&=r.getDestino().getEstado();
-				}
-				if(!activas) continue;
-				System.out.println("Rutas de " + l.getNombre());
-				for(Ruta r : recorrido) {
-					System.out.println("from " + r.getOrigen().getId() + " to " + r.getDestino().getId());
-					grafo.get(r.getOrigen().getId()).add(r);
-				}
+		int N = 1;
+		for(Linea l :lineas) {
+			ArrayList<Ruta> recorrido = l.getRecorrido();
+			for(Ruta r : recorrido) {
+				N = Math.max(N, r.getOrigen().getId()+1);
+				N = Math.max(N, r.getDestino().getId()+1);
 			}
 		}
-		System.out.println("Cant nodos " + N);
-		for(int i=0; i<N; i++) {
-			System.out.println("Aristas salientes del nodo " + i);
-			for(Ruta j : grafo.get(i)) {
-				System.out.println("Edge to " + j.getDestino().getId() + " tiempo " + j.getDato(0) + " dist " + j.getDato(1));
-			}          
+		ArrayList<ArrayList<Ruta>> grafo = new ArrayList<ArrayList<Ruta>>();
+		for(int i=0; i<N; i++) grafo.add(new ArrayList<Ruta>());
+		int[] pageRank = new int[N];
+		for(int i=0; i<N; i++) pageRank[i]=0;
+		for(Linea l : lineas) {
+			ArrayList<Ruta> recorrido = l.getRecorrido();
+			for(Ruta r : recorrido) {
+				pageRank[r.getDestino().getId()]++;
+			}
 		}
-	}
+		ArrayList<Pair> pRank= new ArrayList<Pair>();
+		for(Estacion e : estaciones) pRank.add(new Pair(pageRank[e.getId()], e));
+		System.out.println(" SIN ORDENAR ");
+		for(Pair p : pRank) {
+			System.out.println(p.first + " " + p.second.getId());
+		}
+		pRank.sort((o1,o2) -> o1.comparator(o1,o2));
+		System.out.println(" ORDENADO ");
+		for(Pair p : pRank) {
+			System.out.println(p.first + " " + p.second.getId() + " " + p.second.getNombre());
+		}
+ 	}
 }
