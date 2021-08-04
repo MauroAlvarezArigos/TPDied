@@ -1,23 +1,19 @@
 package dao;
 
-import java.sql.Array;
+import java.sql.Array
+;
+
 import java.sql.Connection;
 
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
+import Excepciones.ExcepcionNoExisteElemento;
 import dao.utils.DB;
 import tp.dominio.Boleto;
 
 public class BoletoDaoSQL implements BoletoDao{
-	
-	private static final String SELECT_ALL_BOLETO = 
-			"SELECT * FROM BOLETO B";
 	
 	private static final String SELECT_BOLETO =
 			"SELECT * FROM BOLETO B "
@@ -106,6 +102,34 @@ public class BoletoDaoSQL implements BoletoDao{
 		return ret;
 	}
 
+	
+	@Override
+	public Boleto buscar(Integer numeroBoleto) {
+		Connection conn = DB.getConexion();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Boleto b = new Boleto();
+		try {
+			pstmt = conn.prepareStatement(SELECT_BOLETO);
+			rs = pstmt.executeQuery();
+			if(!rs.first()) throw new ExcepcionNoExisteElemento();
+			b.setNumeroBoleto(rs.getInt("NUMERO_BOLETO"));
+		}
+		catch(SQLException | ExcepcionNoExisteElemento e) {
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				if(pstmt!=null) pstmt.close();
+				if(conn!=null) conn.close();
+			}
+			catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return b;
+	}
+	
 	@Override
 	public void borrar(Boleto b) {
 		Connection conn = DB.getConexion();

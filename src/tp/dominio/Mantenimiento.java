@@ -1,11 +1,20 @@
 package tp.dominio;
 import java.sql.Time;
 
+
 public class Mantenimiento {
 	Estacion estacion;
 	Time inicio;
 	Time fin;
-	String observaciones;
+	String observaciones=null;
+	
+	public Mantenimiento(Estacion estacion, Time inicio, Time fin, String observaciones) {
+		super();
+		this.estacion= estacion;
+		this.inicio = inicio;
+		this.fin = fin;
+		this.observaciones = observaciones;
+	}
 	
 	public Estacion getEstacion() {
 		return estacion;
@@ -31,8 +40,5 @@ public class Mantenimiento {
 	public void setObservaciones(String observaciones) {
 		this.observaciones = observaciones;
 	}
-
-	
-	
 	
 }

@@ -9,8 +9,9 @@ import tp.dominio.Linea;
 public interface LineaDao {
 	
 	public Linea saveOrUpdate(Linea l);
-	public void borrar(Linea l);
-	public List<Linea> buscarTodos();
+	public void borrarLinea(Linea l);
+	public Linea buscarLinea (String nombre);
+	public List<Linea> buscarTodas();
 	public List<Linea> buscarPorAtributos(Map<String, ?> atributos);
 
 }
