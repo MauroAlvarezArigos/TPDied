@@ -4,8 +4,8 @@ import javax.swing.table.AbstractTableModel;
 
 public class PageRankTableModel extends AbstractTableModel {
 	
+//	private String[] columnNames = {"Estación", "Caminos"};
 	private Object[][] data = null;
-	private String[] columnNames = {"Estación", "Caminos"};
 	
 	public PageRankTableModel(Object[][] _data) {
 		this.data = _data;

@@ -150,7 +150,6 @@ public class ParametrosGUI extends JFrame {
 	    final JTable table = new JTable(dtm);
 	    table.setPreferredScrollableViewportSize(new Dimension(250, 100));
 	    JScrollPane scrollPane = new JScrollPane(table);
-	    table.setEnabled(false);
 	
 		
 		//Proximo Mantenimiento

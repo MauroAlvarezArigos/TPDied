@@ -135,22 +135,21 @@ public class ParametrosGUI extends JFrame {
 		});
 		
 		//PageRank
+		String[] columnNames = {"Estacion", "Caminos"};
 		ArrayList<Pair> pRank = new PageRank().getRank(estaciones);
 		int tam = pRank.size();
 		Object[][] tabla = new Object[tam][2];
 		for(int i=0; i<tam; i++) {
 			tabla[i][0] = pRank.get(i).getEstacion();
 			tabla[i][1] = pRank.get(i).getRank();
+			System.out.println(tabla[i][0]);
 		}
-		
-		
-		
-		String[] columnNames = {"Estacion", "Caminos"};
 		DefaultTableModel dtm = new DefaultTableModel(tabla, columnNames);
 	    final JTable table = new JTable(dtm);
+
 	    table.setPreferredScrollableViewportSize(new Dimension(250, 100));
 	    JScrollPane scrollPane = new JScrollPane(table);
-	    table.setEnabled(false);
+	   // getContentPane().add(scrollPane, BorderLayout.CENTER);       
 	
 		
 		//Proximo Mantenimiento

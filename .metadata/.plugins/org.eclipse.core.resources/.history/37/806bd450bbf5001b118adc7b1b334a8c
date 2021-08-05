@@ -135,22 +135,42 @@ public class ParametrosGUI extends JFrame {
 		});
 		
 		//PageRank
+		String[] columnNames = {"Estacion", "Caminos"};
 		ArrayList<Pair> pRank = new PageRank().getRank(estaciones);
 		int tam = pRank.size();
 		Object[][] tabla = new Object[tam][2];
 		for(int i=0; i<tam; i++) {
 			tabla[i][0] = pRank.get(i).getEstacion();
 			tabla[i][1] = pRank.get(i).getRank();
+			System.out.println(tabla[i][0]);
 		}
+		 DefaultTableModel dtm = new DefaultTableModel(tabla, columnNames);
+	        final JTable table = new JTable(dtm);
+
+	        table.setPreferredScrollableViewportSize(new Dimension(250, 100));
+	        JScrollPane scrollPane = new JScrollPane(table);
+	        getContentPane().add(scrollPane, BorderLayout.CENTER);       
+	        addWindowListener(new WindowAdapter() {           
+	            public void windowClosing(WindowEvent e) {
+	                System.exit(0);               
+	            }
+	        });
 		
-		
-		
-		String[] columnNames = {"Estacion", "Caminos"};
-		DefaultTableModel dtm = new DefaultTableModel(tabla, columnNames);
-	    final JTable table = new JTable(dtm);
-	    table.setPreferredScrollableViewportSize(new Dimension(250, 100));
-	    JScrollPane scrollPane = new JScrollPane(table);
-	    table.setEnabled(false);
+//		PageRankTableModel modelo = new PageRankTableModel(tabla);
+//		System.out.println("HOLA " + modelo.getValueAt(2, 0));
+//		
+//		JTable pagerank = new JTable(modelo);
+//		System.out.println("XD " + pagerank.getValueAt(2,0));
+//		
+//		pagerank.setBorder(new LineBorder(new Color(0, 0, 0)));
+//		pagerank.setPreferredScrollableViewportSize(new Dimension(500,70));
+//		pagerank.setVisible(true);
+//
+//		JScrollPane scrollPane = new JScrollPane(pagerank);
+//		System.out.println("WTF " + scrollPane.getHeight());
+//		System.out.println("WTF " + scrollPane.getHeight());
+//		scrollPane.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Page Rank", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
+//		scrollPane.setVisible(false);
 	
 		
 		//Proximo Mantenimiento
@@ -166,7 +186,13 @@ public class ParametrosGUI extends JFrame {
 		
 		//ESTO HAY QUE CAMBIARLO POR UN PEDIDO A LA BASE DE DATO DE LAS ESTACIONES
 //		ArrayList<Estacion> estaciones = new ArrayList<Estacion>();
-//		
+//		//genero 6 estaciones
+//		Time time1 = new Time(System.currentTimeMillis());
+//		Time time2 = new Time(System.currentTimeMillis()+60000);
+//		estaciones.add(new Estacion(0, "Est 0", time1, time2, true));
+//		estaciones.add(new Estacion(1, "Est 1", time1, time2, true));
+//		estaciones.add(new Estacion(2, "Est 2", time1, time2, true));
+//		estaciones.add(new Estacion(3, "Est 3", time1, time2, true));
 		int N = estaciones.size();
 		for(int i=0; i<N; i++) estaciones.get(i).setUltimoMantenimiento(new Time(System.currentTimeMillis()+70000*i));
 		estaciones.get(2).setUltimoMantenimiento(new Time(System.currentTimeMillis() - 100000));
