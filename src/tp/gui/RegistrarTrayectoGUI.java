@@ -176,6 +176,7 @@ public class RegistrarTrayectoGUI extends JFrame {
 		
 		this.getContentPane().add(panelFrame);
 		this.pack();
+		this.setLocationRelativeTo(null);
 		this.setSize(600,300);
 		
 		

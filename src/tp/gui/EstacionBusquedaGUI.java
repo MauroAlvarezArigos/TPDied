@@ -128,6 +128,7 @@ public class EstacionBusquedaGUI extends JFrame {
 		
 		this.getContentPane().add(panelFrame);
 		this.pack();
+		this.setLocationRelativeTo(null);
 		this.setSize(526,248);	
 
 	}

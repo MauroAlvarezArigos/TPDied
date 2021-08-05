@@ -18,11 +18,13 @@ public class App extends JFrame {
 		JButton boton = new JButton("Estacion");
 		JButton boton2 = new JButton("Boleto");
 		JButton boton3 = new JButton("Linea");
+		JButton boton4 = new JButton("Parametros");
 		
 
 		menu.add(boton);
 		menu.add(boton2);
  		menu.add(boton3);
+ 		menu.add(boton4);
 		
 		boton.addActionListener(e -> {
 			EstacionGUI eg = new EstacionGUI();
@@ -38,11 +40,17 @@ public class App extends JFrame {
 			LineaGUI lg = new LineaGUI();
 			lg.setVisible(true);
 		});
+		
+		boton4.addActionListener(e -> {
+			ParametrosGUI pg = new ParametrosGUI();
+			pg.setVisible(true);
+		});
 
 		
 		frame.setContentPane(menu);
 		
 		frame.pack();
+		frame.setLocationRelativeTo(null);
 		frame.setSize(600,300);
 		frame.setVisible(true);
 		

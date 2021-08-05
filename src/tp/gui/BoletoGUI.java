@@ -20,6 +20,7 @@ import java.sql.Time;
 import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -192,7 +193,7 @@ public class BoletoGUI extends JFrame {
 
 		
 		
-		JButton btnCalcular = new JButton("Calcular");
+		JButton btnCalcular = new JButton();
 		GridBagConstraints gbc_btnCalcular = new GridBagConstraints();
 		gbc_btnCalcular.gridx = 1;
 		gbc_btnCalcular.gridy = 3;
@@ -234,7 +235,7 @@ public class BoletoGUI extends JFrame {
 		});
 		
 		
-		JButton btnFacturar = new JButton("Facturar");
+		JButton btnFacturar = new JButton();
 		GridBagConstraints gbc_btnFacturar = new GridBagConstraints();
 		gbc_btnFacturar.anchor = GridBagConstraints.WEST;
 		gbc_btnFacturar.insets = new Insets(0, 0, 0, 5);
@@ -242,7 +243,7 @@ public class BoletoGUI extends JFrame {
 		gbc_btnFacturar.gridy = 3;
 		panel.add(btnFacturar, gbc_btnFacturar);
 		
-		JButton btnCancelar = new JButton("Cancelar");
+		JButton btnCancelar = new JButton();
 		GridBagConstraints gbc_btnCancelar = new GridBagConstraints();
 		gbc_btnCancelar.anchor = GridBagConstraints.EAST;
 		gbc_btnCancelar.insets = new Insets(0, 0, 0, 5);
@@ -250,10 +251,18 @@ public class BoletoGUI extends JFrame {
 		gbc_btnCancelar.gridy = 3;
 		panel.add(btnCancelar, gbc_btnCancelar);
 		
+		btnCalcular.setIcon(new ImageIcon(".\\res\\calcular.png"));
+		btnCalcular.setMargin(new Insets(0, 0, 0, 0));
+		btnFacturar.setIcon(new ImageIcon(".\\res\\facturar.png"));
+		btnFacturar.setMargin(new Insets(0, 0, 0, 0));
+		btnCancelar.setIcon(new ImageIcon(".\\res\\cancelar.png"));
+		btnCancelar.setMargin(new Insets(0, 0, 0, 0));
+		
 		//Preg si queres cancelar??
 		btnCancelar.addActionListener(e -> dispose());
 		
 		this.pack();
+		this.setLocationRelativeTo(null);
 		this.setSize(500,300);			
 		
 	}

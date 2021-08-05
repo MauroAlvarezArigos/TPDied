@@ -178,6 +178,7 @@ public class LineaGUI extends JFrame {
 		
 		this.getContentPane().add(panelFrame);
 		this.pack();
+		this.setLocationRelativeTo(null);
 		this.setSize(500,300);
 
 	}
