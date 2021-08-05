@@ -8,11 +8,12 @@ public class Ruta {
 	Integer maxPasajeros;
 	Boolean estado;
 	Integer costo;
+	Integer orden; // define el orden de la ruta, es para la BD
 	long[] datos = new long[4]; // 0 tiempo, 1 dist, 2 costo, 3 flow;
 	
 	//Constructor
 	public Ruta(Estacion origen, Estacion destino, Integer distancia, Integer tiempoViaje, Integer maxPasajeros,
-			Boolean estado, Integer costo) {
+			Boolean estado, Integer costo, Integer orden) {
 		super();
 		this.origen = origen;
 		this.destino = destino;
@@ -27,6 +28,7 @@ public class Ruta {
 		this.datos[1] = (long) distancia;
 		this.datos[2] = (long) costo;
 		this.datos[3] = (long) maxPasajeros;
+		this.orden = orden;
 	}
 	
 	public Ruta(Estacion destino, Integer maxPasajeros) {
@@ -96,6 +98,14 @@ public class Ruta {
 
 	public void setCosto(Integer costo) {
 		this.costo = costo;
+	}
+	
+	public Integer getOrden() {
+		return orden;
+	}
+	
+	public void setOrden(Integer orden) {
+		this.orden = orden;
 	}
 
 	public long getDato(int tipo) {

@@ -52,7 +52,7 @@ public class GeneradorRutasRandom {
 				int ix2 = rint(8);
 				while(used[ix2] == true) ix2=rint(8);
 				System.out.print(ix + " " + ix2 + " ");
-				Ruta ruta = new Ruta(e.get(ix), e.get(ix2), dist,t1,mxp,true,rint(100));      
+				Ruta ruta = new Ruta(e.get(ix), e.get(ix2), dist,t1,mxp,true,rint(100), cnt);      
 				System.out.println("Ruta numero " + i + " " + ruta.getOrigen().getId() + " " + ruta.getDestino().getId());
 				aux.add(ruta);
 				cnt++;
