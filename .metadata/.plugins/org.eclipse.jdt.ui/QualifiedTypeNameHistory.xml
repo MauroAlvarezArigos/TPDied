@@ -8,11 +8,12 @@
 <fullyQualifiedTypeName name="java.util.Collections"/>
 <fullyQualifiedTypeName name="sun.misc.Queue"/>
 <fullyQualifiedTypeName name="java.time.LocalTime"/>
-<fullyQualifiedTypeName name="java.sql.Time"/>
-<fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="java.awt.event.ActionEvent"/>
 <fullyQualifiedTypeName name="java.awt.event.ActionListener"/>
 <fullyQualifiedTypeName name="tp.dominio.ComboItem"/>
 <fullyQualifiedTypeName name="tp.dominio.GenerarGrafo"/>
 <fullyQualifiedTypeName name="tp.dominio.Dijkstra"/>
+<fullyQualifiedTypeName name="java.sql.Time"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="tp.dominio.Monticulo"/>
 </qualifiedTypeNameHistroy>

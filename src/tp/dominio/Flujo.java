@@ -5,7 +5,8 @@ import java.util.*;
 
 public class Flujo {
 	
-	public static ArrayList<ArrayList<Ruta>> grafoValido(int src, ArrayList<ArrayList<Ruta>> grafo,int N){
+	public static ArrayList<ArrayList<Ruta>> grafoValido(int src, ArrayList<ArrayList<Ruta>> grafo){
+		int N = grafo.size();
 		ArrayList<ArrayList<Ruta>> ret = new ArrayList<ArrayList<Ruta>>();
 		LinkedList<Integer> q = new LinkedList<Integer>();
 		q.add(src);
@@ -15,7 +16,7 @@ public class Flujo {
 		visited[src] = true;
 		while(!q.isEmpty()) {
 			int aux = q.getLast();
-			System.out.println("Procesando " + aux);
+			//System.out.println("Procesando " + aux);
 			q.pollLast();
 			for(Ruta nxt : grafo.get(aux)) ret.get(aux).add(nxt);
 			for(Ruta nxt : grafo.get(aux)) {
@@ -29,7 +30,8 @@ public class Flujo {
 	}
 	
 	
-	public static long maxFlow(int src, int snk, ArrayList<ArrayList<Ruta>> grafo, int N) {
+	public static long maxFlow(int src, int snk, ArrayList<ArrayList<Ruta>> grafo) {
+		int N = grafo.size();
 		int f, Mf = 0;
 		int INF = 100000000; 
 		int SRC = N, SNK = N+1;
@@ -104,6 +106,10 @@ public class Flujo {
 		return Mf;
 	}
 	
+	public long getMaxFlow(int src, int snk, ArrayList<ArrayList<Ruta>> grafo) {
+		return maxFlow(src,snk, grafoValido(src, grafo));
+	}
+	
 	public static void main(String[] args) {
 		GenerarGrafo aux = new GenerarGrafo();
 		ArrayList<ArrayList<Ruta>> grafo = aux.getGrafo();
@@ -115,7 +121,7 @@ public class Flujo {
 				System.out.println("Edge to " + j.getDestino().getId() + " dist:" + j.getDato(1) + " tiempo:" + j.getDato(0) + " costo:" + j.getDato(2) + " maxFlow:" + j.getDato(3));
 			}          
 		}
-		ArrayList<ArrayList<Ruta>> grafoBFS = grafoValido(0, grafo, N);
+		ArrayList<ArrayList<Ruta>> grafoBFS = grafoValido(0, grafo);
 		System.out.println(" Grafo BFSeado");
 		for(int i=0; i<N; i++) {
 			System.out.println("Aristas salientes del nodo " + i);
@@ -124,7 +130,7 @@ public class Flujo {
 			} 
 		}
 		// con un BFS obtengo todos los Edges validos
-		System.out.println(maxFlow(0, 2, grafoBFS, N));
+		System.out.println(maxFlow(0, 2, grafoBFS));
 		//pruebo algo
 	}
 }

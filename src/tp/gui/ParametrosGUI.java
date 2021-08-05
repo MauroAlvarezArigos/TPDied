@@ -7,6 +7,8 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.sql.Time;
+import java.util.ArrayList;
 
 import javax.swing.*;
 import javax.swing.border.EtchedBorder;
@@ -14,6 +16,12 @@ import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
 import tp.dominio.Estacion;
+import tp.dominio.Flujo;
+import tp.dominio.GenerarGrafo;
+import tp.dominio.Monticulo;
+import tp.dominio.PageRank;
+import tp.dominio.Pair;
+import tp.dominio.Ruta;
 import tp.modelosTabla.PageRankTableModel;
 
 public class ParametrosGUI extends JFrame {
@@ -33,7 +41,9 @@ public class ParametrosGUI extends JFrame {
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		flujoMax.setLayout(gridBagLayout);
 		
-		JLabel lblEstacion = new JLabel("Estación:");
+		
+		
+		JLabel lblEstacion = new JLabel("Estación origen:");
 		GridBagConstraints gbc_lblEstacion = new GridBagConstraints();
 		gbc_lblEstacion.insets = new Insets(0, 0, 5, 5);
 		gbc_lblEstacion.anchor = GridBagConstraints.EAST;
@@ -41,13 +51,44 @@ public class ParametrosGUI extends JFrame {
 		gbc_lblEstacion.gridy = 1;
 		flujoMax.add(lblEstacion, gbc_lblEstacion);
 		
-		JComboBox<Estacion> cbxEstacion = new JComboBox<Estacion>();
-		GridBagConstraints gbc_cbxEstacion = new GridBagConstraints();
-		gbc_cbxEstacion.anchor = GridBagConstraints.WEST;
-		gbc_cbxEstacion.insets = new Insets(0, 0, 5, 5);
-		gbc_cbxEstacion.gridx = 3;
-		gbc_cbxEstacion.gridy = 1;
-		flujoMax.add(cbxEstacion, gbc_cbxEstacion);
+		JLabel lblDestino = new JLabel("Estación destino:");
+		GridBagConstraints gbc_lblDestino = new GridBagConstraints();
+		gbc_lblDestino.insets = new Insets(0, 0, 5, 5);
+		gbc_lblDestino.anchor = GridBagConstraints.EAST;
+		gbc_lblDestino.gridx = 2;
+		gbc_lblDestino.gridy = 2;
+		flujoMax.add(lblDestino, gbc_lblDestino);
+		
+		JComboBox<Estacion> cbxOrigen = new JComboBox<Estacion>();
+		GridBagConstraints gbc_cbxOrigen = new GridBagConstraints();
+		gbc_cbxOrigen.anchor = GridBagConstraints.WEST;
+		gbc_cbxOrigen.insets = new Insets(0, 0, 5, 5);
+		gbc_cbxOrigen.gridx = 3;
+		gbc_cbxOrigen.gridy = 1;
+		
+		JComboBox<Estacion> cbxDestino = new JComboBox<Estacion>();
+		GridBagConstraints gbc_cbxDestino = new GridBagConstraints();
+		gbc_cbxDestino.anchor = GridBagConstraints.WEST;
+		gbc_cbxDestino.insets = new Insets(0, 0, 5, 5);
+		gbc_cbxDestino.gridx = 3;
+		gbc_cbxDestino.gridy = 2;
+		
+		// pido las estaciones
+				ArrayList<Estacion> estaciones = new ArrayList<Estacion>();
+				Time time1 = new Time(System.currentTimeMillis());
+				Time time2 = new Time(System.currentTimeMillis()+60000);
+				estaciones.add(new Estacion(0, "Est 0", time1, time2, true));
+				estaciones.add(new Estacion(1, "Est 1", time1, time2, true));
+				estaciones.add(new Estacion(2, "Est 2", time1, time2, true));
+				for(Estacion e : estaciones) {
+					cbxOrigen.addItem(e);
+					cbxDestino.addItem(e);
+				}
+				
+		flujoMax.add(cbxOrigen, gbc_cbxOrigen);		
+		flujoMax.add(cbxDestino, gbc_cbxDestino);
+		
+		
 		
 		JButton btnCalcular = new JButton("Calcular");
 		btnCalcular.setIcon(new ImageIcon(".\\res\\calcular.png"));
@@ -74,8 +115,20 @@ public class ParametrosGUI extends JFrame {
 		lblFlujoMax.setFont(new Font("Tahoma", Font.PLAIN, 32));
 		
 		btnCalcular.addActionListener(e -> {
-			lblFlujoMax.setText("MauroCAPO"); //PONE ACA LO QUE CALCULASTE 	
-			panel.setVisible(true);
+			
+			ArrayList<ArrayList<Ruta>> grafo = new GenerarGrafo().getGrafo();
+			Object aux = cbxOrigen.getSelectedItem();
+			Estacion estOrigen = (Estacion) aux;
+			aux = cbxDestino.getSelectedItem();
+			Estacion estDestino = (Estacion) aux;
+			if(estOrigen.getId() == estDestino.getId()) {
+				JOptionPane.showMessageDialog(this, "Las estaciones no pueden ser la misma", "ERROR", JOptionPane.WARNING_MESSAGE);
+				lblFlujoMax.setText("-");
+			}
+			else {
+				lblFlujoMax.setText("" + new Flujo().getMaxFlow(estOrigen.getId(), estDestino.getId(), grafo)); //PONE ACA LO QUE CALCULASTE 	
+				panel.setVisible(true);
+			}
 		});
 		
 		//PageRank
@@ -83,10 +136,10 @@ public class ParametrosGUI extends JFrame {
 		JTable pagerank = new JTable(modelo);
 		pagerank.setBorder(new LineBorder(new Color(0, 0, 0)));
 		pagerank.setPreferredScrollableViewportSize(new Dimension(500,70));
-		
 		JScrollPane scrollPane = new JScrollPane(pagerank);
 		scrollPane.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Page Rank", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		scrollPane.setVisible(false);
+		scrollPane.setVisible(true);
+		ArrayList<Pair> pRank = new PageRank().getRank(estaciones);
 		
 		//Proximo Mantenimiento
 		JPanel mant = new JPanel();
@@ -98,7 +151,22 @@ public class ParametrosGUI extends JFrame {
 		gbl_mant.rowWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
 		mant.setLayout(gbl_mant);
 		
-		JLabel lblEstacionMant = new JLabel("9 de Julio");
+		
+		//ESTO HAY QUE CAMBIARLO POR UN PEDIDO A LA BASE DE DATO DE LAS ESTACIONES
+//		ArrayList<Estacion> estaciones = new ArrayList<Estacion>();
+//		//genero 6 estaciones
+//		Time time1 = new Time(System.currentTimeMillis());
+//		Time time2 = new Time(System.currentTimeMillis()+60000);
+//		estaciones.add(new Estacion(0, "Est 0", time1, time2, true));
+//		estaciones.add(new Estacion(1, "Est 1", time1, time2, true));
+//		estaciones.add(new Estacion(2, "Est 2", time1, time2, true));
+//		estaciones.add(new Estacion(3, "Est 3", time1, time2, true));
+		int N = estaciones.size();
+		for(int i=0; i<N; i++) estaciones.get(i).setUltimoMantenimiento(new Time(System.currentTimeMillis()+70000*i));
+		estaciones.get(2).setUltimoMantenimiento(new Time(System.currentTimeMillis() - 100000));
+		Estacion auxEstacion = Monticulo.ultMantenimiento(estaciones);
+		
+		JLabel lblEstacionMant = new JLabel(auxEstacion.getNombre());
 		lblEstacionMant.setFont(new Font("Tahoma", Font.PLAIN, 34));
 		GridBagConstraints gbc_lblEstacionMant = new GridBagConstraints();
 		gbc_lblEstacionMant.insets = new Insets(0, 0, 5, 5);
@@ -106,7 +174,7 @@ public class ParametrosGUI extends JFrame {
 		gbc_lblEstacionMant.gridy = 1;
 		mant.add(lblEstacionMant, gbc_lblEstacionMant);
 		
-		JLabel lblFecha = new JLabel("Ultimo mantenimiento: 10/12/2019");
+		JLabel lblFecha = new JLabel("Ultimo mantenimiento: " + auxEstacion.getUltimoMantenimiento());
 		GridBagConstraints gbc_lblFecha = new GridBagConstraints();
 		gbc_lblFecha.insets = new Insets(0, 0, 0, 5);
 		gbc_lblFecha.gridx = 1;
