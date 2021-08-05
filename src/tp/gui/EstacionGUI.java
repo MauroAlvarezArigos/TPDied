@@ -181,6 +181,7 @@ public class EstacionGUI extends JFrame {
 			flag = 1;
 			btnGuardar.setEnabled(true);
 			btnCancelar.setEnabled(true);
+			btnSalir.setEnabled(false);
 		});
 		
 		btnModificar = new JButton();
