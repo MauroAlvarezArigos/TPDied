@@ -206,8 +206,21 @@ public class ParametrosGUI extends JFrame {
 		//Botones		
 		JPanel botones = new JPanel();
 		JButton btnFlujoMax = new JButton("Flujo Maximo");
+		btnFlujoMax.setIcon(new ImageIcon(".\\res\\flujomax.png"));
+		btnFlujoMax.setMargin(new Insets(0, 0, 0, 0));
+		btnFlujoMax.setHorizontalTextPosition(SwingConstants.CENTER);
+		btnFlujoMax.setVerticalTextPosition(SwingConstants.BOTTOM);
 		JButton btnPageRank = new JButton("Page Rank");
+		btnPageRank.setIcon(new ImageIcon(".\\res\\pagerank.png"));
+		btnPageRank.setMargin(new Insets(0, 0, 0, 0));
+		btnPageRank.setHorizontalTextPosition(SwingConstants.CENTER);
+		btnPageRank.setVerticalTextPosition(SwingConstants.BOTTOM);
+		
 		JButton btnProxMant = new JButton("Proximo Mantenimiento");
+		btnProxMant.setIcon(new ImageIcon(".\\res\\mantenimiento.png"));
+		btnProxMant.setMargin(new Insets(0, 0, 0, 0));
+		btnProxMant.setHorizontalTextPosition(SwingConstants.CENTER);
+		btnProxMant.setVerticalTextPosition(SwingConstants.BOTTOM);
 		
 		botones.add(btnFlujoMax);
 		btnFlujoMax.addActionListener(e -> {

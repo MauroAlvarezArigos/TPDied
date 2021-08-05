@@ -9,6 +9,8 @@ import javax.swing.border.EmptyBorder;
 import tp.dominio.*;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.SwingConstants;
 import java.awt.GridBagLayout;
@@ -265,11 +267,16 @@ public class BoletoGUI extends JFrame {
 		btnCancelar.setMargin(new Insets(0, 0, 0, 0));
 		
 		//Preg si queres cancelar??
-		btnCancelar.addActionListener(e -> dispose());
+		btnCancelar.addActionListener(e -> {
+			int n = JOptionPane.showConfirmDialog(this, "¿Estas seguro de cancelar la compra?", "CUIDADO!", JOptionPane.YES_NO_OPTION);
+			if(n == 0) {
+				dispose();
+			}
+		});
 		
 		this.pack();
 		this.setLocationRelativeTo(null);
-		this.setSize(550,400);			
+		this.setSize(550,300);			
 		
 	}
 

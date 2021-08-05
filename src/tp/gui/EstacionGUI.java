@@ -24,9 +24,6 @@ public class EstacionGUI extends JFrame {
 	private JButton btnGuardar;
 	private JButton btnCancelar;
 	private JButton btnSalir;
-	
-	
-	
 	private Byte flag;
 	
 	public EstacionGUI() {
@@ -143,9 +140,7 @@ public class EstacionGUI extends JFrame {
 		gbc_tbxCierre.gridy = 5;
 		datos.add(tbxCierre, gbc_tbxCierre);
 		tbxCierre.setColumns(10);
-		
-		desactivarEdits();
-		
+				
 		//Buttons
 		JPanel botones = new JPanel();
 		GridBagLayout gbl_botones = new GridBagLayout();
@@ -165,11 +160,6 @@ public class EstacionGUI extends JFrame {
 		gbc_btnBuscar.gridy = 0;
 		botones.add(btnBuscar, gbc_btnBuscar);
 		
-		btnBuscar.addActionListener(e -> {
-			EstacionBusquedaGUI eb = new EstacionBusquedaGUI();
-			eb.setVisible(true);
-		});
-		
 		btnAlta = new JButton();
 		btnAlta.setIcon(new ImageIcon(".\\res\\alta.png"));
 		btnAlta.setMargin(new Insets(0, 0, 0, 0));
@@ -181,15 +171,7 @@ public class EstacionGUI extends JFrame {
 		gbc_btnAlta.gridx = 2;
 		gbc_btnAlta.gridy = 0;
 		botones.add(btnAlta, gbc_btnAlta);
-		
-		btnAlta.addActionListener(e -> {
-			activarEdits();
-			flag = 1;
-			btnGuardar.setEnabled(true);
-			btnCancelar.setEnabled(true);
-			btnSalir.setEnabled(false);
-		});
-		
+				
 		btnModificar = new JButton();
 		btnModificar.setIcon(new ImageIcon(".\\res\\modificar.png"));
 		btnModificar.setMargin(new Insets(0, 0, 0, 0));
@@ -201,13 +183,6 @@ public class EstacionGUI extends JFrame {
 		gbc_btnModificar.gridx = 3;
 		gbc_btnModificar.gridy = 0;
 		botones.add(btnModificar, gbc_btnModificar);
-		
-		btnModificar.addActionListener(e -> {
-			activarEdits();
-			flag = 2;
-			btnGuardar.setEnabled(true);
-			btnCancelar.setEnabled(true);			
-		});
 
 		btnBaja = new JButton();
 		btnBaja.setIcon(new ImageIcon(".\\res\\borrar.png"));
@@ -221,13 +196,6 @@ public class EstacionGUI extends JFrame {
 		gbc_btnBaja.gridx = 4;
 		gbc_btnBaja.gridy = 0;
 		botones.add(btnBaja, gbc_btnBaja);
-		
-		btnBaja.addActionListener(e -> {
-			int n = JOptionPane.showConfirmDialog(this, "¿Estas seguro de eliminar la estación?", "CUIDADO!", JOptionPane.YES_NO_OPTION);
-			if(n == 0) {
-				System.out.println("Eliminando elemento de la base de datos...");
-			}
-		});
 		
 		btnGuardar = new JButton();
 		btnGuardar.setIcon(new ImageIcon(".\\res\\guardar.png"));
@@ -253,14 +221,6 @@ public class EstacionGUI extends JFrame {
 		gbc_btnCancelar.gridy = 0;
 		botones.add(btnCancelar, gbc_btnCancelar);
 		
-		btnCancelar.addActionListener(e -> {
-			int n = JOptionPane.showConfirmDialog(this, "¿Estas seguro?", "CUIDADO!", JOptionPane.YES_NO_OPTION);
-			if(n == 0) {
-				limpiarCampos();
-				setInitialState();
-			}
-		});
-		
 		btnSalir = new JButton();
 		btnSalir.setIcon(new ImageIcon(".\\res\\salir.png"));
 		btnSalir.setMargin(new Insets(0, 0, 0, 0));
@@ -272,13 +232,64 @@ public class EstacionGUI extends JFrame {
 		gbc_btnSalir.gridy = 0;
 		botones.add(btnSalir, gbc_btnSalir);
 		
+		
+		//Buttons Listeners
+		btnBuscar.addActionListener(e -> {
+			EstacionBusquedaGUI eb = new EstacionBusquedaGUI();
+			eb.setVisible(true);
+		});
+		
+		btnAlta.addActionListener(e -> {
+			flag = 1;
+			activarEdits();
+			
+			setOperationState();
+		});
+
+		btnModificar.addActionListener(e -> {
+			flag = 2;
+			activarEdits();
+			
+			setOperationState();
+		});
+		
+		btnBaja.addActionListener(e -> {
+			int n = JOptionPane.showConfirmDialog(this, "¿Estas seguro de eliminar la estación?", "CUIDADO!", JOptionPane.YES_NO_OPTION);
+			if(n == 0) {
+				//Llamar al handler y eliminar elemento de la DB
+				System.out.println("Eliminando elemento de la base de datos...");
+			}
+		});
+		
+		btnGuardar.addActionListener(e -> {
+			if(flag == 1) {
+				//Check that the values are correct
+				//Call handler and make an insert on DB
+				//On success show a dialog
+			}
+			if(flag == 2) {
+				//Check that the values are correct
+				//Call handler and make an update on DB
+				//On success show a dialog
+			}
+		});
+		
+		btnCancelar.addActionListener(e -> {
+			int n = JOptionPane.showConfirmDialog(this, "¿Estas seguro?", "CUIDADO!", JOptionPane.YES_NO_OPTION);
+			if(n == 0) {
+				limpiarCampos();
+				setInitialState();
+			}
+		});
+		
 		btnSalir.addActionListener(e -> dispose());
 		
 		
 		panelFrame.add(botones, BorderLayout.SOUTH);
 		
 		setInitialState();
-		
+		desactivarEdits();
+
 		this.getContentPane().add(panelFrame);
 		this.pack();
 		this.setLocationRelativeTo(null);
@@ -294,6 +305,16 @@ public class EstacionGUI extends JFrame {
 		btnGuardar.setEnabled(false);
 		btnCancelar.setEnabled(false);
 		btnSalir.setEnabled(true);
+	}
+	
+	private void setOperationState() {
+		btnBuscar.setEnabled(false);
+		btnAlta.setEnabled(false);
+		btnModificar.setEnabled(false);
+		btnBaja.setEnabled(false);
+		btnGuardar.setEnabled(true);
+		btnCancelar.setEnabled(true);
+		btnSalir.setEnabled(false);
 	}
 	
 	private void limpiarCampos() {

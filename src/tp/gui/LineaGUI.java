@@ -11,8 +11,19 @@ import javax.swing.*;
 public class LineaGUI extends JFrame {
 	private JTextField tbxNombre;
 	private JTextField tbxColor;
+	private JComboBox<String> cbxEstado;
+	private JButton btnBuscar;
+	private JButton btnTrayectos;
+	private JButton btnAlta;
+	private JButton btnModificar;
+	private JButton btnBaja;
+	private JButton btnGuardar;
+	private JButton btnCancelar;
+	private JButton btnSalir;
+	private Byte flag;
 
 	public LineaGUI() {
+		flag = 0;
 		JPanel panelFrame = new JPanel();
 		panelFrame.setLayout(new BorderLayout());
 		
@@ -67,7 +78,7 @@ public class LineaGUI extends JFrame {
 		gbc_lblEstado.gridy = 5;
 		datos.add(lblEstado, gbc_lblEstado);
 		
-		JComboBox<String> cbxEstado = new JComboBox<String>();
+		cbxEstado = new JComboBox<String>();
 		cbxEstado.setMaximumRowCount(10);
 		cbxEstado.addItem("Activa");
 		cbxEstado.addItem("No Activa");
@@ -84,65 +95,72 @@ public class LineaGUI extends JFrame {
 		gbl_botones.columnWeights = new double[]{0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0};
 		botones.setLayout(gbl_botones);
 				
-		JButton btnBuscar = new JButton();
+		btnBuscar = new JButton();
 		btnBuscar.setIcon(new ImageIcon(".\\res\\buscar.png"));
 		btnBuscar.setMargin(new Insets(0, 0, 0, 0));
+		btnBuscar.setText("Buscar");
+		btnBuscar.setHorizontalTextPosition(SwingConstants.CENTER);
+		btnBuscar.setVerticalTextPosition(SwingConstants.BOTTOM);
 		GridBagConstraints gbc_btnBuscar = new GridBagConstraints();
 		gbc_btnBuscar.insets = new Insets(0, 0, 5, 5);
 		gbc_btnBuscar.gridx = 0;
 		gbc_btnBuscar.gridy = 0;
 		botones.add(btnBuscar, gbc_btnBuscar);
 		
-		JButton btnTrayectos = new JButton();
+		btnTrayectos = new JButton();
 		btnTrayectos.setIcon(new ImageIcon(".\\res\\trayecto.png"));
 		btnTrayectos.setMargin(new Insets(0, 0, 0, 0));
+		btnTrayectos.setText("Trayectos");
+		btnTrayectos.setHorizontalTextPosition(SwingConstants.CENTER);
+		btnTrayectos.setVerticalTextPosition(SwingConstants.BOTTOM);
 		GridBagConstraints gbc_btnTrayectos = new GridBagConstraints();
 		gbc_btnTrayectos.insets = new Insets(0, 0, 5, 5);
 		gbc_btnTrayectos.gridx = 1;
 		gbc_btnTrayectos.gridy = 0;
 		botones.add(btnTrayectos, gbc_btnTrayectos);
 		
-		btnTrayectos.addActionListener(e -> {
-			RegistrarTrayectoGUI rt = new RegistrarTrayectoGUI();
-			rt.setVisible(true);
-		});
-		
-		
-		btnBuscar.addActionListener(e -> {
-			LineaBusquedaGUI lb = new LineaBusquedaGUI();
-			lb.setVisible(true);
-		});
-		
-		JButton btnAlta = new JButton();
+		btnAlta = new JButton();
 		btnAlta.setIcon(new ImageIcon(".\\res\\alta.png"));
 		btnAlta.setMargin(new Insets(0, 0, 0, 0));
+		btnAlta.setText("Nuevo");
+		btnAlta.setHorizontalTextPosition(SwingConstants.CENTER);
+		btnAlta.setVerticalTextPosition(SwingConstants.BOTTOM);
 		GridBagConstraints gbc_btnAlta = new GridBagConstraints();
 		gbc_btnAlta.insets = new Insets(0, 0, 5, 5);
 		gbc_btnAlta.gridx = 2;
 		gbc_btnAlta.gridy = 0;
 		botones.add(btnAlta, gbc_btnAlta);
 		
-		JButton btnModificar = new JButton();
+		btnModificar = new JButton();
 		btnModificar.setIcon(new ImageIcon(".\\res\\modificar.png"));
 		btnModificar.setMargin(new Insets(0, 0, 0, 0));
+		btnModificar.setText("Modificar");
+		btnModificar.setHorizontalTextPosition(SwingConstants.CENTER);
+		btnModificar.setVerticalTextPosition(SwingConstants.BOTTOM);
 		GridBagConstraints gbc_btnModificar = new GridBagConstraints();
 		gbc_btnModificar.insets = new Insets(0, 0, 5, 5);
 		gbc_btnModificar.gridx = 3;
 		gbc_btnModificar.gridy = 0;
 		botones.add(btnModificar, gbc_btnModificar);
 		
-		JButton btnBaja = new JButton();
+		btnBaja = new JButton();
 		btnBaja.setIcon(new ImageIcon(".\\res\\borrar.png"));
 		btnBaja.setMargin(new Insets(0, 0, 0, 0));
+		btnBaja.setText("Borrar");
+		btnBaja.setHorizontalTextPosition(SwingConstants.CENTER);
+		btnBaja.setVerticalTextPosition(SwingConstants.BOTTOM);
 		GridBagConstraints gbc_btnBaja = new GridBagConstraints();
 		gbc_btnBaja.insets = new Insets(0, 0, 5, 5);
 		gbc_btnBaja.gridx = 4;
 		gbc_btnBaja.gridy = 0;
 		botones.add(btnBaja, gbc_btnBaja);
 		
-		JButton btnGuardar = new JButton();
+		btnGuardar = new JButton();
 		btnGuardar.setIcon(new ImageIcon(".\\res\\guardar.png"));
 		btnGuardar.setMargin(new Insets(0, 0, 0, 0));
+		btnGuardar.setText("Guardar");
+		btnGuardar.setHorizontalTextPosition(SwingConstants.CENTER);
+		btnGuardar.setVerticalTextPosition(SwingConstants.BOTTOM);
 		GridBagConstraints gbc_btnGuardar = new GridBagConstraints();
 		gbc_btnGuardar.insets = new Insets(0, 0, 5, 5);
 		gbc_btnGuardar.gridx = 6;
@@ -151,9 +169,12 @@ public class LineaGUI extends JFrame {
 		
 		//LLamar a la capa de servicio y validar todo, luego guardar en bd
 		
-		JButton btnCancelar = new JButton();
+		btnCancelar = new JButton();
 		btnCancelar.setIcon(new ImageIcon(".\\res\\cancelar.png"));
 		btnCancelar.setMargin(new Insets(0, 0, 0, 0));
+		btnCancelar.setText("Cancelar");                                  
+		btnCancelar.setHorizontalTextPosition(SwingConstants.CENTER);    
+		btnCancelar.setVerticalTextPosition(SwingConstants.BOTTOM);
 		GridBagConstraints gbc_btnCancelar = new GridBagConstraints();
 		gbc_btnCancelar.insets = new Insets(0, 0, 5, 5);
 		gbc_btnCancelar.gridx = 7;
@@ -162,19 +183,79 @@ public class LineaGUI extends JFrame {
 		
 		//Preg si esta seguro y si lo esta borrar todo lo lleno
 		
-		JButton btnSalir = new JButton();
+		btnSalir = new JButton();
 		btnSalir.setIcon(new ImageIcon(".\\res\\salir.png"));
 		btnSalir.setMargin(new Insets(0, 0, 0, 0));
+		btnSalir.setText("Salir");                             
+		btnSalir.setHorizontalTextPosition(SwingConstants.CENTER);
+		btnSalir.setVerticalTextPosition(SwingConstants.BOTTOM);
 		GridBagConstraints gbc_btnSalir = new GridBagConstraints();
 		gbc_btnSalir.insets = new Insets(0, 0, 5, 5);
 		gbc_btnSalir.gridx = 9;
 		gbc_btnSalir.gridy = 0;
 		botones.add(btnSalir, gbc_btnSalir);
 		
+		//Buttons Listeners
+		btnBuscar.addActionListener(e -> {
+			LineaBusquedaGUI lb = new LineaBusquedaGUI();
+			lb.setVisible(true);
+		});
+		
+		btnTrayectos.addActionListener(e -> {
+			RegistrarTrayectoGUI rt = new RegistrarTrayectoGUI();
+			rt.setVisible(true);
+		});
+			
+		btnAlta.addActionListener(e -> {
+			flag = 1;
+			activarEdits();
+			
+			setOperationState();
+		});
+
+		btnModificar.addActionListener(e -> {
+			flag = 2;
+			activarEdits();
+			
+			setOperationState();
+		});
+		
+		btnBaja.addActionListener(e -> {
+			int n = JOptionPane.showConfirmDialog(this, "¿Estas seguro de eliminar la estación?", "CUIDADO!", JOptionPane.YES_NO_OPTION);
+			if(n == 0) {
+				//Llamar al handler y eliminar elemento de la DB
+				System.out.println("Eliminando elemento de la base de datos...");
+			}
+		});
+		
+		btnGuardar.addActionListener(e -> {
+			if(flag == 1) {
+				//Check that the values are correct
+				//Call handler and make an insert on DB
+				//On success show a dialog
+			}
+			if(flag == 2) {
+				//Check that the values are correct
+				//Call handler and make an update on DB
+				//On success show a dialog
+			}
+		});
+		
+		btnCancelar.addActionListener(e -> {
+			int n = JOptionPane.showConfirmDialog(this, "¿Estas seguro?", "CUIDADO!", JOptionPane.YES_NO_OPTION);
+			if(n == 0) {
+				limpiarCampos();
+				setInitialState();
+			}
+		});
+				
 		btnSalir.addActionListener(e -> dispose());
 		
 		panelFrame.add(datos, BorderLayout.CENTER);
 		panelFrame.add(botones, BorderLayout.SOUTH);
+		
+		setInitialState();
+		desactivarEdits();
 		
 		this.getContentPane().add(panelFrame);
 		this.pack();
@@ -182,5 +263,46 @@ public class LineaGUI extends JFrame {
 		this.setSize(500,300);
 
 	}
+	
+	private void setInitialState() {
+		btnBuscar.setEnabled(true);
+		btnTrayectos.setEnabled(false);
+		btnAlta.setEnabled(true);
+		btnModificar.setEnabled(false);
+		btnBaja.setEnabled(false);
+		btnGuardar.setEnabled(false);
+		btnCancelar.setEnabled(false);
+		btnSalir.setEnabled(true);
+	}
+	
+	private void setOperationState() {
+		btnBuscar.setEnabled(false);
+		btnTrayectos.setEnabled(false);
+		btnAlta.setEnabled(false);
+		btnModificar.setEnabled(false);
+		btnBaja.setEnabled(false);
+		btnGuardar.setEnabled(true);
+		btnCancelar.setEnabled(true);
+		btnSalir.setEnabled(false);
+	}
+	
+	private void limpiarCampos() {
+		tbxNombre.setText("");
+		tbxColor.setText("");
+		cbxEstado.setSelectedIndex(0);
+	}
+	
+	private void desactivarEdits() {
+		tbxNombre.setEnabled(false);
+		tbxColor.setEnabled(false);
+		cbxEstado.setEnabled(false);
+	}
+	
+	private void activarEdits() {
+		tbxNombre.setEnabled(true);
+		tbxColor.setEnabled(true);
+		cbxEstado.setEnabled(true);
+	}
+
 
 }
