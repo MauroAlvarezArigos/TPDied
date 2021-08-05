@@ -87,16 +87,16 @@ public class ParametrosGUI extends JFrame {
 		gbc_cbxDestino.gridy = 2;
 		
 		// pido las estaciones
-				ArrayList<Estacion> estaciones = new ArrayList<Estacion>();
-				Timestamp time1 = new Timestamp(System.currentTimeMillis());
-				Timestamp time2 = new Timestamp(System.currentTimeMillis()+60000);
-				estaciones.add(new Estacion(0, "Est 0", time1, time2, true));
-				estaciones.add(new Estacion(1, "Est 1", time1, time2, true));
-				estaciones.add(new Estacion(2, "Est 2", time1, time2, true));
-				for(Estacion e : estaciones) {
-					cbxOrigen.addItem(e);
-					cbxDestino.addItem(e);
-				}
+		ArrayList<Estacion> estaciones = new ArrayList<Estacion>();
+		Timestamp time1 = new Timestamp(System.currentTimeMillis());
+		Timestamp time2 = new Timestamp(System.currentTimeMillis()+60000);
+		estaciones.add(new Estacion(0, "Est 0", time1, time2, true));
+		estaciones.add(new Estacion(1, "Est 1", time1, time2, true));
+		estaciones.add(new Estacion(2, "Est 2", time1, time2, true));
+		for(Estacion e : estaciones) {
+			cbxOrigen.addItem(e);
+			cbxDestino.addItem(e);
+		}
 				
 		flujoMax.add(cbxOrigen, gbc_cbxOrigen);		
 		flujoMax.add(cbxDestino, gbc_cbxDestino);
@@ -106,15 +106,17 @@ public class ParametrosGUI extends JFrame {
 		JButton btnCalcular = new JButton("Calcular");
 		btnCalcular.setIcon(new ImageIcon(".\\res\\calcular.png"));
 		btnCalcular.setMargin(new Insets(0, 0, 0, 0));
+		btnCalcular.setHorizontalTextPosition(SwingConstants.CENTER);
+		btnCalcular.setVerticalTextPosition(SwingConstants.BOTTOM);
 		GridBagConstraints gbc_btnCalcular = new GridBagConstraints();
-		gbc_btnCalcular.anchor = GridBagConstraints.WEST;
+		gbc_btnCalcular.anchor = GridBagConstraints.CENTER;
 		gbc_btnCalcular.insets = new Insets(0, 0, 5, 0);
-		gbc_btnCalcular.gridx = 4;
-		gbc_btnCalcular.gridy = 1;
+		gbc_btnCalcular.gridx = 5;
+		gbc_btnCalcular.gridy = 2;
 		flujoMax.add(btnCalcular, gbc_btnCalcular);
 		
 		JPanel panel = new JPanel();
-		panel.setBorder(new TitledBorder(null, "Flujo Máximo", TitledBorder.CENTER, TitledBorder.TOP, null, null));
+		panel.setBorder(new TitledBorder(null, "Flujo", TitledBorder.CENTER, TitledBorder.TOP, null, null));
 		GridBagConstraints gbc_panel = new GridBagConstraints();
 		gbc_panel.insets = new Insets(0, 0, 0, 5);
 		gbc_panel.fill = GridBagConstraints.BOTH;
@@ -260,7 +262,7 @@ public class ParametrosGUI extends JFrame {
 		this.setContentPane(panelFrame);
 		this.pack();
 		this.setLocationRelativeTo(null);
-		this.setSize(500,300);	
+		this.setSize(500,400);	
 		
 		
 	}
