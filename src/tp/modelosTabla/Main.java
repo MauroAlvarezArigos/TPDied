@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
@@ -27,8 +28,8 @@ public class Main extends JFrame {
 
         String[] columnNames = {"Estacion", "Caminos"};
         ArrayList<Estacion> estaciones = new ArrayList<Estacion>();
-		Time time1 = new Time(System.currentTimeMillis());
-		Time time2 = new Time(System.currentTimeMillis()+60000);
+		Timestamp time1 = new Timestamp(System.currentTimeMillis());
+		Timestamp time2 = new Timestamp(System.currentTimeMillis()+60000);
 		estaciones.add(new Estacion(0, "Est 0", time1, time2, true));
 		estaciones.add(new Estacion(1, "Est 1", time1, time2, true));
 		estaciones.add(new Estacion(2, "Est 2", time1, time2, true));
