@@ -263,7 +263,7 @@ public class BoletoGUI extends JFrame {
 		
 		this.pack();
 		this.setLocationRelativeTo(null);
-		this.setSize(550,400);			
+		this.setSize(500,400);			
 		
 	}
 

@@ -253,9 +253,9 @@ public class BoletoGUI extends JFrame {
 		
 		btnCalcular.setIcon(new ImageIcon(".\\res\\calcular.png"));
 		btnCalcular.setMargin(new Insets(0, 0, 0, 0));
-		btnFacturar.setIcon(new ImageIcon(".\\res\\facturar.png"));
+		btnFacturar.setIcon(new ImageIcon("C:\\Users\\Fede\\Desktop\\repos\\TPDied\\res\\facturar.png"));
 		btnFacturar.setMargin(new Insets(0, 0, 0, 0));
-		btnCancelar.setIcon(new ImageIcon(".\\res\\cancelar.png"));
+		btnCancelar.setIcon(new ImageIcon("C:\\Users\\Fede\\Desktop\\repos\\TPDied\\res\\cancelar.png"));
 		btnCancelar.setMargin(new Insets(0, 0, 0, 0));
 		
 		//Preg si queres cancelar??
@@ -263,7 +263,7 @@ public class BoletoGUI extends JFrame {
 		
 		this.pack();
 		this.setLocationRelativeTo(null);
-		this.setSize(550,400);			
+		this.setSize(500,300);			
 		
 	}
 
