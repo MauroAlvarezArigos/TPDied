@@ -141,7 +141,7 @@ public class ParametrosGUI extends JFrame {
 			System.out.println(tabla[i][0]);
 		}
 		PageRankTableModel modelo = new PageRankTableModel(tabla);
-		System.out.println("HOLA " + modelo.getValueAt(2, 0));
+		
 		
 		JTable pagerank = new JTable(modelo);
 		pagerank.setBorder(new LineBorder(new Color(0, 0, 0)));
@@ -214,11 +214,9 @@ public class ParametrosGUI extends JFrame {
 			flujoMax.setVisible(false);
 			mant.setVisible(false);
 			
-			SwingUtilities.updateComponentTreeUI(panelFrame);
-			
 			panelFrame.add(scrollPane, BorderLayout.CENTER);
 			scrollPane.setVisible(true);
-			
+			SwingUtilities.updateComponentTreeUI(panelFrame);
 		});
 		
 		botones.add(btnProxMant);

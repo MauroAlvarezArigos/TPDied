@@ -132,17 +132,17 @@ public class ParametrosGUI extends JFrame {
 		});
 		
 		//PageRank
+		PageRankTableModel modelo = new PageRankTableModel();
 		ArrayList<Pair> pRank = new PageRank().getRank(estaciones);
 		int tam = pRank.size();
-		Object[][] tabla = new Object[tam][2];
+		Object[][] tabla = new Object[2][tam];
 		for(int i=0; i<tam; i++) {
-			tabla[i][0] = pRank.get(i).getEstacion();
-			tabla[i][1] = pRank.get(i).getRank();
-			System.out.println(tabla[i][0]);
+			tabla[0][i] = pRank.get(i).getEstacion();
+			tabla[1][i] = pRank.get(i).getRank();
+			System.out.println(tabla[0][i]);
 		}
-		PageRankTableModel modelo = new PageRankTableModel(tabla);
-		System.out.println("HOLA " + modelo.getValueAt(2, 0));
-		
+		modelo.setData(tabla);
+		System.out.println(modelo.getColumnCount());
 		JTable pagerank = new JTable(modelo);
 		pagerank.setBorder(new LineBorder(new Color(0, 0, 0)));
 		pagerank.setPreferredScrollableViewportSize(new Dimension(500,70));
@@ -214,11 +214,9 @@ public class ParametrosGUI extends JFrame {
 			flujoMax.setVisible(false);
 			mant.setVisible(false);
 			
-			SwingUtilities.updateComponentTreeUI(panelFrame);
-			
 			panelFrame.add(scrollPane, BorderLayout.CENTER);
 			scrollPane.setVisible(true);
-			
+			SwingUtilities.updateComponentTreeUI(panelFrame);
 		});
 		
 		botones.add(btnProxMant);

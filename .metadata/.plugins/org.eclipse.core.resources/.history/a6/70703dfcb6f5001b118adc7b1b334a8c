@@ -7,7 +7,7 @@ public class PageRankTableModel extends AbstractTableModel {
 	private String[] columnNames = {"Estación", "Caminos"};
 	private Object[][] data = null;
 	
-	public PageRankTableModel(Object[][] _data) {
+	public void PageRankTableModel(Object[][] _data) {
 		this.data = _data;
 	}
 	

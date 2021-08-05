@@ -213,9 +213,7 @@ public class ParametrosGUI extends JFrame {
 		btnPageRank.addActionListener(e -> {
 			flujoMax.setVisible(false);
 			mant.setVisible(false);
-			
 			SwingUtilities.updateComponentTreeUI(panelFrame);
-			
 			panelFrame.add(scrollPane, BorderLayout.CENTER);
 			scrollPane.setVisible(true);
 			

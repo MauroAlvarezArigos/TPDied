@@ -132,21 +132,18 @@ public class ParametrosGUI extends JFrame {
 		});
 		
 		//PageRank
-		ArrayList<Pair> pRank = new PageRank().getRank(estaciones);
-		int tam = pRank.size();
-		Object[][] tabla = new Object[tam][2];
-		for(int i=0; i<tam; i++) {
-			tabla[i][0] = pRank.get(i).getEstacion();
-			tabla[i][1] = pRank.get(i).getRank();
-			System.out.println(tabla[i][0]);
-		}
-		PageRankTableModel modelo = new PageRankTableModel(tabla);
-		System.out.println("HOLA " + modelo.getValueAt(2, 0));
+		PageRankTableModel modelo = new PageRankTableModel();
 		
 		JTable pagerank = new JTable(modelo);
 		pagerank.setBorder(new LineBorder(new Color(0, 0, 0)));
 		pagerank.setPreferredScrollableViewportSize(new Dimension(500,70));
-
+//		ArrayList<Pair> pRank = new PageRank().getRank(estaciones);
+//		int tam = pRank.size();
+//		Object[][] tabla = new Object[2][tam];
+//		for(int i=0; i<tam; i++) {
+//			tabla[0][i] = pRank.get(i).getEstacion();
+//			tabla[1][i] = pRank.get(i).getRank();
+//		}
 		JScrollPane scrollPane = new JScrollPane(pagerank);
 		scrollPane.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Page Rank", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		scrollPane.setVisible(true);
@@ -214,11 +211,9 @@ public class ParametrosGUI extends JFrame {
 			flujoMax.setVisible(false);
 			mant.setVisible(false);
 			
-			SwingUtilities.updateComponentTreeUI(panelFrame);
-			
 			panelFrame.add(scrollPane, BorderLayout.CENTER);
 			scrollPane.setVisible(true);
-			
+			SwingUtilities.updateComponentTreeUI(panelFrame);
 		});
 		
 		botones.add(btnProxMant);

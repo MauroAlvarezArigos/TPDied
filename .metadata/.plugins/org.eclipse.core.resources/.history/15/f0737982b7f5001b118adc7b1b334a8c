@@ -214,11 +214,9 @@ public class ParametrosGUI extends JFrame {
 			flujoMax.setVisible(false);
 			mant.setVisible(false);
 			
-			SwingUtilities.updateComponentTreeUI(panelFrame);
-			
 			panelFrame.add(scrollPane, BorderLayout.CENTER);
 			scrollPane.setVisible(true);
-			
+			SwingUtilities.updateComponentTreeUI(panelFrame);
 		});
 		
 		botones.add(btnProxMant);

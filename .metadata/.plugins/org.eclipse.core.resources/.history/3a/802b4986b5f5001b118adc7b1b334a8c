@@ -26,10 +26,4 @@ public class Pair {
 	public long getCost() {
 		return this.aux2;
 	}
-	public Estacion getEstacion() {
-		return this.second;
-	}
-	public int getRank() {
-		return this.first;
-	}
 }
