@@ -35,22 +35,6 @@ public class RegistrarTrayectoGUI extends JFrame {
 		panel.setLayout(gbl_panel);
 		panel.setBorder(BorderFactory.createTitledBorder("Datos"));
 		
-		JLabel lblLinea = new JLabel("Linea:");
-		GridBagConstraints gbc_lblLinea = new GridBagConstraints();
-		gbc_lblLinea.anchor = GridBagConstraints.EAST;
-		gbc_lblLinea.insets = new Insets(0, 0, 5, 5);
-		gbc_lblLinea.gridx = 2;
-		gbc_lblLinea.gridy = 0;
-		panel.add(lblLinea, gbc_lblLinea);
-		
-		JComboBox<String> cbxLinea = new JComboBox<String>();
-		GridBagConstraints gbc_cbxLinea = new GridBagConstraints();
-		gbc_cbxLinea.anchor = GridBagConstraints.WEST;
-		gbc_cbxLinea.insets = new Insets(0, 0, 5, 5);
-		gbc_cbxLinea.gridx = 3;
-		gbc_cbxLinea.gridy = 0;
-		panel.add(cbxLinea, gbc_cbxLinea);
-		
 		//Con un for cargar las lineas guardadas en la Base de datos, pero solo el nombre
 		
 		JLabel lblOrigen = new JLabel("Origen:");
@@ -186,6 +170,9 @@ public class RegistrarTrayectoGUI extends JFrame {
 		gbc_cancelar.gridx = 4;
 		gbc_cancelar.gridy = 6;
 		panel.add(cancelar, gbc_cancelar);
+		
+		cancelar.addActionListener(e -> dispose());
+		
 		
 		this.getContentPane().add(panelFrame);
 		this.pack();

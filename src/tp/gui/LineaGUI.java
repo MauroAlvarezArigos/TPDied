@@ -93,6 +93,26 @@ public class LineaGUI extends JFrame {
 		gbc_btnBuscar.gridy = 0;
 		botones.add(btnBuscar, gbc_btnBuscar);
 		
+		JButton btnTrayectos = new JButton();
+		btnTrayectos.setIcon(new ImageIcon(".\\res\\trayecto.png"));
+		btnTrayectos.setMargin(new Insets(0, 0, 0, 0));
+		GridBagConstraints gbc_btnTrayectos = new GridBagConstraints();
+		gbc_btnTrayectos.insets = new Insets(0, 0, 5, 5);
+		gbc_btnTrayectos.gridx = 1;
+		gbc_btnTrayectos.gridy = 0;
+		botones.add(btnTrayectos, gbc_btnTrayectos);
+		
+		btnTrayectos.addActionListener(e -> {
+			RegistrarTrayectoGUI rt = new RegistrarTrayectoGUI();
+			rt.setVisible(true);
+		});
+		
+		
+		btnBuscar.addActionListener(e -> {
+			LineaBusquedaGUI lb = new LineaBusquedaGUI();
+			lb.setVisible(true);
+		});
+		
 		JButton btnAlta = new JButton();
 		btnAlta.setIcon(new ImageIcon(".\\res\\alta.png"));
 		btnAlta.setMargin(new Insets(0, 0, 0, 0));
@@ -129,6 +149,8 @@ public class LineaGUI extends JFrame {
 		gbc_btnGuardar.gridy = 0;
 		botones.add(btnGuardar, gbc_btnGuardar);
 		
+		//LLamar a la capa de servicio y validar todo, luego guardar en bd
+		
 		JButton btnCancelar = new JButton();
 		btnCancelar.setIcon(new ImageIcon(".\\res\\cancelar.png"));
 		btnCancelar.setMargin(new Insets(0, 0, 0, 0));
@@ -137,6 +159,8 @@ public class LineaGUI extends JFrame {
 		gbc_btnCancelar.gridx = 7;
 		gbc_btnCancelar.gridy = 0;
 		botones.add(btnCancelar, gbc_btnCancelar);
+		
+		//Preg si esta seguro y si lo esta borrar todo lo lleno
 		
 		JButton btnSalir = new JButton();
 		btnSalir.setIcon(new ImageIcon(".\\res\\salir.png"));
@@ -147,6 +171,7 @@ public class LineaGUI extends JFrame {
 		gbc_btnSalir.gridy = 0;
 		botones.add(btnSalir, gbc_btnSalir);
 		
+		btnSalir.addActionListener(e -> dispose());
 		
 		panelFrame.add(datos, BorderLayout.CENTER);
 		panelFrame.add(botones, BorderLayout.SOUTH);

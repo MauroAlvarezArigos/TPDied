@@ -99,6 +99,8 @@ public class EstacionBusquedaGUI extends JFrame {
 		gbc_btnBuscar.gridy = 2;
 		parametrosBusqueda.add(btnBuscar, gbc_btnBuscar);
 		
+		//LLamar al servicio de busqueda
+		
 		JButton btnCancelar = new JButton();
 		btnCancelar.setIcon(new ImageIcon(".\\res\\cancelar.png"));
 		btnCancelar.setMargin(new Insets(0, 0, 0, 0));
@@ -107,6 +109,8 @@ public class EstacionBusquedaGUI extends JFrame {
 		gbc_btnCancelar.gridx = 2;
 		gbc_btnCancelar.gridy = 2;
 		parametrosBusqueda.add(btnCancelar, gbc_btnCancelar);
+		
+		btnCancelar.addActionListener(e -> dispose());
 		
 		/// CREAR TABLA
 		EstacionBusquedaTableModel modelo = new EstacionBusquedaTableModel();

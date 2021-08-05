@@ -137,7 +137,7 @@ public class EstacionGUI extends JFrame {
 		botones.setLayout(gbl_botones);
 		
 		JButton btnBuscar = new JButton();
-		btnBuscar.setIcon(new ImageIcon("D:\\Facultad\\Programacion\\Java\\TPDied\\res\\buscar.png"));
+		btnBuscar.setIcon(new ImageIcon(".\\res\\buscar.png"));
 		btnBuscar.setMargin(new Insets(0, 0, 0, 0));
 		GridBagConstraints gbc_btnBuscar = new GridBagConstraints();
 		gbc_btnBuscar.anchor = GridBagConstraints.WEST;
@@ -146,8 +146,13 @@ public class EstacionGUI extends JFrame {
 		gbc_btnBuscar.gridy = 0;
 		botones.add(btnBuscar, gbc_btnBuscar);
 		
+		btnBuscar.addActionListener(e -> {
+			EstacionBusquedaGUI eb = new EstacionBusquedaGUI();
+			eb.setVisible(true);
+		});
+		
 		JButton btnAlta = new JButton();
-		btnAlta.setIcon(new ImageIcon("D:\\Facultad\\Programacion\\Java\\TPDied\\res\\alta.png"));
+		btnAlta.setIcon(new ImageIcon(".\\res\\alta.png"));
 		btnAlta.setMargin(new Insets(0, 0, 0, 0));
 		GridBagConstraints gbc_btnAlta = new GridBagConstraints();
 		gbc_btnAlta.insets = new Insets(0, 0, 0, 5);
@@ -156,7 +161,7 @@ public class EstacionGUI extends JFrame {
 		botones.add(btnAlta, gbc_btnAlta);
 		
 		JButton btnModificar = new JButton();
-		btnModificar.setIcon(new ImageIcon("D:\\Facultad\\Programacion\\Java\\TPDied\\res\\modificar.png"));
+		btnModificar.setIcon(new ImageIcon(".\\res\\modificar.png"));
 		btnModificar.setMargin(new Insets(0, 0, 0, 0));
 		GridBagConstraints gbc_btnModificar = new GridBagConstraints();
 		gbc_btnModificar.insets = new Insets(0, 0, 0, 5);
@@ -164,8 +169,8 @@ public class EstacionGUI extends JFrame {
 		gbc_btnModificar.gridy = 0;
 		botones.add(btnModificar, gbc_btnModificar);
 
-	JButton btnBaja = new JButton();
-		btnBaja.setIcon(new ImageIcon("D:\\Facultad\\Programacion\\Java\\TPDied\\res\\borrar.png"));
+		JButton btnBaja = new JButton();
+		btnBaja.setIcon(new ImageIcon(".\\res\\borrar.png"));
 		btnBaja.setMargin(new Insets(0, 0, 0, 0));
 		GridBagConstraints gbc_btnBaja = new GridBagConstraints();
 		gbc_btnBaja.anchor = GridBagConstraints.WEST;
@@ -175,7 +180,7 @@ public class EstacionGUI extends JFrame {
 		botones.add(btnBaja, gbc_btnBaja);
 		
 		JButton btnGuardar = new JButton();
-		btnGuardar.setIcon(new ImageIcon("D:\\Facultad\\Programacion\\Java\\TPDied\\res\\guardar.png"));
+		btnGuardar.setIcon(new ImageIcon(".\\res\\guardar.png"));
 		btnGuardar.setMargin(new Insets(0, 0, 0, 0));
 		GridBagConstraints gbc_btnGuardar = new GridBagConstraints();
 		gbc_btnGuardar.insets = new Insets(0, 0, 0, 5);
@@ -184,7 +189,7 @@ public class EstacionGUI extends JFrame {
 		botones.add(btnGuardar, gbc_btnGuardar);
 		
 		JButton btnCancelar = new JButton();
-		btnCancelar.setIcon(new ImageIcon("D:\\Facultad\\Programacion\\Java\\TPDied\\res\\cancelar.png"));
+		btnCancelar.setIcon(new ImageIcon(".\\res\\cancelar.png"));
 		btnCancelar.setMargin(new Insets(0, 0, 0, 0));
 		GridBagConstraints gbc_btnCancelar = new GridBagConstraints();
 		gbc_btnCancelar.insets = new Insets(0, 0, 0, 5);
@@ -193,12 +198,15 @@ public class EstacionGUI extends JFrame {
 		botones.add(btnCancelar, gbc_btnCancelar);
 		
 		JButton btnSalir = new JButton();
-		btnSalir.setIcon(new ImageIcon("D:\\Facultad\\Programacion\\Java\\TPDied\\res\\salir.png"));
+		btnSalir.setIcon(new ImageIcon(".\\res\\salir.png"));
 		btnSalir.setMargin(new Insets(0, 0, 0, 0));
 		GridBagConstraints gbc_btnSalir = new GridBagConstraints();
 		gbc_btnSalir.gridx = 9;
 		gbc_btnSalir.gridy = 0;
 		botones.add(btnSalir, gbc_btnSalir);
+		
+		btnSalir.addActionListener(e -> dispose());
+		
 		
 		panelFrame.add(botones, BorderLayout.SOUTH);
 		
