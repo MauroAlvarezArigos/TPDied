@@ -35,7 +35,6 @@ public class BoletoGUI extends JFrame {
 		contentPane.setLayout(new BorderLayout(0, 0));
 		this.setContentPane(contentPane);
 		
-		
 		JLabel lblBoletos = new JLabel("Venta Boletos");
 		lblBoletos.setHorizontalAlignment(SwingConstants.CENTER);
 		lblBoletos.setFont(new Font("Tahoma", Font.PLAIN, 22));
@@ -126,6 +125,7 @@ public class BoletoGUI extends JFrame {
 		gbc_panelEstacion.gridx = 2;
 		gbc_panelEstacion.gridy = 2;
 		panel.add(panelEstacion, gbc_panelEstacion);
+		
 		GridBagLayout gbl_panelEstacion = new GridBagLayout();
 		gbl_panelEstacion.columnWidths = new int[]{0, 0, 0};
 		gbl_panelEstacion.rowHeights = new int[]{0, 0, 0, 0, 0};
@@ -147,14 +147,15 @@ public class BoletoGUI extends JFrame {
 		gbc_cbxOrigen.insets = new Insets(0, 0, 5, 0);
 		gbc_cbxOrigen.gridx = 1;
 		gbc_cbxOrigen.gridy = 1;
+		
 		// pido las estaciones
-				ArrayList<Estacion> estaciones = new ArrayList<Estacion>();
-				Time time1 = new Time(System.currentTimeMillis());
-				Time time2 = new Time(System.currentTimeMillis()+60000);
-				estaciones.add(new Estacion(0, "Est 0", time1, time2, true));
-				estaciones.add(new Estacion(1, "Est 1", time1, time2, true));
-				estaciones.add(new Estacion(2, "Est 2", time1, time2, true));
-				for(Estacion e : estaciones) cbxOrigen.addItem(e);
+		ArrayList<Estacion> estaciones = new ArrayList<Estacion>();
+		Time time1 = new Time(System.currentTimeMillis());
+		Time time2 = new Time(System.currentTimeMillis()+60000);
+		estaciones.add(new Estacion(0, "Est 0", time1, time2, true));
+		estaciones.add(new Estacion(1, "Est 1", time1, time2, true));
+		estaciones.add(new Estacion(2, "Est 2", time1, time2, true));
+		for(Estacion e : estaciones) cbxOrigen.addItem(e);
 		panelEstacion.add(cbxOrigen, gbc_cbxOrigen);
 		
 		JLabel lblDestino = new JLabel("Destino:");
@@ -177,25 +178,44 @@ public class BoletoGUI extends JFrame {
 		JLabel lblCosto = new JLabel("");
 		GridBagConstraints gbc_lblCosto = new GridBagConstraints();
         panel.add(lblCosto);
-        gbc_lblCosto.anchor = GridBagConstraints.WEST;
+        gbc_lblCosto.anchor = GridBagConstraints.NORTHWEST;
 		gbc_lblCosto.insets = new Insets(0, 0, 0, 5);
 		gbc_lblCosto.gridx = 1;
 		gbc_lblCosto.gridy = 3;
 		panel.add(lblCosto, gbc_lblCosto);
+		
 		JLabel lblValor = new JLabel("");
 		GridBagConstraints gbc_lblValor = new GridBagConstraints();
         panel.add(lblValor);
         gbc_lblValor.anchor = GridBagConstraints.WEST;
 		gbc_lblValor.insets = new Insets(0, 0, 0, 5);
 		gbc_lblValor.gridx = 1;
-		gbc_lblValor.gridy = 4;
+		gbc_lblValor.gridy = 3;
 		panel.add(lblValor, gbc_lblValor);
+		
+		JButton btnFacturar = new JButton("Facturar");
+		GridBagConstraints gbc_btnFacturar = new GridBagConstraints();
+		gbc_btnFacturar.anchor = GridBagConstraints.WEST;
+		gbc_btnFacturar.insets = new Insets(0, 0, 0, 5);
+		gbc_btnFacturar.gridx = 2;
+		gbc_btnFacturar.gridy = 3;
+		btnFacturar.setEnabled(false);
+		panel.add(btnFacturar, gbc_btnFacturar);
+		
+		JButton btnCancelar = new JButton("Cancelar");
+		GridBagConstraints gbc_btnCancelar = new GridBagConstraints();
+		gbc_btnCancelar.anchor = GridBagConstraints.EAST;
+		gbc_btnCancelar.insets = new Insets(0, 0, 0, 5);
+		gbc_btnCancelar.gridx = 2;
+		gbc_btnCancelar.gridy = 3;
+		panel.add(btnCancelar, gbc_btnCancelar);
 
 		
 		
-		JButton btnCalcular = new JButton();
+		JButton btnCalcular = new JButton("Calcular");
 		GridBagConstraints gbc_btnCalcular = new GridBagConstraints();
-		gbc_btnCalcular.gridx = 1;
+		gbc_btnCalcular.insets = new Insets(0, 0, 0, 5);
+		gbc_btnCalcular.gridx = 0;
 		gbc_btnCalcular.gridy = 3;
 		panelEstacion.add(btnCalcular, gbc_btnCalcular);
 		btnCalcular.addActionListener(new ActionListener() {
@@ -209,7 +229,7 @@ public class BoletoGUI extends JFrame {
 						GenerarGrafo auxg = new GenerarGrafo();
 						ArrayList<ArrayList<Ruta>> grafo = auxg.getGrafo();
 						Pair val;
-						Boolean posible = true;
+						Boolean posible = false;
 						if(selected == "El más rápido") {
 							val = Dijkstra.getDijkstra(estOrigen.getId(), estDestino.getId(), 0, grafo, grafo.size());
 							if(val.getVal() < INF) lblValor.setText("Tiempo: " + val.getVal());
@@ -226,30 +246,15 @@ public class BoletoGUI extends JFrame {
 							else lblValor.setText("Costo: inalcanzable");
 						}
 						if(val.getCost() < INF) {
-							posible=false;
+							posible=true;
 							lblCosto.setText("Precio: " + val.getCost()); //PONE ACA LO QUE CALCULASTE
 						}
 						else lblCosto.setText("Precio: " + estDestino.getNombre() + " es inalcanzable");
 						//panel.setVisible(true);
+						if(posible) btnFacturar.setEnabled(true);
+						else btnFacturar.setEnabled(false);
 				}
 		});
-		
-		
-		JButton btnFacturar = new JButton();
-		GridBagConstraints gbc_btnFacturar = new GridBagConstraints();
-		gbc_btnFacturar.anchor = GridBagConstraints.WEST;
-		gbc_btnFacturar.insets = new Insets(0, 0, 0, 5);
-		gbc_btnFacturar.gridx = 2;
-		gbc_btnFacturar.gridy = 3;
-		panel.add(btnFacturar, gbc_btnFacturar);
-		
-		JButton btnCancelar = new JButton();
-		GridBagConstraints gbc_btnCancelar = new GridBagConstraints();
-		gbc_btnCancelar.anchor = GridBagConstraints.EAST;
-		gbc_btnCancelar.insets = new Insets(0, 0, 0, 5);
-		gbc_btnCancelar.gridx = 2;
-		gbc_btnCancelar.gridy = 3;
-		panel.add(btnCancelar, gbc_btnCancelar);
 		
 		btnCalcular.setIcon(new ImageIcon(".\\res\\calcular.png"));
 		btnCalcular.setMargin(new Insets(0, 0, 0, 0));

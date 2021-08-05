@@ -2,8 +2,9 @@ package tp.modelosTabla;
 
 import javax.swing.table.AbstractTableModel;
 
-public class EstacionBusquedaTableModel extends AbstractTableModel {
-	private String[] columnNames = {"ID", "Nombre", "Estado"};
+public class LineaBusquedaTableModel extends AbstractTableModel {
+	
+	private String[] columnNames = {"Linea", "Color", "Estado"};
 	private Object[][] data = null;
 	
 	

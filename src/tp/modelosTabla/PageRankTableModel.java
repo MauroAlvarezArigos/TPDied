@@ -3,7 +3,8 @@ package tp.modelosTabla;
 import javax.swing.table.AbstractTableModel;
 
 public class PageRankTableModel extends AbstractTableModel {
-	private String[] columnNames = {"ID", "Nombre", "Estado"};
+	
+	private String[] columnNames = {"Estación", "Caminos"};
 	private Object[][] data = null;
 	
 	
@@ -29,6 +30,10 @@ public class PageRankTableModel extends AbstractTableModel {
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
 		return data[rowIndex][columnIndex];
+	}
+	
+	public String getColumnName(int columnIndex) {
+	    return columnNames[columnIndex];
 	}
 
 }

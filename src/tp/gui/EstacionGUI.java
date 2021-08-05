@@ -14,8 +14,23 @@ public class EstacionGUI extends JFrame {
 	private JTextField tbxNombre;
 	private JTextField tbxApertura;
 	private JTextField tbxCierre;
+	private JComboBox<String> cbxEstado;
+	private JEditorPane editorObservaciones;
+	
+	private JButton btnBuscar;
+	private JButton btnAlta;
+	private JButton btnModificar;
+	private JButton btnBaja;
+	private JButton btnGuardar;
+	private JButton btnCancelar;
+	private JButton btnSalir;
+	
+	
+	
+	private Byte flag;
 	
 	public EstacionGUI() {
+		flag = 0;
 		JPanel panelFrame = new JPanel();
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 1.0};
@@ -55,7 +70,7 @@ public class EstacionGUI extends JFrame {
 		datos.add(tbxNombre, gbc_tbxNombre);
 		tbxNombre.setColumns(20);
 		
-		JComboBox<String> cbxEstado = new JComboBox<String>();
+		cbxEstado = new JComboBox<String>();
 		cbxEstado.setMaximumRowCount(10);
 		cbxEstado.addItem("Operativa");
 		cbxEstado.addItem("En Mantenimiento");
@@ -107,7 +122,7 @@ public class EstacionGUI extends JFrame {
 		gbc_lblCierre.gridy = 5;
 		datos.add(lblCierre, gbc_lblCierre);
 		
-		JEditorPane editorObservaciones = new JEditorPane();
+		editorObservaciones = new JEditorPane();
 		GridBagConstraints gbc_editorObservaciones = new GridBagConstraints();
 		gbc_editorObservaciones.gridheight = 5;
 		gbc_editorObservaciones.insets = new Insets(0, 0, 5, 5);
@@ -129,6 +144,7 @@ public class EstacionGUI extends JFrame {
 		datos.add(tbxCierre, gbc_tbxCierre);
 		tbxCierre.setColumns(10);
 		
+		desactivarEdits();
 		
 		//Buttons
 		JPanel botones = new JPanel();
@@ -136,7 +152,7 @@ public class EstacionGUI extends JFrame {
 		gbl_botones.columnWeights = new double[]{0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0};
 		botones.setLayout(gbl_botones);
 		
-		JButton btnBuscar = new JButton();
+		btnBuscar = new JButton();
 		btnBuscar.setIcon(new ImageIcon(".\\res\\buscar.png"));
 		btnBuscar.setMargin(new Insets(0, 0, 0, 0));
 		GridBagConstraints gbc_btnBuscar = new GridBagConstraints();
@@ -151,7 +167,7 @@ public class EstacionGUI extends JFrame {
 			eb.setVisible(true);
 		});
 		
-		JButton btnAlta = new JButton();
+		btnAlta = new JButton();
 		btnAlta.setIcon(new ImageIcon(".\\res\\alta.png"));
 		btnAlta.setMargin(new Insets(0, 0, 0, 0));
 		GridBagConstraints gbc_btnAlta = new GridBagConstraints();
@@ -160,7 +176,14 @@ public class EstacionGUI extends JFrame {
 		gbc_btnAlta.gridy = 0;
 		botones.add(btnAlta, gbc_btnAlta);
 		
-		JButton btnModificar = new JButton();
+		btnAlta.addActionListener(e -> {
+			activarEdits();
+			flag = 1;
+			btnGuardar.setEnabled(true);
+			btnCancelar.setEnabled(true);
+		});
+		
+		btnModificar = new JButton();
 		btnModificar.setIcon(new ImageIcon(".\\res\\modificar.png"));
 		btnModificar.setMargin(new Insets(0, 0, 0, 0));
 		GridBagConstraints gbc_btnModificar = new GridBagConstraints();
@@ -168,8 +191,15 @@ public class EstacionGUI extends JFrame {
 		gbc_btnModificar.gridx = 3;
 		gbc_btnModificar.gridy = 0;
 		botones.add(btnModificar, gbc_btnModificar);
+		
+		btnModificar.addActionListener(e -> {
+			activarEdits();
+			flag = 2;
+			btnGuardar.setEnabled(true);
+			btnCancelar.setEnabled(true);			
+		});
 
-		JButton btnBaja = new JButton();
+		btnBaja = new JButton();
 		btnBaja.setIcon(new ImageIcon(".\\res\\borrar.png"));
 		btnBaja.setMargin(new Insets(0, 0, 0, 0));
 		GridBagConstraints gbc_btnBaja = new GridBagConstraints();
@@ -179,7 +209,14 @@ public class EstacionGUI extends JFrame {
 		gbc_btnBaja.gridy = 0;
 		botones.add(btnBaja, gbc_btnBaja);
 		
-		JButton btnGuardar = new JButton();
+		btnBaja.addActionListener(e -> {
+			int n = JOptionPane.showConfirmDialog(this, "¿Estas seguro de eliminar la estación?", "CUIDADO!", JOptionPane.YES_NO_OPTION);
+			if(n == 0) {
+				System.out.println("Eliminando elemento de la base de datos...");
+			}
+		});
+		
+		btnGuardar = new JButton();
 		btnGuardar.setIcon(new ImageIcon(".\\res\\guardar.png"));
 		btnGuardar.setMargin(new Insets(0, 0, 0, 0));
 		GridBagConstraints gbc_btnGuardar = new GridBagConstraints();
@@ -188,7 +225,7 @@ public class EstacionGUI extends JFrame {
 		gbc_btnGuardar.gridy = 0;
 		botones.add(btnGuardar, gbc_btnGuardar);
 		
-		JButton btnCancelar = new JButton();
+		btnCancelar = new JButton();
 		btnCancelar.setIcon(new ImageIcon(".\\res\\cancelar.png"));
 		btnCancelar.setMargin(new Insets(0, 0, 0, 0));
 		GridBagConstraints gbc_btnCancelar = new GridBagConstraints();
@@ -197,7 +234,15 @@ public class EstacionGUI extends JFrame {
 		gbc_btnCancelar.gridy = 0;
 		botones.add(btnCancelar, gbc_btnCancelar);
 		
-		JButton btnSalir = new JButton();
+		btnCancelar.addActionListener(e -> {
+			int n = JOptionPane.showConfirmDialog(this, "¿Estas seguro?", "CUIDADO!", JOptionPane.YES_NO_OPTION);
+			if(n == 0) {
+				limpiarCampos();
+				setInitialState();
+			}
+		});
+		
+		btnSalir = new JButton();
 		btnSalir.setIcon(new ImageIcon(".\\res\\salir.png"));
 		btnSalir.setMargin(new Insets(0, 0, 0, 0));
 		GridBagConstraints gbc_btnSalir = new GridBagConstraints();
@@ -210,10 +255,46 @@ public class EstacionGUI extends JFrame {
 		
 		panelFrame.add(botones, BorderLayout.SOUTH);
 		
+		setInitialState();
+		
 		this.getContentPane().add(panelFrame);
 		this.pack();
 		this.setLocationRelativeTo(null);
 		this.setSize(500,300);	
 
+	}
+	
+	private void setInitialState() {
+		btnBuscar.setEnabled(true);
+		btnAlta.setEnabled(true);
+		btnModificar.setEnabled(false);
+		btnBaja.setEnabled(false);
+		btnGuardar.setEnabled(false);
+		btnCancelar.setEnabled(false);
+		btnSalir.setEnabled(true);
+	}
+	
+	private void limpiarCampos() {
+		tbxNombre.setText("");
+		tbxApertura.setText("");
+		tbxCierre.setText("");
+		cbxEstado.setSelectedIndex(0);
+		editorObservaciones.setText("");
+	}
+	
+	private void desactivarEdits() {
+		tbxNombre.setEnabled(false);
+		tbxApertura.setEnabled(false);
+		tbxCierre.setEnabled(false);
+		cbxEstado.setEnabled(false);
+		editorObservaciones.setEnabled(false);
+	}
+	
+	private void activarEdits() {
+		tbxNombre.setEnabled(true);
+		tbxApertura.setEnabled(true);
+		tbxCierre.setEnabled(true);
+		cbxEstado.setEnabled(true);
+		editorObservaciones.setEnabled(true);
 	}
 }
