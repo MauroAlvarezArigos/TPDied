@@ -1,6 +1,7 @@
 package tp.dominio;
 
 import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.*;
 
 public class GeneradorRutasRandom {
@@ -27,8 +28,8 @@ public class GeneradorRutasRandom {
 		//genero 8 estaciones
 		ArrayList<Estacion> e = new ArrayList<Estacion>();
 		for(int i=0; i<8; i++) {
-			Time time1 = new Time(System.currentTimeMillis());
-			Time time2 = new Time(System.currentTimeMillis()+60000);
+			Timestamp time1 = new Timestamp(System.currentTimeMillis());
+			Timestamp time2 = new Timestamp(System.currentTimeMillis()+60000);
 			String aux = "est ";
 			aux = aux+(char)(i+'0');
 			Estacion est = new Estacion(i, aux, time1, time2, true);

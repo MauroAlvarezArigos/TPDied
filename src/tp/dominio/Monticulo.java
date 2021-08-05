@@ -1,6 +1,5 @@
 package tp.dominio;
 
-import java.sql.Time;
 import java.util.ArrayList;
 import java.util.PriorityQueue;
 

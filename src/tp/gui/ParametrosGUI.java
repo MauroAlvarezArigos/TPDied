@@ -10,7 +10,17 @@ import java.awt.Insets;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.sql.Time;
+import java.sql.Timestamp;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
+import java.util.TimeZone;
 
 import javax.swing.*;
 import javax.swing.border.EtchedBorder;
@@ -78,8 +88,8 @@ public class ParametrosGUI extends JFrame {
 		
 		// pido las estaciones
 				ArrayList<Estacion> estaciones = new ArrayList<Estacion>();
-				Time time1 = new Time(System.currentTimeMillis());
-				Time time2 = new Time(System.currentTimeMillis()+60000);
+				Timestamp time1 = new Timestamp(System.currentTimeMillis());
+				Timestamp time2 = new Timestamp(System.currentTimeMillis()+60000);
 				estaciones.add(new Estacion(0, "Est 0", time1, time2, true));
 				estaciones.add(new Estacion(1, "Est 1", time1, time2, true));
 				estaciones.add(new Estacion(2, "Est 2", time1, time2, true));
@@ -168,8 +178,8 @@ public class ParametrosGUI extends JFrame {
 //		ArrayList<Estacion> estaciones = new ArrayList<Estacion>();
 //		
 		int N = estaciones.size();
-		for(int i=0; i<N; i++) estaciones.get(i).setUltimoMantenimiento(new Time(System.currentTimeMillis()+70000*i));
-		estaciones.get(2).setUltimoMantenimiento(new Time(System.currentTimeMillis() - 100000));
+		for(int i=0; i<N; i++) estaciones.get(i).setUltimoMantenimiento(new Timestamp(System.currentTimeMillis()+70000*i));
+		estaciones.get(2).setUltimoMantenimiento(new Timestamp(System.currentTimeMillis() - 100000));
 		Estacion auxEstacion = Monticulo.ultMantenimiento(estaciones);
 		
 		JLabel lblEstacionMant = new JLabel(auxEstacion.getNombre());
@@ -179,8 +189,13 @@ public class ParametrosGUI extends JFrame {
 		gbc_lblEstacionMant.gridx = 1;
 		gbc_lblEstacionMant.gridy = 1;
 		mant.add(lblEstacionMant, gbc_lblEstacionMant);
-		
-		JLabel lblFecha = new JLabel("Ultimo mantenimiento: " + auxEstacion.getUltimoMantenimiento());
+
+		LocalDateTime now = auxEstacion.getUltimoMantenimiento().toLocalDateTime();
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        String fdt = now.format(formatter);
+        
+        
+		JLabel lblFecha = new JLabel("Ultimo mantenimiento: " + fdt);
 		GridBagConstraints gbc_lblFecha = new GridBagConstraints();
 		gbc_lblFecha.insets = new Insets(0, 0, 0, 5);
 		gbc_lblFecha.gridx = 1;

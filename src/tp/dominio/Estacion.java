@@ -1,17 +1,17 @@
 package tp.dominio;
 
-import java.sql.Time;
+import java.sql.Timestamp;
 
 public class Estacion {
 	Integer id;
 	String nombre;
-	Time horarioApertura;
-	Time horarioCierre;
+	Timestamp horarioApertura;
+	Timestamp horarioCierre;
 	Boolean estado; //1 operativo, 0 en mantenimiento
-	Time ultimoMantenimiento = null;
+	Timestamp ultimoMantenimiento = null;
 	
 	//Constructor
-	public Estacion(Integer id, String nombre, Time horarioApertura, Time horarioCierre, Boolean estado) {
+	public Estacion(Integer id, String nombre, Timestamp horarioApertura, Timestamp horarioCierre, Boolean estado) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
@@ -37,16 +37,16 @@ public class Estacion {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	public Time getHorarioApertura() {
+	public Timestamp getHorarioApertura() {
 		return horarioApertura;
 	}
-	public void setHorarioApertura(Time horarioApertura) {
+	public void setHorarioApertura(Timestamp horarioApertura) {
 		this.horarioApertura = horarioApertura;
 	}
-	public Time getHorarioCierre() {
+	public Timestamp getHorarioCierre() {
 		return horarioCierre;
 	}
-	public void setHorarioCierre(Time horarioCierre) {
+	public void setHorarioCierre(Timestamp horarioCierre) {
 		this.horarioCierre = horarioCierre;
 	}
 	public Boolean getEstado() {
@@ -55,10 +55,10 @@ public class Estacion {
 	public void setEstado(Boolean estado) {
 		this.estado = estado;
 	}
-	public void setUltimoMantenimiento(Time ult) {
+	public void setUltimoMantenimiento(Timestamp ult) {
 		this.ultimoMantenimiento = ult;
 	}
-	public Time getUltimoMantenimiento() {
+	public Timestamp getUltimoMantenimiento() {
 		return this.ultimoMantenimiento;
 	}
 

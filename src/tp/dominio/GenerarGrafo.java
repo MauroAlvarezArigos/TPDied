@@ -1,6 +1,7 @@
 package tp.dominio;
 
 import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 public class GenerarGrafo {
@@ -12,8 +13,8 @@ public class GenerarGrafo {
 		lineas.add(new Linea("linea 3", "roja", true));
 		ArrayList<Estacion> estaciones = new ArrayList<Estacion>();
 		//genero 6 estaciones
-		Time time1 = new Time(System.currentTimeMillis());
-		Time time2 = new Time(System.currentTimeMillis()+60000);
+		Timestamp time1 = new Timestamp(System.currentTimeMillis());
+		Timestamp time2 = new Timestamp(System.currentTimeMillis()+60000);
 		estaciones.add(new Estacion(0, "Est 0", time1, time2, true));
 		estaciones.add(new Estacion(1, "Est 1", time1, time2, true));
 		estaciones.add(new Estacion(2, "Est 2", time1, time2, true));

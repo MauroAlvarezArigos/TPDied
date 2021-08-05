@@ -1,14 +1,14 @@
 package tp.dominio;
-import java.sql.Time;
+import java.sql.Timestamp;
 
 
 public class Mantenimiento {
 	Estacion estacion;
-	Time inicio;
-	Time fin;
+	Timestamp inicio;
+	Timestamp fin;
 	String observaciones=null;
 	
-	public Mantenimiento(Estacion estacion, Time inicio, Time fin, String observaciones) {
+	public Mantenimiento(Estacion estacion, Timestamp inicio, Timestamp fin, String observaciones) {
 		super();
 		this.estacion= estacion;
 		this.inicio = inicio;
@@ -22,16 +22,16 @@ public class Mantenimiento {
 	public void setEstacion(Estacion estacion) {
 		this.estacion = estacion;
 	}
-	public Time getInicio() {
+	public Timestamp getInicio() {
 		return inicio;
 	}
-	public void setInicio(Time inicio) {
+	public void setInicio(Timestamp inicio) {
 		this.inicio = inicio;
 	}
-	public Time getFin() {
+	public Timestamp getFin() {
 		return fin;
 	}
-	public void setFin(Time fin) {
+	public void setFin(Timestamp fin) {
 		this.fin = fin;
 	}
 	public String getObservaciones() {
