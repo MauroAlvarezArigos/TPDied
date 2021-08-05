@@ -155,6 +155,9 @@ public class EstacionGUI extends JFrame {
 		btnBuscar = new JButton();
 		btnBuscar.setIcon(new ImageIcon(".\\res\\buscar.png"));
 		btnBuscar.setMargin(new Insets(0, 0, 0, 0));
+		btnBuscar.setText("Buscar");
+		btnBuscar.setHorizontalTextPosition(SwingConstants.CENTER);
+		btnBuscar.setVerticalTextPosition(SwingConstants.BOTTOM);
 		GridBagConstraints gbc_btnBuscar = new GridBagConstraints();
 		gbc_btnBuscar.anchor = GridBagConstraints.WEST;
 		gbc_btnBuscar.insets = new Insets(0, 0, 0, 5);
@@ -170,6 +173,9 @@ public class EstacionGUI extends JFrame {
 		btnAlta = new JButton();
 		btnAlta.setIcon(new ImageIcon(".\\res\\alta.png"));
 		btnAlta.setMargin(new Insets(0, 0, 0, 0));
+		btnAlta.setText("Nuevo");
+		btnAlta.setHorizontalTextPosition(SwingConstants.CENTER);
+		btnAlta.setVerticalTextPosition(SwingConstants.BOTTOM);
 		GridBagConstraints gbc_btnAlta = new GridBagConstraints();
 		gbc_btnAlta.insets = new Insets(0, 0, 0, 5);
 		gbc_btnAlta.gridx = 2;
@@ -187,6 +193,9 @@ public class EstacionGUI extends JFrame {
 		btnModificar = new JButton();
 		btnModificar.setIcon(new ImageIcon(".\\res\\modificar.png"));
 		btnModificar.setMargin(new Insets(0, 0, 0, 0));
+		btnModificar.setText("Modificar");
+		btnModificar.setHorizontalTextPosition(SwingConstants.CENTER);
+		btnModificar.setVerticalTextPosition(SwingConstants.BOTTOM);
 		GridBagConstraints gbc_btnModificar = new GridBagConstraints();
 		gbc_btnModificar.insets = new Insets(0, 0, 0, 5);
 		gbc_btnModificar.gridx = 3;
@@ -203,6 +212,9 @@ public class EstacionGUI extends JFrame {
 		btnBaja = new JButton();
 		btnBaja.setIcon(new ImageIcon(".\\res\\borrar.png"));
 		btnBaja.setMargin(new Insets(0, 0, 0, 0));
+		btnBaja.setText("Borrar");
+		btnBaja.setHorizontalTextPosition(SwingConstants.CENTER);
+		btnBaja.setVerticalTextPosition(SwingConstants.BOTTOM);
 		GridBagConstraints gbc_btnBaja = new GridBagConstraints();
 		gbc_btnBaja.anchor = GridBagConstraints.WEST;
 		gbc_btnBaja.insets = new Insets(0, 0, 0, 5);
@@ -220,6 +232,9 @@ public class EstacionGUI extends JFrame {
 		btnGuardar = new JButton();
 		btnGuardar.setIcon(new ImageIcon(".\\res\\guardar.png"));
 		btnGuardar.setMargin(new Insets(0, 0, 0, 0));
+		btnGuardar.setText("Guardar");
+		btnGuardar.setHorizontalTextPosition(SwingConstants.CENTER);
+		btnGuardar.setVerticalTextPosition(SwingConstants.BOTTOM);
 		GridBagConstraints gbc_btnGuardar = new GridBagConstraints();
 		gbc_btnGuardar.insets = new Insets(0, 0, 0, 5);
 		gbc_btnGuardar.gridx = 6;
@@ -229,6 +244,9 @@ public class EstacionGUI extends JFrame {
 		btnCancelar = new JButton();
 		btnCancelar.setIcon(new ImageIcon(".\\res\\cancelar.png"));
 		btnCancelar.setMargin(new Insets(0, 0, 0, 0));
+		btnCancelar.setText("Cancelar");                                  
+		btnCancelar.setHorizontalTextPosition(SwingConstants.CENTER);    
+		btnCancelar.setVerticalTextPosition(SwingConstants.BOTTOM);      
 		GridBagConstraints gbc_btnCancelar = new GridBagConstraints();
 		gbc_btnCancelar.insets = new Insets(0, 0, 0, 5);
 		gbc_btnCancelar.gridx = 7;
@@ -246,6 +264,9 @@ public class EstacionGUI extends JFrame {
 		btnSalir = new JButton();
 		btnSalir.setIcon(new ImageIcon(".\\res\\salir.png"));
 		btnSalir.setMargin(new Insets(0, 0, 0, 0));
+		btnSalir.setText("Salir");                             
+		btnSalir.setHorizontalTextPosition(SwingConstants.CENTER);
+		btnSalir.setVerticalTextPosition(SwingConstants.BOTTOM);  
 		GridBagConstraints gbc_btnSalir = new GridBagConstraints();
 		gbc_btnSalir.gridx = 9;
 		gbc_btnSalir.gridy = 0;
