@@ -20,6 +20,10 @@ public class Estacion {
 		this.estado = estado;
 	}
 	
+	public Estacion() {
+		
+	}
+	
 	//Getters and Setters
 	public Integer getId() {
 		return id;

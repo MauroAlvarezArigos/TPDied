@@ -162,7 +162,6 @@ public class EstacionDaoSQL implements EstacionDao{
 	return lista;
 	}
 	
-	//FALTA CORREGIR
 	private String prepararSentencia(Map<String, ?> atrib) {
 		String p1 = "SELECT * FROM ESTACION E "
 				+ "WHERE ID = ?";
