@@ -39,6 +39,10 @@ public class EstacionDaoSQL implements EstacionDao{
 			"SELECT ID, FECHA_INICIO_M, FECHA_FIN_M"
 			+ "FROM ESTACION E, MANTENIMIENTO M"
 			+ "WHERE E.ID = M.ID " ;
+	
+	public EstacionDaoSQL() {
+		
+	}
 
 	@Override
 	public Estacion saveOrUpdate(Estacion es) {
@@ -49,8 +53,8 @@ public class EstacionDaoSQL implements EstacionDao{
 				pstmt = conn.prepareStatement(UPDATE_ESTACION);
 				pstmt.setInt(1, es.getId());
 				pstmt.setString(2, es.getNombre());
-				pstmt.setTime(3, es.getHorarioApertura());
-				pstmt.setTime(4, es.getHorarioCierre());
+				pstmt.setTimestamp(3, es.getHorarioApertura());
+				pstmt.setTimestamp(4, es.getHorarioCierre());
 				pstmt.setBoolean(5, es.getEstado());
 				
 			}
@@ -58,8 +62,8 @@ public class EstacionDaoSQL implements EstacionDao{
 				pstmt = conn.prepareStatement(INSERT_ESTACION);
 				pstmt.setInt(1, es.getId());
 				pstmt.setString(2, es.getNombre());
-				pstmt.setTime(3, es.getHorarioApertura());
-				pstmt.setTime(4, es.getHorarioCierre());
+				pstmt.setTimestamp(3, es.getHorarioApertura());
+				pstmt.setTimestamp(4, es.getHorarioCierre());
 				pstmt.setBoolean(5, es.getEstado());
 			}
 			pstmt.executeUpdate();
@@ -141,8 +145,8 @@ public class EstacionDaoSQL implements EstacionDao{
 				Estacion es = new Estacion();
 				es.setId(rs.getInt("ID"));
 				es.setNombre(rs.getString("NOMBRE"));
-				es.setHorarioApertura(rs.getTime("HORARIO_APERTURA"));
-				es.setHorarioCierre(rs.getTime("HORARIO_CIERRE"));
+				es.setHorarioApertura(rs.getTimestamp("HORARIO_APERTURA"));
+				es.setHorarioCierre(rs.getTimestamp("HORARIO_CIERRE"));
 			  	es.setEstado(rs.getBoolean("ESTADO"));
 				lista.add(es);
 			}

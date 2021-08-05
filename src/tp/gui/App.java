@@ -1,14 +1,33 @@
 package tp.gui;
 
 import java.awt.event.ActionEvent;
+import java.sql.Timestamp;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import dao.EstacionDaoSQL;
+import dao.utils.DB;
+import tp.dominio.Estacion;
+
+
 public class App extends JFrame {
 	
 	public static void main(String[] args) {
+		
+		DB conn = new DB();
+		conn.getConexion();
+		
+		Timestamp time1 = new Timestamp (System.currentTimeMillis());
+		Timestamp time2 = new Timestamp (System.currentTimeMillis()+60000);
+		Estacion esta = new Estacion (1, "estacion1", time1, time2, true);
+		
+		EstacionDaoSQL est = new EstacionDaoSQL();
+		est.saveOrUpdate(esta);
+		
+		
+		
 		JFrame frame = new JFrame("Mi JFrame");
 		frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		frame.setTitle("Ejemplo de JFrame");

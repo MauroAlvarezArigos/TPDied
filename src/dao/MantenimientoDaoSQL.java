@@ -29,8 +29,8 @@ public class MantenimientoDaoSQL implements MantenimientoDao{
 				pstmt = conn.prepareStatement(INSERT_MANTENIMIENTO);
 				pstmt.setInt(1, idEstacion);
 				for(int i = 0; i<lista.size(); i++) {
-					pstmt.setTime(2, lista.get(i).getInicio());
-					pstmt.setTime(3, lista.get(i).getFin());
+					pstmt.setTimestamp(2, lista.get(i).getInicio());
+					pstmt.setTimestamp(3, lista.get(i).getFin());
 					pstmt.setString(4, lista.get(i).getObservaciones());
 					pstmt.executeUpdate();
 				}
@@ -61,8 +61,8 @@ public class MantenimientoDaoSQL implements MantenimientoDao{
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				m = new Mantenimiento();
-				m.setInicio(rs.getTime("FECHA_INICIO"));
-				m.setFin(rs.getTime("FECHA_FIN"));	
+				m.setInicio(rs.getTimestamp("FECHA_INICIO"));
+				m.setFin(rs.getTimestamp("FECHA_FIN"));	
 				lista.add(m);
 			}
 			

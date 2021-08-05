@@ -16,6 +16,9 @@ public class Mantenimiento {
 		this.observaciones = observaciones;
 	}
 	
+	public Mantenimiento () {
+		
+	}
 	public Estacion getEstacion() {
 		return estacion;
 	}
