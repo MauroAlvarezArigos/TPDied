@@ -1,0 +1,14 @@
+package tp.dominio;
+
+import java.util.PriorityQueue;
+
+public class Monticulo {
+	public static void main(String[] args) {
+		PriorityQueue<Estacion> pq = new PriorityQueue<Estacion>((x,y)->Estacion.compare(x,y));
+		while(!pq.isEmpty()) {
+			Estacion aux = pq.remove();
+			System.out.println(aux.getUltimoMantenimiento());
+		}
+	}
+	
+}

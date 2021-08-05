@@ -1,7 +1,6 @@
 package dao;
 
-import java.sql.Array
-;
+import java.sql.Array;
 
 import java.sql.Connection;
 

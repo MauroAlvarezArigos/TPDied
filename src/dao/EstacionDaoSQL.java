@@ -19,7 +19,7 @@ public class EstacionDaoSQL implements EstacionDao{
 	
 	private static final String SELECT_ESTACION =
 			"SELECT * FROM ESTACION E "
-			+ "WHERE PATENTE = ?";
+			+ "WHERE ID = ?";
 	
 	private static final String UPDATE_ESTACION =
 			"UPDATE ESTACION SET ID = ?, NOMBRE = ?, HORARIO_APERTURA = ?, HORARIO_CIERRE = ?,"
