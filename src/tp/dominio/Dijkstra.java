@@ -7,7 +7,7 @@ import java.util.PriorityQueue;
 
 public class Dijkstra {
 	
-	public static long getDijkstra(int src, int to, int tipo, ArrayList<ArrayList<Ruta>> grafo, int N) {
+	public static Pair getDijkstra(int src, int to, int tipo, ArrayList<ArrayList<Ruta>> grafo, int N) {
 		long INF = 100000009; // me gustaria que sea const, averiguar si se puede. no me deja static
 		long[] dist = new long[N];
 		Ruta[] dad = new Ruta[N];
@@ -32,8 +32,9 @@ public class Dijkstra {
 		
 		//descomentar esto para obtener el recorrido
 		ArrayList<Ruta> camino = new ArrayList<Ruta>();
+		long costoTotal;
 		if(dist[to] < INF) {
-			long costoTotal = (long)0;
+			costoTotal = (long)0;
 			int actual = to;
 			while(dad[actual] != null) {
 				camino.add(dad[actual]);
@@ -41,15 +42,18 @@ public class Dijkstra {
 			}
 			//tengo que imprimir la ruta al reves
 			Collections.reverse(camino);
-			System.out.println("Imprimo el camino de " + src + " to " + to);
+			//System.out.println("Imprimo el camino de " + src + " to " + to);
 			for(Ruta r : camino) {
 				costoTotal += r.getCosto();
-				System.out.println(r.getOrigen().getId() + " " + r.getDestino().getId());
+				//System.out.println(r.getOrigen().getId() + " " + r.getDestino().getId());
 			}
-			System.out.println("El costo total es " + costoTotal);
+			//System.out.println("El costo total es " + costoTotal);
 		}
-		else 	System.out.println("La estacion " + to + " es inalcanzable desde " + src);
-		return dist[to];
+		else {
+			costoTotal = INF;
+			//System.out.println("La estacion " + to + " es inalcanzable desde " + src);
+		}
+		return new Pair(dist[to], costoTotal);
 	}
 	
 	public static void main(String[] args) {

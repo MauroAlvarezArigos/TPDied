@@ -33,6 +33,7 @@ public class LineaBusquedaGUI extends JFrame {
 	private JTable resultados;
 	
 	public LineaBusquedaGUI() {
+		// al seleccionar nombre/color y a la vez estado, se seleccionan ambas xd
 		setResizable(false);
 		
 		JPanel panelFrame = new JPanel();

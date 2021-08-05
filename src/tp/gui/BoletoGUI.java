@@ -5,12 +5,19 @@ import java.awt.BorderLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import tp.dominio.*;
+
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.SwingConstants;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.Time;
+import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.JComboBox;
@@ -58,7 +65,7 @@ public class BoletoGUI extends JFrame {
 		gbc_cbxCamino.gridy = 1;
 		panel.add(cbxCamino, gbc_cbxCamino);
 		cbxCamino.addItem("El más rápido");
-		cbxCamino.addItem("El de menor distacia");
+		cbxCamino.addItem("El de menor distancia");
 		cbxCamino.addItem("El más barato");
 		
 		JPanel datosCliente = new JPanel();
@@ -133,12 +140,20 @@ public class BoletoGUI extends JFrame {
 		gbc_lblOrigen.gridy = 1;
 		panelEstacion.add(lblOrigen, gbc_lblOrigen);
 		
-		JComboBox<String> cbxOrigen = new JComboBox<String>();
+		JComboBox<Estacion> cbxOrigen = new JComboBox<Estacion>();
 		GridBagConstraints gbc_cbxOrigen = new GridBagConstraints();
 		gbc_cbxOrigen.anchor = GridBagConstraints.WEST;
 		gbc_cbxOrigen.insets = new Insets(0, 0, 5, 0);
 		gbc_cbxOrigen.gridx = 1;
 		gbc_cbxOrigen.gridy = 1;
+		// pido las estaciones
+				ArrayList<Estacion> estaciones = new ArrayList<Estacion>();
+				Time time1 = new Time(System.currentTimeMillis());
+				Time time2 = new Time(System.currentTimeMillis()+60000);
+				estaciones.add(new Estacion(0, "Est 0", time1, time2, true));
+				estaciones.add(new Estacion(1, "Est 1", time1, time2, true));
+				estaciones.add(new Estacion(2, "Est 2", time1, time2, true));
+				for(Estacion e : estaciones) cbxOrigen.addItem(e);
 		panelEstacion.add(cbxOrigen, gbc_cbxOrigen);
 		
 		JLabel lblDestino = new JLabel("Destino:");
@@ -149,27 +164,75 @@ public class BoletoGUI extends JFrame {
 		gbc_lblDestino.gridy = 2;
 		panelEstacion.add(lblDestino, gbc_lblDestino);
 		
-		JComboBox<String> cbxDestino = new JComboBox<String>();
+		JComboBox<Estacion> cbxDestino = new JComboBox<Estacion>();
 		GridBagConstraints gbc_cbxDestino = new GridBagConstraints();
 		gbc_cbxDestino.insets = new Insets(0, 0, 5, 0);
 		gbc_cbxDestino.anchor = GridBagConstraints.WEST;
 		gbc_cbxDestino.gridx = 1;
 		gbc_cbxDestino.gridy = 2;
+			for(Estacion e : estaciones) cbxDestino.addItem(e);
 		panelEstacion.add(cbxDestino, gbc_cbxDestino);
+		
+		JLabel lblCosto = new JLabel("");
+		GridBagConstraints gbc_lblCosto = new GridBagConstraints();
+        panel.add(lblCosto);
+        gbc_lblCosto.anchor = GridBagConstraints.WEST;
+		gbc_lblCosto.insets = new Insets(0, 0, 0, 5);
+		gbc_lblCosto.gridx = 1;
+		gbc_lblCosto.gridy = 3;
+		panel.add(lblCosto, gbc_lblCosto);
+		JLabel lblValor = new JLabel("");
+		GridBagConstraints gbc_lblValor = new GridBagConstraints();
+        panel.add(lblValor);
+        gbc_lblValor.anchor = GridBagConstraints.WEST;
+		gbc_lblValor.insets = new Insets(0, 0, 0, 5);
+		gbc_lblValor.gridx = 1;
+		gbc_lblValor.gridy = 4;
+		panel.add(lblValor, gbc_lblValor);
+
+		
 		
 		JButton btnCalcular = new JButton("Calcular");
 		GridBagConstraints gbc_btnCalcular = new GridBagConstraints();
 		gbc_btnCalcular.gridx = 1;
 		gbc_btnCalcular.gridy = 3;
 		panelEstacion.add(btnCalcular, gbc_btnCalcular);
+		btnCalcular.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e){  
+						long INF = 100000009;
+						Object aux = cbxOrigen.getSelectedItem();
+						Estacion estOrigen = (Estacion) aux;
+						aux = cbxDestino.getSelectedItem();
+						Estacion estDestino = (Estacion) aux;
+						String selected = cbxCamino.getSelectedItem().toString();
+						GenerarGrafo auxg = new GenerarGrafo();
+						ArrayList<ArrayList<Ruta>> grafo = auxg.getGrafo();
+						Pair val;
+						Boolean posible = true;
+						if(selected == "El más rápido") {
+							val = Dijkstra.getDijkstra(estOrigen.getId(), estDestino.getId(), 0, grafo, grafo.size());
+							if(val.getVal() < INF) lblValor.setText("Tiempo: " + val.getVal());
+							else lblValor.setText("Costo: inalcanzable");
+						}
+						else if(selected == "El de menor distancia") {
+							val = Dijkstra.getDijkstra(estOrigen.getId(), estDestino.getId(), 1, grafo, grafo.size());
+							if(val.getVal() < INF) lblValor.setText("Distancia: " + val.getVal());
+							else lblValor.setText("Costo: inalcanzable");
+						}
+						else {
+							val = Dijkstra.getDijkstra(estOrigen.getId(), estDestino.getId(), 2, grafo, grafo.size());
+							if(val.getVal() < INF) lblValor.setText("Costo: " + val.getVal());
+							else lblValor.setText("Costo: inalcanzable");
+						}
+						if(val.getCost() < INF) {
+							posible=false;
+							lblCosto.setText("Precio: " + val.getCost()); //PONE ACA LO QUE CALCULASTE
+						}
+						else lblCosto.setText("Precio: " + estDestino.getNombre() + " es inalcanzable");
+						//panel.setVisible(true);
+				}
+		});
 		
-		JLabel lblCosto = new JLabel("Precio: ");
-		GridBagConstraints gbc_lblCosto = new GridBagConstraints();
-		gbc_lblCosto.anchor = GridBagConstraints.WEST;
-		gbc_lblCosto.insets = new Insets(0, 0, 0, 5);
-		gbc_lblCosto.gridx = 1;
-		gbc_lblCosto.gridy = 3;
-		panel.add(lblCosto, gbc_lblCosto);
 		
 		JButton btnFacturar = new JButton("Facturar");
 		GridBagConstraints gbc_btnFacturar = new GridBagConstraints();
