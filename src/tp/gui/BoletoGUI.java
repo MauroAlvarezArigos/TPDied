@@ -31,7 +31,7 @@ public class BoletoGUI extends JFrame {
 
 	public BoletoGUI() {
 		JPanel contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setBorder(new EmptyBorder(5,5,5,5));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		this.setContentPane(contentPane);
 		
@@ -212,7 +212,7 @@ public class BoletoGUI extends JFrame {
 
 		
 		
-		JButton btnCalcular = new JButton("Calcular");
+		JButton btnCalcular = new JButton(" Calcular");
 		GridBagConstraints gbc_btnCalcular = new GridBagConstraints();
 		gbc_btnCalcular.insets = new Insets(0, 0, 0, 5);
 		gbc_btnCalcular.gridx = 0;
@@ -256,6 +256,7 @@ public class BoletoGUI extends JFrame {
 				}
 		});
 		
+
 		btnCalcular.setIcon(new ImageIcon(".\\res\\calcular.png"));
 		btnCalcular.setMargin(new Insets(0, 0, 0, 0));
 		btnFacturar.setIcon(new ImageIcon(".\\res\\facturar.png"));
@@ -268,7 +269,7 @@ public class BoletoGUI extends JFrame {
 		
 		this.pack();
 		this.setLocationRelativeTo(null);
-		this.setSize(500,300);			
+		this.setSize(550,400);			
 		
 	}
 
