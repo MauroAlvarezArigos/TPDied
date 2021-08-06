@@ -49,8 +49,9 @@ public class Estacion {
 	public void setHorarioCierre(Timestamp horarioCierre) {
 		this.horarioCierre = horarioCierre;
 	}
-	public Boolean getEstado() {
-		return estado;
+	public Integer getEstado() {
+		if(this.estado) return 1;
+		else return 0;
 	}
 	public void setEstado(Boolean estado) {
 		this.estado = estado;
@@ -67,7 +68,7 @@ public class Estacion {
 	}
 	@Override
 	public String toString() {
-		return this.nombre;
+		return this.id + ", "+ this.nombre+ ", " + this.horarioApertura+ ", " + this.horarioCierre+ ", " + this.estado;
 	}
 
 }

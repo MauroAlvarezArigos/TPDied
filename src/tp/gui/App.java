@@ -16,15 +16,15 @@ public class App extends JFrame {
 	
 	public static void main(String[] args) {
 		
-		DB conn = new DB();
-		conn.getConexion();
+		DB.getConexion();
 		
 		Timestamp time1 = new Timestamp (System.currentTimeMillis());
 		Timestamp time2 = new Timestamp (System.currentTimeMillis()+60000);
-		Estacion esta = new Estacion (1, "estacion1", time1, time2, true);
+		Estacion esta = new Estacion(2, "estacion2", time1, time2, true);
+		System.out.println(esta.toString());
 		
 		EstacionDaoSQL est = new EstacionDaoSQL();
-		est.saveOrUpdate(esta);
+		est.borrar(esta);
 		
 		
 		

@@ -24,21 +24,21 @@ public class EstacionDaoSQL implements EstacionDao{
 	private static final String UPDATE_ESTACION =
 			"UPDATE ESTACION SET ID = ?, NOMBRE = ?, HORARIO_APERTURA = ?, HORARIO_CIERRE = ?,"
 			+ " ESTADO = ?"
-			+ "WHERE ID = ?";
+			+ " WHERE ID = ?";
 	
 	private static final String DELETE_ESTACION =
-			"DELETE FROM ESTACION"
+			"DELETE FROM ESTACION "
 			+ "WHERE ID = ?";
 	
 	private static final String INSERT_ESTACION =
-			"INSERT INTO ESTACION(ID, NOMBRE, HORARIO_APERTURA, HORARIO_CIERRE,  ESTADO"
+			"INSERT INTO ESTACION(ID, NOMBRE, HORARIOAPERTURA, HORARIOCIERRE,  ESTADO) "
 			+ "VALUES(?, ?, ?, ?, ?)";
 	
 	// información que permita consultar para cada estación, el historial de mantenimientos 
 	private static final String SELECT_ESTACION_M =
 			"SELECT ID, FECHA_INICIO_M, FECHA_FIN_M"
-			+ "FROM ESTACION E, MANTENIMIENTO M"
-			+ "WHERE E.ID = M.ID " ;
+			+ " FROM ESTACION E, MANTENIMIENTO M"
+			+ " WHERE E.ID = M.ID " ;
 	
 	public EstacionDaoSQL() {
 		
@@ -55,8 +55,9 @@ public class EstacionDaoSQL implements EstacionDao{
 				pstmt.setString(2, es.getNombre());
 				pstmt.setTimestamp(3, es.getHorarioApertura());
 				pstmt.setTimestamp(4, es.getHorarioCierre());
-				pstmt.setBoolean(5, es.getEstado());
+				pstmt.setString(5, Integer.toBinaryString(es.getEstado()));
 				
+				System.out.println("Psmt: "+pstmt.toString());
 			}
 			else {
 				pstmt = conn.prepareStatement(INSERT_ESTACION);
@@ -64,7 +65,9 @@ public class EstacionDaoSQL implements EstacionDao{
 				pstmt.setString(2, es.getNombre());
 				pstmt.setTimestamp(3, es.getHorarioApertura());
 				pstmt.setTimestamp(4, es.getHorarioCierre());
-				pstmt.setBoolean(5, es.getEstado());
+				pstmt.setString(5, Integer.toBinaryString(es.getEstado()));
+				
+				System.out.println("Psmt: "+pstmt.toString());
 			}
 			pstmt.executeUpdate();
 		}
@@ -114,6 +117,7 @@ public class EstacionDaoSQL implements EstacionDao{
 		try {
 			pstmt = conn.prepareStatement(DELETE_ESTACION);
 			pstmt.setInt(1, es.getId());
+			System.out.println("pstmt: "+pstmt.toString());
 			pstmt.execute();
 		}
 		catch(SQLException e) {
