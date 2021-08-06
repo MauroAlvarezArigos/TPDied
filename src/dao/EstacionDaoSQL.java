@@ -19,7 +19,7 @@ public class EstacionDaoSQL implements EstacionDao{
 	
 	private static final String SELECT_ESTACION =
 			"SELECT * FROM ESTACION E "
-			+ "WHERE ID = ?";
+			+ " WHERE ID = ?";
 	
 	private static final String UPDATE_ESTACION =
 			"UPDATE ESTACION SET ID = ?, NOMBRE = ?, HORARIO_APERTURA = ?, HORARIO_CIERRE = ?,"
@@ -27,12 +27,12 @@ public class EstacionDaoSQL implements EstacionDao{
 			+ " WHERE ID = ?";
 	
 	private static final String DELETE_ESTACION =
-			"DELETE FROM ESTACION "
-			+ "WHERE ID = ?";
+			"DELETE FROM ESTACION"
+			+ " WHERE ID = ?";
 	
 	private static final String INSERT_ESTACION =
-			"INSERT INTO ESTACION(ID, NOMBRE, HORARIOAPERTURA, HORARIOCIERRE,  ESTADO) "
-			+ "VALUES(?, ?, ?, ?, ?)";
+			" INSERT INTO ESTACION(ID, NOMBRE, HORARIO_APERTURA, HORARIO_CIERRE,  ESTADO "
+			+ " VALUES(?, ?, ?, ?, ?)";
 	
 	// información que permita consultar para cada estación, el historial de mantenimientos 
 	private static final String SELECT_ESTACION_M =
@@ -152,6 +152,7 @@ public class EstacionDaoSQL implements EstacionDao{
 				es.setHorarioApertura(rs.getTimestamp("HORARIO_APERTURA"));
 				es.setHorarioCierre(rs.getTimestamp("HORARIO_CIERRE"));
 			  	es.setEstado(rs.getBoolean("ESTADO"));
+			  	//Integer.toBinaryString(es.setEstado(rs.getBoolean("ESTADO")));
 				lista.add(es);
 			}
 		}catch(SQLException e) {

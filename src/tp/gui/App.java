@@ -25,6 +25,8 @@ public class App extends JFrame {
 		
 		EstacionDaoSQL est = new EstacionDaoSQL();
 		est.borrar(esta);
+
+		est.saveOrUpdate(esta);
 		
 		
 		

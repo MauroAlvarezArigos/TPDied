@@ -11,6 +11,7 @@ public class DB {
 	private static Boolean conexion = true;
 
     private static Connection crearConexion() {
+
         String url =  "jdbc:postgresql://localhost:5432/postgres";
         String user = "postgres";
         String pass = "admin123";
@@ -26,6 +27,7 @@ public class DB {
         return conn;
     }
     public static  Connection getConexion() {
+
         if(conexion) return crearConexion();
         return null;
     }

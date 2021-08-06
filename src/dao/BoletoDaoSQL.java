@@ -15,22 +15,22 @@ import tp.dominio.Boleto;
 public class BoletoDaoSQL implements BoletoDao{
 	
 	private static final String SELECT_BOLETO =
-			"SELECT * FROM BOLETO B "
-			+ "WHERE NUMERO_BOLETO = ?";
+			"SELECT * FROM BOLETO B"
+			+ " WHERE NUMERO_BOLETO = ? ";
 	
 	private static final String UPDATE_BOLETO =
 			"UPDATE BOLETO SET NUMERO_BOLETO = ?, CORREO = ?, NOMBRE_CLIENTE = ?, FECHA_VENTA = ?,"
 			+ "ORIGEN, DESTINO, RECORRIDO, COSTO"
-			+ "WHERE NUMERO_BOLETO = ?";
+			+ " WHERE NUMERO_BOLETO = ? ";
 	
 	private static final String DELETE_BOLETO =
 			"DELETE FROM BOLETO"
-			+ "WHERE NUMERO_BOLETO = ?";
+			+ " WHERE NUMERO_BOLETO = ? ";
 	
 	private static final String INSERT_BOLETO =
 			"INSERT INTO ESTACION(NUMERO_BOLETO, CORREO, NOMBRE_CLIENTE, FECHA_VENTA,"
 			+"ORIGEN, DESTINO, RECORRIDO, COSTO"
-			+ "VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
+			+ " VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
 
 	@Override
 	public Boleto saveOrUpdate(Boleto b) {

@@ -14,13 +14,13 @@ import tp.dominio.Mantenimiento;
 public class MantenimientoDaoSQL implements MantenimientoDao{
 	
 	private static final String INSERT_MANTENIMIENTO =
-			"INSERT INTO MANTENIMIENTO(ID, FECHA_INICIO, FECHA_FIN, OBSERVACIONES"
-			+ "VALUES(?, ?, ?, ?)";
+			"INSERT INTO MANTENIMIENTO(ID, FECHA_INICIO, FECHA_FIN, OBSERVACIONES)"
+			+ " VALUES(?, ?, ?, ?)";
 	
 	private static final String SELECT_MANTENIMIENTO =
 			"SELECT * "
-			+ "FROM MANTENIMIENTO M"
-			+ "WHERE M.ID = ?";
+			+ " FROM MANTENIMIENTO M"
+			+ " WHERE M.ID = ? ";
 
 	@Override
 	public List<Mantenimiento> saveOrUpdate(Integer idEstacion, List<Mantenimiento> lista, Connection conn) {

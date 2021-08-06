@@ -23,20 +23,20 @@ public class LineaDaoSQL implements LineaDao{
 			"SELECT * FROM LINEA L";
 	
 	private static final String SELECT_LINEA =
-			"SELECT * FROM LINEA L "
-			+ "WHERE NOMBRE = ?";
+			"SELECT * FROM LINEA L"
+			+ " WHERE NOMBRE = ? ";
 	
 	private static final String UPDATE_LINEA =
 			"UPDATE LINEA SET NOMBRE = ?, COLOR = ?, ESTADO = ?, RECORRIDO = ?,"
-			+ "WHERE NOMBRE = ?";
+			+ " WHERE NOMBRE = ? ";
 	
 	private static final String DELETE_LINEA =
 			"DELETE FROM LINEA"
-			+ "WHERE NOMBRE = ?";
+			+ " WHERE NOMBRE = ? ";
 	
 	private static final String INSERT_LINEA =
-			"INSERT INTO ESTACION(NOMBRE, COLOR, ESTADO, RECORRIDO"
-			+ "VALUES(?, ?, ?, ?)";
+			"INSERT INTO ESTACION(NOMBRE, COLOR, ESTADO, RECORRIDO)"
+			+ " VALUES(?, ?, ?, ?)";
 
 	@Override
 	public Linea saveOrUpdate(Linea l) {
