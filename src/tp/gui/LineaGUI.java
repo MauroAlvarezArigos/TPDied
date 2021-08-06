@@ -9,6 +9,7 @@ import java.awt.Insets;
 import javax.swing.*;
 
 public class LineaGUI extends JFrame {
+
 	private JTextField tbxNombre;
 	private JTextField tbxColor;
 	private JComboBox<String> cbxEstado;
@@ -304,5 +305,36 @@ public class LineaGUI extends JFrame {
 		cbxEstado.setEnabled(true);
 	}
 
+	public JTextField getTbxNombre() {
+		return tbxNombre;
+	}
+
+	public void setTbxNombre(JTextField tbxNombre) {
+		this.tbxNombre = tbxNombre;
+	}
+
+	public JTextField getTbxColor() {
+		return tbxColor;
+	}
+
+	public void setTbxColor(JTextField tbxColor) {
+		this.tbxColor = tbxColor;
+	}
+
+	public JComboBox<String> getCbxEstado() {
+		return cbxEstado;
+	}
+
+	public void setCbxEstado(JComboBox<String> cbxEstado) {
+		this.cbxEstado = cbxEstado;
+	}
+
+	public Byte getFlag() {
+		return flag;
+	}
+
+	public void setFlag(Byte flag) {
+		this.flag = flag;
+	}
 
 }
