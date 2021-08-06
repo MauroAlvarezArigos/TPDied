@@ -3,7 +3,7 @@ CREATE TABLE Estacion (
 	nombre varchar(50),
 	horarioApertura time,
 	horarioCierre time,
-	estado bit,
+	estado varchar(1),
 	CONSTRAINT id_pk PRIMARY KEY (id)
 );
 

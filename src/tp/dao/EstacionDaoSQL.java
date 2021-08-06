@@ -20,7 +20,7 @@ public class EstacionDaoSQL implements EstacionDao{
 			"SELECT * FROM ESTACION E";
 	
 	private static final String SELECT_ESTACION =
-			"SELECT * FROM ESTACION E "
+			"SELECT * FROM ESTACION "
 			+ " WHERE ID = ?";
 	
 	private static final String UPDATE_ESTACION =
@@ -33,7 +33,7 @@ public class EstacionDaoSQL implements EstacionDao{
 			+ " WHERE ID = ?";
 	
 	private static final String INSERT_ESTACION =
-			" INSERT INTO ESTACION(NOMBRE, HORARIOAPERTURA, HORARIOCIERRE,  ESTADO) "
+			" INSERT INTO ESTACION (NOMBRE, HORARIOAPERTURA, HORARIOCIERRE,  ESTADO) "
 			+ " VALUES(?, ?, ?, ?)";
 	
 	// información que permita consultar para cada estación, el historial de mantenimientos 
@@ -50,7 +50,12 @@ public class EstacionDaoSQL implements EstacionDao{
 	public Estacion saveOrUpdate(Estacion es) {
 		Connection conn = DB.getConexion();
 		PreparedStatement pstmt = null;
+		System.out.println("Entre a SAVEORUPDATE");
+		System.out.println(checkNull(es.getId(), conn));
+		
 		try{
+			System.out.println("En Try: "+ checkNull(es.getId(), conn));
+			
 			if(checkNull(es.getId(), conn)) {
 				pstmt = conn.prepareStatement(UPDATE_ESTACION);
 				System.out.println("Modo UPDATE");
@@ -91,24 +96,34 @@ public class EstacionDaoSQL implements EstacionDao{
 		return null;
 	}
 	
-	private boolean checkNull(Integer id, Connection conn) {
+	private Boolean checkNull(Integer id, Connection conn) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		Boolean ret = false;
+		System.out.println("entre a checknull");
+
 		try {
 			pstmt = conn.prepareStatement(SELECT_ESTACION, ResultSet.TYPE_SCROLL_INSENSITIVE,	ResultSet.CONCUR_UPDATABLE);
+			System.out.println("1");
 			pstmt.setInt(1,id);
+			System.out.println("2");
 			rs = pstmt.executeQuery();
+			System.out.println("3");
 			ret = rs.first();
+			System.out.println(ret);
+
 		}
 		catch(SQLException e) {
+			System.out.println("1 en catch");
 			e.printStackTrace();
 		}
 		finally {
 			try {
+				System.out.println("entre al finally");
 				if(pstmt!=null) pstmt.close();
 			}
 			catch(SQLException e) {
+				System.out.println("2");
 				e.printStackTrace();
 			}
 		}
