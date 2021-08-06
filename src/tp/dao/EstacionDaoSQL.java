@@ -2,6 +2,7 @@ package tp.dao;
 
 import java.sql.Connection;
 
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,10 +12,11 @@ import java.util.Map;
 
 import tp.dao.utils.DB;
 import tp.dominio.Estacion;
+import tp.dominio.Ruta;
 
 public class EstacionDaoSQL implements EstacionDao{
 	
-	private static final String SELECT_ALL_ESTACIONES = 
+	private static final String SELECT_ALL_ESTACION = 
 			"SELECT * FROM ESTACION E";
 	
 	private static final String SELECT_ESTACION =
@@ -31,7 +33,7 @@ public class EstacionDaoSQL implements EstacionDao{
 			+ " WHERE ID = ?";
 	
 	private static final String INSERT_ESTACION =
-			" INSERT INTO ESTACION(ID, NOMBRE, HORARIO_APERTURA, HORARIO_CIERRE,  ESTADO "
+			" INSERT INTO ESTACION(ID, NOMBRE, HORARIOAPERTURA, HORARIOCIERRE,  ESTADO) "
 			+ " VALUES(?, ?, ?, ?, ?)";
 	
 	// información que permita consultar para cada estación, el historial de mantenimientos 
@@ -133,6 +135,38 @@ public class EstacionDaoSQL implements EstacionDao{
 			}
 		}
 		
+	}
+	
+	@Override
+	public List<Estacion> buscarTodas() {
+		List<Estacion> lista = new ArrayList<Estacion>();
+		Connection conn = DB.getConexion();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Estacion es = null;
+		try {
+			pstmt = conn.prepareStatement(SELECT_ALL_ESTACION);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				es = new Estacion ();
+				es.setId(rs.getInt("ID"));
+				es.setNombre(rs.getString("NOMBRE"));
+				lista.add(es);
+			}
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				if(pstmt!=null) pstmt.close();
+				if(conn!=null) conn.close();
+			}
+			catch(SQLException e) {
+				e.printStackTrace();
+			}
+	}
+		return lista;
 	}
 
 	@Override

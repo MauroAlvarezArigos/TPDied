@@ -8,6 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import tp.dao.EstacionDaoSQL;
+import tp.dao.LineaDaoSQL;
 import tp.dao.utils.DB;
 import tp.dominio.Estacion;
 
@@ -24,6 +25,8 @@ public class App extends JFrame {
 		System.out.println(esta.toString());
 		
 		EstacionDaoSQL est = new EstacionDaoSQL();
+		
+		
 		est.borrar(esta);
 
 		est.saveOrUpdate(esta);

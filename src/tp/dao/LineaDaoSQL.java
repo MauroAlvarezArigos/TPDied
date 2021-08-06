@@ -37,6 +37,10 @@ public class LineaDaoSQL implements LineaDao{
 	private static final String INSERT_LINEA =
 			"INSERT INTO ESTACION(NOMBRE, COLOR, ESTADO, RECORRIDO)"
 			+ " VALUES(?, ?, ?, ?)";
+	
+	public LineaDaoSQL() {
+		
+	}
 
 	@Override
 	public Linea saveOrUpdate(Linea l) {
