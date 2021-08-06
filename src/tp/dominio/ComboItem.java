@@ -1,6 +1,7 @@
 package tp.dominio;
 
 public class ComboItem {
+	
 	Estacion estacion;
 	String nombre;
 	
@@ -15,4 +16,6 @@ public class ComboItem {
 	public Estacion getItem() {
 		return this.estacion;
 	}
+	
+	
 }

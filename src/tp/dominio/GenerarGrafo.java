@@ -5,6 +5,30 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 
 public class GenerarGrafo {
+	
+	public static Boolean isNumber(char x) {
+		if(x >= '0' && x<='9') return true;
+		return false;
+	}
+	
+	public static Timestamp getFormato(String s) {
+		
+		Timestamp ts = new Timestamp(0); 
+		Boolean valid = true;
+		if(s.length() != 5) return null;
+		for(int i=0; i<5; i++) {
+			if(i!=2) valid &= isNumber(s.charAt(0));
+		}
+		if(s.charAt(2) != ':') valid&=false;
+		if(!valid) return null;
+		long segxmin = 60000;
+		long hora = (s.charAt(0)-'0')*10 + s.charAt(1)-'0';
+		long min = (s.charAt(3)-'0')*10 + s.charAt(4)-'0';
+		ts.setTime((long) segxmin * 60 * 3 + (long) segxmin * min + hora*segxmin*60); 
+		return ts;
+	}
+	
+	
 	public ArrayList<ArrayList<Ruta>> getGrafo(){
 		ArrayList<Linea> lineas = new ArrayList<Linea>(); // pedir a la BD que me de todas las lineas 
 		//genero 3 lineas
@@ -61,5 +85,9 @@ public class GenerarGrafo {
 			}
 		}
 		return grafo;
+	}
+	
+	public static void main(String[] args) {
+		Timestamp ts = getFormato("12:30");
 	}
 }
