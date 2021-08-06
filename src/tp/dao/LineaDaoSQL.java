@@ -1,4 +1,4 @@
-package dao;
+package tp.dao;
 
 import java.sql.Array;
 
@@ -12,8 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import dao.utils.DB;
-import Excepciones.ExcepcionNoExisteElemento;
+import tp.Excepciones.ExcepcionNoExisteElemento;
+import tp.dao.utils.DB;
 import tp.dominio.Linea;
 import tp.dominio.Ruta;
 

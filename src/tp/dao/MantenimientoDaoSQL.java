@@ -1,4 +1,4 @@
-package dao;
+package tp.dao;
 
 import java.sql.Connection;
 

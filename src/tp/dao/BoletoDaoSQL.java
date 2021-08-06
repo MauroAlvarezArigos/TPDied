@@ -1,4 +1,4 @@
-package dao;
+package tp.dao;
 
 import java.sql.Array;
 
@@ -8,8 +8,9 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import Excepciones.ExcepcionNoExisteElemento;
-import dao.utils.DB;
+
+import tp.Excepciones.ExcepcionNoExisteElemento;
+import tp.dao.utils.DB;
 import tp.dominio.Boleto;
 
 public class BoletoDaoSQL implements BoletoDao{

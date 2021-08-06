@@ -1,4 +1,4 @@
-package Excepciones;
+package tp.Excepciones;
 
 public class ExcepcionNoExisteElemento extends Exception{
 	

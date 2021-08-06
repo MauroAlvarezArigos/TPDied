@@ -7,8 +7,8 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import dao.EstacionDaoSQL;
-import dao.utils.DB;
+import tp.dao.EstacionDaoSQL;
+import tp.dao.utils.DB;
 import tp.dominio.Estacion;
 
 

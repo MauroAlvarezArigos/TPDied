@@ -1,4 +1,4 @@
-package dao;
+package tp.dao;
 
 import java.sql.Connection;
 
@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import dao.utils.DB;
+import tp.dao.utils.DB;
 import tp.dominio.Estacion;
 
 public class EstacionDaoSQL implements EstacionDao{

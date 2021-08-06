@@ -1,4 +1,4 @@
-package dao.utils;
+package tp.dao.utils;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
