@@ -340,4 +340,42 @@ public class EstacionGUI extends JFrame {
 		cbxEstado.setEnabled(true);
 		editorObservaciones.setEnabled(true);
 	}
+	
+	//Getters and Setters
+	public Byte getFlag() {
+		return this.flag;
+	}
+	
+	public JTextField getTbxNombre() {
+		return this.tbxNombre;
+	}
+
+	public void setTbxNombre(JTextField tbxNombre) {
+		this.tbxNombre = tbxNombre;
+	}
+
+	public JTextField getTbxApertura() {
+		return tbxApertura;
+	}
+
+	public void setTbxApertura(JTextField tbxApertura) {
+		this.tbxApertura = tbxApertura;
+	}
+
+	public JTextField getTbxCierre() {
+		return tbxCierre;
+	}
+
+	public void setTbxCierre(JTextField tbxCierre) {
+		this.tbxCierre = tbxCierre;
+	}
+
+	public JEditorPane getEditorObservaciones() {
+		return editorObservaciones;
+	}
+
+	public void setEditorObservaciones(JEditorPane editorObservaciones) {
+		this.editorObservaciones = editorObservaciones;
+	}	
+	
 }
