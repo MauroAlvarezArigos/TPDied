@@ -66,6 +66,9 @@ public class Estacion {
 	public static int compare(Estacion x, Estacion y) {
 		return (x.ultimoMantenimiento.compareTo(y.ultimoMantenimiento));
 	}
+	public Boolean getEstado2() {
+		return this.estado;
+	}
 	
 	@Override
 	public String toString() {

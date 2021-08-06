@@ -53,8 +53,8 @@ public class GenerarGrafo {
 				Boolean activas = true; // rutas y estaciones activas?
 				for(Ruta r : recorrido) {
 					activas&=r.getEstado();
-					activas&=r.getOrigen().getEstado();
-					activas&=r.getDestino().getEstado();
+					activas&=r.getOrigen().getEstado2();
+					activas&=r.getDestino().getEstado2();
 				}
 				if(!activas) continue;
 				for(Ruta r : recorrido) grafo.get(r.getOrigen().getId()).add(r);
