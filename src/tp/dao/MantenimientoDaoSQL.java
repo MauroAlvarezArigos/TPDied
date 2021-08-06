@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import tp.dao.utils.DB;
 import tp.dominio.Estacion;
 import tp.dominio.Mantenimiento;
 
@@ -23,7 +24,8 @@ public class MantenimientoDaoSQL implements MantenimientoDao{
 			+ " WHERE M.ID = ? ";
 
 	@Override
-	public List<Mantenimiento> saveOrUpdate(Integer idEstacion, List<Mantenimiento> lista, Connection conn) {
+	public List<Mantenimiento> saveOrUpdate(Integer idEstacion, List<Mantenimiento> lista) {
+		Connection conn = DB.getConexion();
 		PreparedStatement pstmt = null;
 		try {
 				pstmt = conn.prepareStatement(INSERT_MANTENIMIENTO);
