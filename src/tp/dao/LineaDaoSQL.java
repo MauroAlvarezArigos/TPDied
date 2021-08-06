@@ -18,7 +18,7 @@ import tp.dominio.Linea;
 import tp.dominio.Ruta;
 
 public class LineaDaoSQL implements LineaDao{
-	
+	private Linea prueba;
 	private static final String SELECT_ALL_LINEA = 
 			"SELECT * FROM LINEA L";
 	
