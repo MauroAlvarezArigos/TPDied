@@ -24,7 +24,7 @@ public class EstacionDaoSQL implements EstacionDao{
 			+ " WHERE ID = ?";
 	
 	private static final String UPDATE_ESTACION =
-			"UPDATE ESTACION SET ID = ?, NOMBRE = ?, HORARIO_APERTURA = ?, HORARIO_CIERRE = ?,"
+			"UPDATE ESTACION SET NOMBRE = ?, HORARIO_APERTURA = ?, HORARIO_CIERRE = ?,"
 			+ " ESTADO = ?"
 			+ " WHERE ID = ?";
 	
@@ -33,8 +33,8 @@ public class EstacionDaoSQL implements EstacionDao{
 			+ " WHERE ID = ?";
 	
 	private static final String INSERT_ESTACION =
-			" INSERT INTO ESTACION(ID, NOMBRE, HORARIOAPERTURA, HORARIOCIERRE,  ESTADO) "
-			+ " VALUES(?, ?, ?, ?, ?)";
+			" INSERT INTO ESTACION(NOMBRE, HORARIOAPERTURA, HORARIOCIERRE,  ESTADO) "
+			+ " VALUES(?, ?, ?, ?)";
 	
 	// información que permita consultar para cada estación, el historial de mantenimientos 
 	private static final String SELECT_ESTACION_M =
@@ -53,21 +53,24 @@ public class EstacionDaoSQL implements EstacionDao{
 		try{
 			if(checkNull(es.getId(), conn)) {
 				pstmt = conn.prepareStatement(UPDATE_ESTACION);
-				pstmt.setInt(1, es.getId());
-				pstmt.setString(2, es.getNombre());
-				pstmt.setTimestamp(3, es.getHorarioApertura());
-				pstmt.setTimestamp(4, es.getHorarioCierre());
-				pstmt.setString(5, Integer.toBinaryString(es.getEstado()));
+				System.out.println("Modo UPDATE");
+				pstmt.setString(1, es.getNombre());
+				pstmt.setTimestamp(2, es.getHorarioApertura());
+				pstmt.setTimestamp(3, es.getHorarioCierre());
+				pstmt.setString(4, Integer.toBinaryString(es.getEstado()));
+				pstmt.setInt(5, es.getId());
 				
 				System.out.println("Psmt: "+pstmt.toString());
 			}
 			else {
 				pstmt = conn.prepareStatement(INSERT_ESTACION);
-				pstmt.setInt(1, es.getId());
-				pstmt.setString(2, es.getNombre());
-				pstmt.setTimestamp(3, es.getHorarioApertura());
-				pstmt.setTimestamp(4, es.getHorarioCierre());
-				pstmt.setString(5, Integer.toBinaryString(es.getEstado()));
+				
+				System.out.println("Modo INSERT");
+				
+				pstmt.setString(1, es.getNombre());
+				pstmt.setTimestamp(2, es.getHorarioApertura());
+				pstmt.setTimestamp(3, es.getHorarioCierre());
+				pstmt.setString(4, Integer.toBinaryString(es.getEstado()));
 				
 				System.out.println("Psmt: "+pstmt.toString());
 			}
