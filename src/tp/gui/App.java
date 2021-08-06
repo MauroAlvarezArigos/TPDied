@@ -16,7 +16,7 @@ import tp.dominio.Estacion;
 public class App extends JFrame {
 	
 	public static void main(String[] args) {
-		
+		/*
 		DB.getConexion();
 		
 		Timestamp time1 = new Timestamp (System.currentTimeMillis());
@@ -31,7 +31,7 @@ public class App extends JFrame {
 
 		est.saveOrUpdate(esta);
 		
-		
+		*/
 		
 		JFrame frame = new JFrame("Mi JFrame");
 		frame.setDefaultCloseOperation(EXIT_ON_CLOSE);

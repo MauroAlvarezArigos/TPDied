@@ -9,6 +9,7 @@ import java.awt.Insets;
 
 import javax.swing.*;
 
+
 public class EstacionGUI extends JFrame {
 	
 	private JTextField tbxNombre;
@@ -241,7 +242,7 @@ public class EstacionGUI extends JFrame {
 		
 		btnAlta.addActionListener(e -> {
 			flag = 1;
-			activarEdits();
+			activarEdits();			
 			
 			setOperationState();
 		});
@@ -262,6 +263,11 @@ public class EstacionGUI extends JFrame {
 		});
 		
 		btnGuardar.addActionListener(e -> {
+			
+			Boolean b = cbxEstado.getSelectedItem().equals("Operativa")? true : false;
+			
+			System.out.println(b);
+			
 			if(flag == 1) {
 				//Check that the values are correct
 				//Call handler and make an insert on DB
@@ -288,8 +294,7 @@ public class EstacionGUI extends JFrame {
 		panelFrame.add(botones, BorderLayout.SOUTH);
 		
 		setInitialState();
-		desactivarEdits();
-
+		
 		this.getContentPane().add(panelFrame);
 		this.pack();
 		this.setLocationRelativeTo(null);
@@ -298,6 +303,7 @@ public class EstacionGUI extends JFrame {
 	}
 	
 	private void setInitialState() {
+		desactivarEdits();
 		btnBuscar.setEnabled(true);
 		btnAlta.setEnabled(true);
 		btnModificar.setEnabled(false);
@@ -368,6 +374,14 @@ public class EstacionGUI extends JFrame {
 
 	public void setTbxCierre(JTextField tbxCierre) {
 		this.tbxCierre = tbxCierre;
+	}
+	
+	public JComboBox<String> getCbxEstado() {
+		return cbxEstado;
+	}
+
+	public void setCbxEstado(JComboBox<String> cbxEstado) {
+		this.cbxEstado = cbxEstado;
 	}
 
 	public JEditorPane getEditorObservaciones() {
