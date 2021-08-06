@@ -9,6 +9,9 @@ import java.awt.Insets;
 
 import javax.swing.*;
 
+import tp.Excepciones.DatosObligatoriosException;
+import tp.controller.EstacionController;
+
 
 public class EstacionGUI extends JFrame {
 	
@@ -27,7 +30,12 @@ public class EstacionGUI extends JFrame {
 	private JButton btnSalir;
 	private Byte flag;
 	
+	private EstacionController controller;
+	
 	public EstacionGUI() {
+		
+		this.controller = new EstacionController(this);
+		
 		flag = 0;
 		JPanel panelFrame = new JPanel();
 		GridBagLayout gridBagLayout = new GridBagLayout();
@@ -248,7 +256,7 @@ public class EstacionGUI extends JFrame {
 		});
 
 		btnModificar.addActionListener(e -> {
-			flag = 2;
+			flag = 1;
 			activarEdits();
 			
 			setOperationState();
@@ -264,19 +272,17 @@ public class EstacionGUI extends JFrame {
 		
 		btnGuardar.addActionListener(e -> {
 			
-			Boolean b = cbxEstado.getSelectedItem().equals("Operativa")? true : false;
-			
-			System.out.println(b);
-			
 			if(flag == 1) {
-				//Check that the values are correct
-				//Call handler and make an insert on DB
-				//On success show a dialog
-			}
-			if(flag == 2) {
-				//Check that the values are correct
-				//Call handler and make an update on DB
-				//On success show a dialog
+				try {
+					controller.guardar();
+				} catch(DatosObligatoriosException e1) {
+					this.mostrarError("Error al guardar", e1.getMensaje());
+					System.out.println(e1.getMensaje());
+				} catch(Exception e2) {
+					this.mostrarError("Error al guardar", e2.getMessage());
+				}
+				
+				this.limpiarCampos();
 			}
 		});
 		
@@ -345,6 +351,13 @@ public class EstacionGUI extends JFrame {
 		tbxCierre.setEnabled(true);
 		cbxEstado.setEnabled(true);
 		editorObservaciones.setEnabled(true);
+	}
+	
+	public void mostrarError(String titulo,String detalle) {
+		JFrame padre= (JFrame) SwingUtilities.getWindowAncestor(this);
+		JOptionPane.showMessageDialog(padre,
+			    detalle,titulo,
+			    JOptionPane.ERROR_MESSAGE);
 	}
 	
 	//Getters and Setters
