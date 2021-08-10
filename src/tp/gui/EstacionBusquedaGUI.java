@@ -137,7 +137,7 @@ public class EstacionBusquedaGUI extends JFrame {
 		this.pack();
 		this.setLocationRelativeTo(null);
 		this.setSize(526,248);	
-		
+		JScrollPane scrollPane = new JScrollPane();
 		btnBuscar.addActionListener(e -> {
 	  		Map<String, String> atributos = new HashMap<String, String>();
 	  		try{
@@ -160,19 +160,17 @@ public class EstacionBusquedaGUI extends JFrame {
 				for(int i=0; i<tam; i++) {
 					tabla[i][0] = ret.get(i).getId();
 					tabla[i][1] = ret.get(i).getNombre();
-					tabla[i][2] = ret.get(i).getEstado(); // esto hay q modificarlo
+					tabla[i][2] = ret.get(i).getEstado();
 				}
 				String[] columnNames = {"ID", "Estacion", "Estado"};
 				DefaultTableModel dtm = new DefaultTableModel(tabla, columnNames);
 			    final JTable table = new JTable(dtm);
 			    table.setPreferredScrollableViewportSize(new Dimension(250, 100));
-			    JScrollPane scrollPane = new JScrollPane(table);
-			    scrollPane.setVisible(false);
+			    scrollPane.setViewportView(table);
 			    scrollPane.setBorder(resultadosBorder);	
 			    panelFrame.add(scrollPane, BorderLayout.CENTER);
 			    scrollPane.setVisible(true);
 			    SwingUtilities.updateComponentTreeUI(panelFrame);
-				
 				
 			}catch(Exception e1) {
 				e1.printStackTrace();
