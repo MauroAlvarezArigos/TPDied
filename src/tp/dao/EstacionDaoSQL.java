@@ -267,6 +267,10 @@ public class EstacionDaoSQL implements EstacionDao{
 					values = values.concat(" AND E.HORARIO_CIERRE = " +entry.getValue());
 						break;
 						
+				case "ESTADO":
+					values = values.concat(" AND E.ESTADO = " + entry.getValue());
+					break;
+						
 				default:
 					if(entry!=null)
 					values = values.concat(" AND "+"E."+entry.getKey()+"='"+entry.getValue() + "'");
