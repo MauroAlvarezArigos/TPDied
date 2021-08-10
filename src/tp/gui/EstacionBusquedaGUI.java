@@ -114,9 +114,34 @@ public class EstacionBusquedaGUI extends JFrame {
 		parametrosBusqueda.add(btnCancelar, gbc_btnCancelar);
 		
 		
-	  	btnBuscar.addActionListener(e -> {
+	  	
+		
+		
+		btnCancelar.addActionListener(e -> dispose());
+		
+		/// CREAR TABLA
+//		EstacionBusquedaTableModel modelo = new EstacionBusquedaTableModel();
+//		resultados = new JTable(modelo);
+//		resultados.setBorder(new LineBorder(new Color(0, 0, 0)));
+//		resultados.setPreferredScrollableViewportSize(new Dimension(500,70));
+//
+//		JScrollPane scrollPane = new JScrollPane(resultados);
+//		scrollPane.setBorder(resultadosBorder);		
+		///
+		
+		panelFrame.add(lblBuscarEstacion, BorderLayout.PAGE_START);
+		panelFrame.add(parametrosBusqueda, BorderLayout.LINE_START);
+//		panelFrame.add(scrollPane, BorderLayout.CENTER);
+		
+		this.getContentPane().add(panelFrame);
+		this.pack();
+		this.setLocationRelativeTo(null);
+		this.setSize(526,248);	
+		
+		btnBuscar.addActionListener(e -> {
 	  		Map<String, String> atributos = new HashMap<String, String>();
 	  		try{
+	  			
 	  			if(cbxEstado.getSelectedItem().toString() == "Operativa"){
 	  				atributos.put("ESTADO","1");
 				}
@@ -129,35 +154,30 @@ public class EstacionBusquedaGUI extends JFrame {
 	  			//List<Estacion> lista = new ArrayList<Estacion>();
 	  			
 	  			atributos.put("NOMBRE",tbxNombre.getText());
-				controller.buscar(atributos);
+				List<Estacion> ret = controller.buscar(atributos);
+				int tam = ret.size();
+				Object[][] tabla = new Object[tam][3];
+				for(int i=0; i<tam; i++) {
+					tabla[i][0] = ret.get(i).getId();
+					tabla[i][1] = ret.get(i).getNombre();
+					tabla[i][2] = ret.get(i).getEstado(); // esto hay q modificarlo
+				}
+				String[] columnNames = {"ID", "Estacion", "Estado"};
+				DefaultTableModel dtm = new DefaultTableModel(tabla, columnNames);
+			    final JTable table = new JTable(dtm);
+			    table.setPreferredScrollableViewportSize(new Dimension(250, 100));
+			    JScrollPane scrollPane = new JScrollPane(table);
+			    scrollPane.setVisible(false);
+			    scrollPane.setBorder(resultadosBorder);	
+			    panelFrame.add(scrollPane, BorderLayout.CENTER);
+			    scrollPane.setVisible(true);
+			    SwingUtilities.updateComponentTreeUI(panelFrame);
 				
-				//System.out.println(lista.toString());
+				
 			}catch(Exception e1) {
 				e1.printStackTrace();
 			}
 		});
-		
-		
-		btnCancelar.addActionListener(e -> dispose());
-		
-		/// CREAR TABLA
-		EstacionBusquedaTableModel modelo = new EstacionBusquedaTableModel();
-		resultados = new JTable(modelo);
-		resultados.setBorder(new LineBorder(new Color(0, 0, 0)));
-		resultados.setPreferredScrollableViewportSize(new Dimension(500,70));
-
-		JScrollPane scrollPane = new JScrollPane(resultados);
-		scrollPane.setBorder(resultadosBorder);		
-		///
-		
-		panelFrame.add(lblBuscarEstacion, BorderLayout.PAGE_START);
-		panelFrame.add(parametrosBusqueda, BorderLayout.LINE_START);
-		panelFrame.add(scrollPane, BorderLayout.CENTER);
-		
-		this.getContentPane().add(panelFrame);
-		this.pack();
-		this.setLocationRelativeTo(null);
-		this.setSize(526,248);	
 
 	}
 	

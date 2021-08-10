@@ -239,7 +239,6 @@ public class EstacionDaoSQL implements EstacionDao{
 			}
 		}
 		
-		System.out.println(lista.get(0).getNombre());
 		return lista;
 	}
 	
