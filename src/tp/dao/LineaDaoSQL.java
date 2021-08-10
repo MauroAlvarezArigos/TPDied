@@ -1,9 +1,5 @@
 package tp.dao;
 
-import java.sql.Array;
-
-
-
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -16,10 +12,10 @@ import java.util.Map;
 import tp.Excepciones.ExcepcionNoExisteElemento;
 import tp.dao.utils.DB;
 import tp.dominio.Linea;
-import tp.dominio.Ruta;
+
 
 public class LineaDaoSQL implements LineaDao{
-	private Linea prueba;
+	//private Linea prueba;
 	private static final String SELECT_ALL_LINEA = 
 			"SELECT * FROM LINEA L";
 	
@@ -28,7 +24,7 @@ public class LineaDaoSQL implements LineaDao{
 			+ " WHERE NOMBRE = ? ";
 	
 	private static final String UPDATE_LINEA =
-			"UPDATE LINEA SET NOMBRE = ?, COLOR = ?, ESTADO = ?, RECORRIDO = ?,"
+			"UPDATE LINEA SET NOMBRE = ?, COLOR = ?, ESTADO = ?"
 			+ " WHERE NOMBRE = ? ";
 	
 	private static final String DELETE_LINEA =
@@ -36,8 +32,8 @@ public class LineaDaoSQL implements LineaDao{
 			+ " WHERE NOMBRE = ? ";
 	
 	private static final String INSERT_LINEA =
-			"INSERT INTO ESTACION(NOMBRE, COLOR, ESTADO, RECORRIDO)"
-			+ " VALUES(?, ?, ?, ?)";
+			"INSERT INTO ESTACION(NOMBRE, COLOR, ESTADO)"
+			+ " VALUES(?, ?, ?)";
 	
 	public LineaDaoSQL() {
 		
@@ -56,7 +52,6 @@ public class LineaDaoSQL implements LineaDao{
 			pstmt.setString(1, l.getNombre());
 			pstmt.setString(2, l.getColor());
 			pstmt.setString(3, Integer.toBinaryString(l.getEstado()));
-			pstmt.setArrayList(4, l.getRecorrido());
 			
 			System.out.println("Psmt: "+pstmt.toString());
 			pstmt.executeUpdate();
@@ -90,7 +85,6 @@ public class LineaDaoSQL implements LineaDao{
 			pstmt.setString(1, l.getNombre());
 			pstmt.setString(2, l.getColor());
 			pstmt.setString(3, Integer.toBinaryString(l.getEstado()));
-			pstmt.setArrayList(4, l.getRecorrido());
 			
 			System.out.println("Psmt: "+pstmt.toString());
 			pstmt.executeUpdate();
@@ -235,7 +229,7 @@ public class LineaDaoSQL implements LineaDao{
 				l.setNombre(rs.getString("NOMBRE"));
 				l.setColor(rs.getString("COLOR"));
 				l.setEstado(rs.getBoolean("ESTADO"));
-				l.setRecorrido((ArrayList<Ruta>) rs.getArray("RECORRIDO"));
+				//l.setRecorrido((ArrayList<Ruta>) rs.getArray("RECORRIDO"));
 			  	lista.add(l);
 			}
 		}catch(SQLException e) {
