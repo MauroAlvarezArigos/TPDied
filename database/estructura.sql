@@ -1,5 +1,5 @@
 CREATE TABLE Estacion (
-	id int,
+	id serial,
 	nombre varchar(50),
 	horarioApertura time,
 	horarioCierre time,
