@@ -47,43 +47,27 @@ public class EstacionDaoSQL implements EstacionDao{
 	}
 
 	@Override
-	public Estacion saveOrUpdate(Estacion es) {
+	public Estacion insert(Estacion es) {
 		Connection conn = DB.getConexion();
 		PreparedStatement pstmt = null;
-		System.out.println("Entre a SAVEORUPDATE");
-		System.out.println(checkNull(es.getId(), conn));
+		System.out.println("Entre a Insert");
 		
 		try{
-			System.out.println("En Try: "+ checkNull(es.getId(), conn));
+			pstmt = conn.prepareStatement(INSERT_ESTACION);
 			
-			if(checkNull(es.getId(), conn)) {
-				pstmt = conn.prepareStatement(UPDATE_ESTACION);
-				System.out.println("Modo UPDATE");
-				pstmt.setString(1, es.getNombre());
-				pstmt.setTimestamp(2, es.getHorarioApertura());
-				pstmt.setTimestamp(3, es.getHorarioCierre());
-				pstmt.setString(4, Integer.toBinaryString(es.getEstado()));
-				pstmt.setInt(5, es.getId());
+			System.out.println("Modo INSERT");
 				
-				System.out.println("Psmt: "+pstmt.toString());
-			}
-			else {
-				pstmt = conn.prepareStatement(INSERT_ESTACION);
-				
-				System.out.println("Modo INSERT");
-				
-				pstmt.setString(1, es.getNombre());
-				pstmt.setTimestamp(2, es.getHorarioApertura());
-				pstmt.setTimestamp(3, es.getHorarioCierre());
-				pstmt.setString(4, Integer.toBinaryString(es.getEstado()));
-				
-				System.out.println("Psmt: "+pstmt.toString());
-			}
+			pstmt.setString(1, es.getNombre());
+			pstmt.setTimestamp(2, es.getHorarioApertura());
+			pstmt.setTimestamp(3, es.getHorarioCierre());
+			pstmt.setString(4, Integer.toBinaryString(es.getEstado()));
+			
+			System.out.println("Psmt: "+pstmt.toString());
 			pstmt.executeUpdate();
 		}
-			catch(SQLException e){
-				e.printStackTrace();
-			}
+		catch(SQLException e){
+			e.printStackTrace();
+		}
 		finally {
 			try {
 				if(pstmt!=null) pstmt.close();
@@ -93,6 +77,42 @@ public class EstacionDaoSQL implements EstacionDao{
 				e.printStackTrace();
 			}
 		}
+		return null;
+	}
+	
+	@Override
+	public Estacion modify(Estacion es) {
+		Connection conn = DB.getConexion();
+		PreparedStatement pstmt = null;
+		System.out.println("Entre a Update");
+		
+		try {
+			pstmt = conn.prepareStatement(UPDATE_ESTACION);
+			
+			System.out.println("Modo Update");
+			
+			pstmt.setString(1, es.getNombre());
+			pstmt.setTimestamp(2, es.getHorarioApertura());
+			pstmt.setTimestamp(3, es.getHorarioCierre());
+			pstmt.setString(4, Integer.toBinaryString(es.getEstado()));
+			pstmt.setInt(5, es.getId());
+			
+			System.out.println("Psmt: "+pstmt.toString());
+			pstmt.executeUpdate();
+	
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				if(pstmt!=null) pstmt.close();
+				if(conn!=null) conn.close();
+			}
+			catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
 		return null;
 	}
 	

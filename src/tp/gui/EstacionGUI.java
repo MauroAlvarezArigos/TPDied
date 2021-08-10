@@ -256,7 +256,7 @@ public class EstacionGUI extends JFrame {
 		});
 
 		btnModificar.addActionListener(e -> {
-			flag = 1;
+			flag = 2;
 			activarEdits();
 			
 			setOperationState();
@@ -283,6 +283,16 @@ public class EstacionGUI extends JFrame {
 				}
 				
 				this.limpiarCampos();
+			}
+			else if(flag == 2) {
+				try {
+					controller.modificar();
+				} catch(DatosObligatoriosException e1) {
+					this.mostrarError("Error al guardar", e1.getMensaje());
+					System.out.println(e1.getMensaje());
+				} catch(Exception e2) {
+					this.mostrarError("Error al guardar", e2.getMessage());
+				}
 			}
 		});
 		

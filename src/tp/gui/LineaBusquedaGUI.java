@@ -105,6 +105,8 @@ public class LineaBusquedaGUI extends JFrame {
 		gbc_rdbtnEstado.gridx = 0;
 		gbc_rdbtnEstado.gridy = 2;
 		parametrosBusqueda.add(rdbtnEstado, gbc_rdbtnEstado);
+		
+		parametros.add(rdbtnEstado);
 				
 		JComboBox<String> cbxEstado = new JComboBox<String>();
 		GridBagConstraints gbc_cbxEstado = new GridBagConstraints();

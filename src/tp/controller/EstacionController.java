@@ -60,10 +60,23 @@ public class EstacionController {
 			throw e;
 		}
 	}
+	public Estacion modificar() throws DatosObligatoriosException{
+		try {
+			altaModelo();
+			System.out.println("Modificado "+ estacion.toString());
+			estacionServicio.modificarEstacion(estacion);
+			this.lista.clear();
+			this.lista.addAll(estacionServicio.buscarTodas());
+			return estacion;
+		}catch(DatosObligatoriosException e) {
+			System.out.println(e.getMensaje());
+			throw e;
+		}
+	}
 	public Estacion guardar() throws DatosObligatoriosException {
 		try{
 			altaModelo();
-			System.out.println("ACTUALIZADO "+estacion.toString());
+			System.out.println("INICIADO "+estacion.toString());
 			estacionServicio.crearEstacion(estacion);
 			this.lista.clear();
 			this.lista.addAll(estacionServicio.buscarTodas());
@@ -72,8 +85,8 @@ public class EstacionController {
 			System.out.println(e.getMensaje());
 			throw e;
 		}
-
 	}
+	
 	public void eliminar(Estacion e) {
 		this.estacionServicio.borrarEstacion(e);		
 	}

@@ -16,9 +16,13 @@ public class EstacionServicio {
 	}
 	
 	public Estacion crearEstacion(Estacion es) {
-		return this.estacionDao.saveOrUpdate(es);
+		return this.estacionDao.insert(es);
 	}
-	
+
+	public Estacion modificarEstacion(Estacion es) {
+		return this.estacionDao.modify(es);
+	}
+
 	public List<Estacion> buscarTodas(){
 		return estacionDao.buscarTodas();
 	}
