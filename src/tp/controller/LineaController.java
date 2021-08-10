@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 
 import tp.Excepciones.DatosObligatoriosException;
+import tp.dominio.Estacion;
 import tp.dominio.Linea;
 import tp.gui.LineaGUI;
 import tp.servicios.LineaServicio;
@@ -49,6 +50,35 @@ public class LineaController {
 		try {
 			altaLinea();
 			System.out.println("MODIFICADO "+ linea.toString());
+			lineaServicio.crearLinea(linea);
+			this.lista.clear();
+			this.lista.addAll(lineaServicio.buscarTodas());
+			return linea;
+		}catch(DatosObligatoriosException e) {
+			System.out.println(e.getMensaje());
+			throw e;
+		}
+	}
+	
+	
+	public Linea modificar() throws DatosObligatoriosException{
+		try {
+			altaLinea();
+			System.out.println("Modificado "+ linea.toString());
+			lineaServicio.modificarLinea(linea);
+			this.lista.clear();
+			this.lista.addAll(lineaServicio.buscarTodas());
+			return linea;
+		}catch(DatosObligatoriosException e) {
+			System.out.println(e.getMensaje());
+			throw e;
+		}
+	}
+	
+	public Linea guardar() throws DatosObligatoriosException {
+		try{
+			altaLinea();
+			System.out.println("INICIADO "+linea.toString());
 			lineaServicio.crearLinea(linea);
 			this.lista.clear();
 			this.lista.addAll(lineaServicio.buscarTodas());

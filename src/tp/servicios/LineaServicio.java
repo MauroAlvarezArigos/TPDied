@@ -5,6 +5,7 @@ import java.util.Map;
 
 import tp.dao.LineaDao;
 import tp.dao.LineaDaoSQL;
+import tp.dominio.Estacion;
 import tp.dominio.Linea;
 
 public class LineaServicio {
@@ -16,7 +17,10 @@ private LineaDao lineadao;
 	}
 	
 	public Linea crearLinea(Linea l) {
-		return this.lineadao.saveOrUpdate(l);
+		return this.lineadao.insert(l);
+	}
+	public Linea modificarLinea(Linea l) {
+		return this.lineadao.modify(l);
 	}
 	
 	public Linea buscarLinea(Linea l) {
