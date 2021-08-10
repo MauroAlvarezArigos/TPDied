@@ -8,7 +8,8 @@ import tp.dominio.Linea;
 
 public interface LineaDao {
 	
-	public Linea saveOrUpdate(Linea l);
+	public Linea insert(Linea l);
+	public Linea modify(Linea l); 
 	public void borrarLinea(Linea l);
 	public Linea buscarLinea (String nombre);
 	public List<Linea> buscarTodas();

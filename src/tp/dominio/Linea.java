@@ -45,8 +45,13 @@ public class Linea {
 		this.color = color;
 	}
 
-	public Boolean getEstado() {
-		return estado;
+	public Integer getEstado() {
+		if(this.estado) return 1;
+		else return 0;
+	}
+	
+	public Boolean getEstado2() {
+		return this.estado;
 	}
 
 	public void setEstado(Boolean estado) {

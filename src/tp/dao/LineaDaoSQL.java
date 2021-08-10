@@ -4,6 +4,7 @@ import java.sql.Array;
 
 
 
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -42,32 +43,27 @@ public class LineaDaoSQL implements LineaDao{
 		
 	}
 
-	@Override
-	public Linea saveOrUpdate(Linea l) {
+	public Linea insert(Linea l) {
 		Connection conn = DB.getConexion();
 		PreparedStatement pstmt = null;
+		System.out.println("Entre a Insert");
+		
 		try{
-			if(checkNull(l.getNombre(), conn)) {
-				pstmt = conn.prepareStatement(UPDATE_LINEA);
-				pstmt.setString(1, l.getNombre());
-				pstmt.setString(2, l.getColor());
-				pstmt.setBoolean(3, l.getEstado());
-				pstmt.setArray(4, (Array) l.getRecorrido());
+			pstmt = conn.prepareStatement(INSERT_LINEA);
+			
+			System.out.println("Modo INSERT");
 				
-				
-			}
-			else {
-				pstmt = conn.prepareStatement(INSERT_LINEA);
-				pstmt.setString(1, l.getNombre());
-				pstmt.setString(2, l.getColor());
-				pstmt.setBoolean(3, l.getEstado());
-				pstmt.setArray(4, (Array) l.getRecorrido());
-			}
+			pstmt.setString(1, l.getNombre());
+			pstmt.setString(2, l.getColor());
+			pstmt.setString(3, Integer.toBinaryString(l.getEstado()));
+			pstmt.setArrayList(4, l.getRecorrido());
+			
+			System.out.println("Psmt: "+pstmt.toString());
 			pstmt.executeUpdate();
 		}
-			catch(SQLException e){
-				e.printStackTrace();
-			}
+		catch(SQLException e){
+			e.printStackTrace();
+		}
 		finally {
 			try {
 				if(pstmt!=null) pstmt.close();
@@ -80,7 +76,42 @@ public class LineaDaoSQL implements LineaDao{
 		return null;
 	}
 	
-	private boolean checkNull(String nombre, Connection conn) {
+	@Override
+	public Linea modify(Linea l) {
+		Connection conn = DB.getConexion();
+		PreparedStatement pstmt = null;
+		System.out.println("Entre a Update");
+		
+		try {
+			pstmt = conn.prepareStatement(UPDATE_LINEA);
+			
+			System.out.println("Modo Update");
+			
+			pstmt.setString(1, l.getNombre());
+			pstmt.setString(2, l.getColor());
+			pstmt.setString(3, Integer.toBinaryString(l.getEstado()));
+			pstmt.setArrayList(4, l.getRecorrido());
+			
+			System.out.println("Psmt: "+pstmt.toString());
+			pstmt.executeUpdate();
+	
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				if(pstmt!=null) pstmt.close();
+				if(conn!=null) conn.close();
+			}
+			catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return null;
+	}
+	
+	/*private boolean checkNull(String nombre, Connection conn) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		Boolean ret = false;
@@ -102,7 +133,7 @@ public class LineaDaoSQL implements LineaDao{
 			}
 		}
 		return ret;
-	}
+	}*/
 
 	@Override
 	public void borrarLinea(Linea l) {
