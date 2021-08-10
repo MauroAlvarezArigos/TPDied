@@ -15,17 +15,8 @@ public class BoletoServicio {
 		boletodao = new BoletoDaoSQL();
 	}
 	
-	public Boleto crearEstacion(Boleto b) {
-		return this.boletodao.saveOrUpdate(b);
+	public Boleto crearBoleto(Boleto b) {
+		return this.boletodao.insert(b);
 	}
 	
-	public Boleto buscarBoleto(Boleto b) {
-		return boletodao.buscar(b.getNumeroBoleto());
-	}
-	
-	public void borrarBoleto(Boleto b) {
-		boletodao.borrar(b);
-	}
-	
-
 }

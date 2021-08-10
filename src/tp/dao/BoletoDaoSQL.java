@@ -15,57 +15,28 @@ import tp.dominio.Boleto;
 
 public class BoletoDaoSQL implements BoletoDao{
 	
-	private static final String SELECT_BOLETO =
-			"SELECT * FROM BOLETO B"
-			+ " WHERE NUMERO_BOLETO = ? ";
-	
-	private static final String UPDATE_BOLETO =
-			"UPDATE BOLETO SET NUMERO_BOLETO = ?, CORREO = ?, NOMBRE_CLIENTE = ?, FECHA_VENTA = ?,"
-			+ "ORIGEN, DESTINO, RECORRIDO, COSTO"
-			+ " WHERE NUMERO_BOLETO = ? ";
-	
-	private static final String DELETE_BOLETO =
-			"DELETE FROM BOLETO"
-			+ " WHERE NUMERO_BOLETO = ? ";
-	
 	private static final String INSERT_BOLETO =
-			"INSERT INTO ESTACION(NUMERO_BOLETO, CORREO, NOMBRE_CLIENTE, FECHA_VENTA,"
-			+"ORIGEN, DESTINO, RECORRIDO, COSTO"
-			+ " VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
+			"INSERT INTO BOLETO(CORREO, NOMBRECLIENTE, FECHAVENTA,"
+			+"ORIGEN, DESTINO, COSTO)"
+			+ " VALUES(?, ?, ?, ?, ?, ?)";
 
 	@Override
-	public Boleto saveOrUpdate(Boleto b) {
+	public Boleto insert(Boleto b) {
 		Connection conn = DB.getConexion();
 		PreparedStatement pstmt = null;
 		try{
-			if(checkNull(b.getNumeroBoleto(), conn)) {
-				pstmt = conn.prepareStatement(UPDATE_BOLETO);
-				pstmt.setInt(1, b.getNumeroBoleto());
-				pstmt.setString(2, b.getCorreo());
-				pstmt.setString(3, b.getNombreCliente());
-				pstmt.setDate(4, (Date) b.getFechaVenta());
-				pstmt.setString(5, b.getOrigen());
-				pstmt.setString(6, b.getDestino());
-				pstmt.setArray(7, (Array) b.getRecorrido());
-				pstmt.setInt(8, b.getCosto());
+			pstmt = conn.prepareStatement(INSERT_BOLETO);
+			pstmt.setString(1, b.getCorreo());
+			pstmt.setString(2, b.getNombreCliente());
+			pstmt.setDate(3, (Date) b.getFechaVenta());
+			pstmt.setString(4, b.getOrigen());
+			pstmt.setString(5, b.getDestino());
+			pstmt.setInt(6, b.getCosto());
 				
-			}
-			else {
-				pstmt = conn.prepareStatement(INSERT_BOLETO);
-				pstmt.setInt(1, b.getNumeroBoleto());
-				pstmt.setString(2, b.getCorreo());
-				pstmt.setString(3, b.getNombreCliente());
-				pstmt.setDate(4, (Date) b.getFechaVenta());
-				pstmt.setString(5, b.getOrigen());
-				pstmt.setString(6, b.getDestino());
-				pstmt.setArray(7, (Array) b.getRecorrido());
-				pstmt.setInt(8, b.getCosto());
-			}
 			pstmt.executeUpdate();
-		}
-			catch(SQLException e){
+		} catch(SQLException e) {
 				e.printStackTrace();
-			}
+		}
 		finally {
 			try {
 				if(pstmt!=null) pstmt.close();
@@ -78,7 +49,7 @@ public class BoletoDaoSQL implements BoletoDao{
 		return null;
 	}
 
-	private boolean checkNull(int numeroBoleto, Connection conn) {
+	/*private boolean checkNull(int numeroBoleto, Connection conn) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		Boolean ret = false;
@@ -100,65 +71,8 @@ public class BoletoDaoSQL implements BoletoDao{
 			}
 		}
 		return ret;
-	}
+	}*/
 
-	
-	@Override
-	public Boleto buscar(Integer numeroBoleto) {
-		Connection conn = DB.getConexion();
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		Boleto b = new Boleto();
-		try {
-			pstmt = conn.prepareStatement(SELECT_BOLETO);
-			rs = pstmt.executeQuery();
-			if(!rs.first()) throw new ExcepcionNoExisteElemento();
-			b.setNumeroBoleto(rs.getInt("NUMERO_BOLETO"));
-		}
-		catch(SQLException | ExcepcionNoExisteElemento e) {
-			e.printStackTrace();
-		}
-		finally {
-			try {
-				if(pstmt!=null) pstmt.close();
-				if(conn!=null) conn.close();
-			}
-			catch(SQLException e) {
-				e.printStackTrace();
-			}
-		}
-		return b;
-	}
-	
-	@Override
-	public void borrar(Boleto b) {
-		Connection conn = DB.getConexion();
-		PreparedStatement pstmt = null;
-		try {
-			pstmt = conn.prepareStatement(DELETE_BOLETO);
-			pstmt.setInt(1, b.getNumeroBoleto());
-			pstmt.execute();
-		}
-		catch(SQLException e) {
-			e.printStackTrace();
-		}
-		finally {
-			try {
-				if(pstmt!=null) pstmt.close();
-				if(conn!=null) conn.close();
-			}
-			catch(SQLException e) {
-				e.printStackTrace();
-			}
-		}
-		
-	}
-	
-	
-
-
-	
-	
 }
 	
 

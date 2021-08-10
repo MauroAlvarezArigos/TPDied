@@ -8,7 +8,7 @@ CREATE TABLE Estacion (
 );
 
 CREATE TABLE Boleto(
-	numeroBoleto int NOT NULL,
+	numeroBoleto serial,
 	correo varchar(50),
 	nombreCliente varchar(50),
 	fechaVenta date,

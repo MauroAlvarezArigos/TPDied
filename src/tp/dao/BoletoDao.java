@@ -4,8 +4,6 @@ import tp.dominio.Boleto;
 
 public interface BoletoDao {
 	
-	public Boleto saveOrUpdate(Boleto b);
-	public void borrar(Boleto b);
-	public Boleto buscar(Integer numeroBoleto);
+	public Boleto insert(Boleto b);
 
 }

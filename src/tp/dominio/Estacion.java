@@ -72,7 +72,7 @@ public class Estacion {
 	
 	@Override
 	public String toString() {
-		return this.id + ", "+ this.nombre+ ", " + this.horarioApertura+ ", " + this.horarioCierre+ ", " + this.estado;
+		return this.nombre;
 	}
 
 }

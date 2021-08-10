@@ -6,6 +6,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import tp.Excepciones.DatosObligatoriosException;
+import tp.controller.BoletoController;
+import tp.controller.EstacionController;
 import tp.dominio.*;
 
 import javax.swing.JLabel;
@@ -13,6 +16,8 @@ import javax.swing.JOptionPane;
 
 import java.awt.Font;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
+
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
@@ -21,6 +26,7 @@ import java.awt.event.ActionListener;
 import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -31,8 +37,23 @@ import javax.swing.JButton;
 public class BoletoGUI extends JFrame {
 	private JTextField tbxNombre;
 	private JTextField tbxEmail;
-
+	
+	private long costo;
+	
+	private List<Estacion> estaciones;
+	private BoletoController controller;
+	
+	private JComboBox<Estacion> cbxOrigen;
+	private JComboBox<Estacion> cbxDestino;
+	
+	private JButton btnCalcular;
+	private JButton btnFacturar;
+	private JButton btnCancelar;
+	
 	public BoletoGUI() {
+		this.controller = new BoletoController(this);
+		controller.cargarEstaciones();
+		
 		JPanel contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5,5,5,5));
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -144,22 +165,14 @@ public class BoletoGUI extends JFrame {
 		gbc_lblOrigen.gridy = 1;
 		panelEstacion.add(lblOrigen, gbc_lblOrigen);
 		
-		JComboBox<Estacion> cbxOrigen = new JComboBox<Estacion>();
+		//cbxOrigen = new JComboBox<Estacion>();
 		GridBagConstraints gbc_cbxOrigen = new GridBagConstraints();
 		gbc_cbxOrigen.anchor = GridBagConstraints.WEST;
 		gbc_cbxOrigen.insets = new Insets(0, 0, 5, 0);
 		gbc_cbxOrigen.gridx = 1;
 		gbc_cbxOrigen.gridy = 1;
-		
-		// pido las estaciones
-		ArrayList<Estacion> estaciones = new ArrayList<Estacion>();
-		Timestamp time1 = new Timestamp(System.currentTimeMillis());
-		Timestamp time2 = new Timestamp(System.currentTimeMillis()+60000);
-		estaciones.add(new Estacion(0, "Est 0", time1, time2, true));
-		estaciones.add(new Estacion(1, "Est 1", time1, time2, true));
-		estaciones.add(new Estacion(2, "Est 2", time1, time2, true));
-		for(Estacion e : estaciones) cbxOrigen.addItem(e);
 		panelEstacion.add(cbxOrigen, gbc_cbxOrigen);
+
 		
 		JLabel lblDestino = new JLabel("Destino:");
 		GridBagConstraints gbc_lblDestino = new GridBagConstraints();
@@ -169,14 +182,14 @@ public class BoletoGUI extends JFrame {
 		gbc_lblDestino.gridy = 2;
 		panelEstacion.add(lblDestino, gbc_lblDestino);
 		
-		JComboBox<Estacion> cbxDestino = new JComboBox<Estacion>();
+		//cbxDestino = new JComboBox<Estacion>();
 		GridBagConstraints gbc_cbxDestino = new GridBagConstraints();
 		gbc_cbxDestino.insets = new Insets(0, 0, 5, 0);
 		gbc_cbxDestino.anchor = GridBagConstraints.WEST;
 		gbc_cbxDestino.gridx = 1;
 		gbc_cbxDestino.gridy = 2;
-			for(Estacion e : estaciones) cbxDestino.addItem(e);
 		panelEstacion.add(cbxDestino, gbc_cbxDestino);
+		
 		
 		JLabel lblCosto = new JLabel("");
 		GridBagConstraints gbc_lblCosto = new GridBagConstraints();
@@ -196,7 +209,7 @@ public class BoletoGUI extends JFrame {
 		gbc_lblValor.gridy = 3;
 		panel.add(lblValor, gbc_lblValor);
 		
-		JButton btnFacturar = new JButton("Facturar");
+		btnFacturar = new JButton("Facturar");
 		GridBagConstraints gbc_btnFacturar = new GridBagConstraints();
 		gbc_btnFacturar.anchor = GridBagConstraints.WEST;
 		gbc_btnFacturar.insets = new Insets(0, 0, 0, 5);
@@ -205,7 +218,7 @@ public class BoletoGUI extends JFrame {
 		btnFacturar.setEnabled(false);
 		panel.add(btnFacturar, gbc_btnFacturar);
 		
-		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar = new JButton("Cancelar");
 		GridBagConstraints gbc_btnCancelar = new GridBagConstraints();
 		gbc_btnCancelar.anchor = GridBagConstraints.EAST;
 		gbc_btnCancelar.insets = new Insets(0, 0, 0, 5);
@@ -215,14 +228,14 @@ public class BoletoGUI extends JFrame {
 
 		
 		
-		JButton btnCalcular = new JButton(" Calcular");
+		btnCalcular = new JButton(" Calcular");
 		GridBagConstraints gbc_btnCalcular = new GridBagConstraints();
 		gbc_btnCalcular.insets = new Insets(0, 0, 0, 5);
 		gbc_btnCalcular.gridx = 0;
 		gbc_btnCalcular.gridy = 3;
 		panelEstacion.add(btnCalcular, gbc_btnCalcular);
 		btnCalcular.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e){  
+			public void actionPerformed(ActionEvent e){  
 						long INF = 100000009;
 						Object aux = cbxOrigen.getSelectedItem();
 						Estacion estOrigen = (Estacion) aux;
@@ -250,10 +263,10 @@ public class BoletoGUI extends JFrame {
 						}
 						if(val.getCost() < INF) {
 							posible=true;
+							costo = val.getCost();
 							lblCosto.setText("Precio: " + val.getCost()); //PONE ACA LO QUE CALCULASTE
 						}
 						else lblCosto.setText("Precio: " + estDestino.getNombre() + " es inalcanzable");
-						//panel.setVisible(true);
 						if(posible) btnFacturar.setEnabled(true);
 						else btnFacturar.setEnabled(false);
 				}
@@ -267,6 +280,17 @@ public class BoletoGUI extends JFrame {
 		btnCancelar.setIcon(new ImageIcon(".\\res\\cancelar.png"));
 		btnCancelar.setMargin(new Insets(0, 0, 0, 0));
 		
+		btnFacturar.addActionListener(e -> {
+			try{
+				controller.guardar();
+				setInitialState();
+			} catch (DatosObligatoriosException e1) {
+				this.mostrarError("Error al guardar", e1.getMensaje());
+				System.out.println(e1.getMensaje());
+
+			}
+		});
+		
 		//Preg si queres cancelar??
 		btnCancelar.addActionListener(e -> {
 			int n = JOptionPane.showConfirmDialog(this, "¿Estas seguro de cancelar la compra?", "CUIDADO!", JOptionPane.YES_NO_OPTION);
@@ -275,10 +299,75 @@ public class BoletoGUI extends JFrame {
 			}
 		});
 		
+		System.out.println(cbxOrigen.getSelectedItem().toString());
+		SwingUtilities.updateComponentTreeUI(this);
+
+
 		this.pack();
 		this.setLocationRelativeTo(null);
 		this.setSize(550,300);			
 		
 	}
+	
+	public void mostrarError(String titulo,String detalle) {
+		JFrame padre= (JFrame) SwingUtilities.getWindowAncestor(this);
+		JOptionPane.showMessageDialog(padre,
+			    detalle,titulo,
+			    JOptionPane.ERROR_MESSAGE);
+	}
+	
+	private void setInitialState() {
+		btnFacturar.setEnabled(false);
+		btnCalcular.setEnabled(true);
+		btnCancelar.setEnabled(true);
+		
+		tbxEmail.setText("");
+		tbxNombre.setText("");
+		
+		cbxDestino.setSelectedIndex(0);
+		cbxOrigen.setSelectedIndex(0);
+		
+	}
+	
+	//Getters and Setters
+	public JTextField getTbxNombre() {
+		return tbxNombre;
+	}
 
+	public void setTbxNombre(JTextField tbxNombre) {
+		this.tbxNombre = tbxNombre;
+	}
+
+	public JTextField getTbxEmail() {
+		return tbxEmail;
+	}
+
+	public void setTbxEmail(JTextField tbxEmail) {
+		this.tbxEmail = tbxEmail;
+	}
+
+	public JComboBox<Estacion> getCbxOrigen() {
+		return cbxOrigen;
+	}
+
+	public void setCbxOrigen(JComboBox<Estacion> cbxOrigen) {
+		this.cbxOrigen = cbxOrigen;
+	}
+
+	public JComboBox<Estacion> getCbxDestino() {
+		return cbxDestino;
+	}
+
+	public void setCbxDestino(JComboBox<Estacion> cbxDestino) {
+		this.cbxDestino = cbxDestino;
+	}
+	
+	public long getCosto() {
+		return costo;
+	}
+	
+	
+	
+	
+	
 }
