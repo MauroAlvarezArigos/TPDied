@@ -27,7 +27,10 @@ import java.awt.FlowLayout;
 
 public class EstacionBusquedaGUI extends JFrame {
 	private JTextField tbxNombre;
-	private JTable resultados;
+	private JTable table;
+	
+	private Object[][] tabla;
+	
 	
 	private EstacionController controller;
 	
@@ -102,7 +105,6 @@ public class EstacionBusquedaGUI extends JFrame {
 		gbc_btnBuscar.gridy = 2;
 		parametrosBusqueda.add(btnBuscar, gbc_btnBuscar);
 		
-		//LLamar al servicio de busqueda
 		
 		JButton btnCancelar = new JButton();
 		btnCancelar.setIcon(new ImageIcon(".\\res\\cancelar.png"));
@@ -113,31 +115,15 @@ public class EstacionBusquedaGUI extends JFrame {
 		gbc_btnCancelar.gridy = 2;
 		parametrosBusqueda.add(btnCancelar, gbc_btnCancelar);
 		
-		
-	  	
-		
-		
 		btnCancelar.addActionListener(e -> dispose());
-		
-		/// CREAR TABLA
-//		EstacionBusquedaTableModel modelo = new EstacionBusquedaTableModel();
-//		resultados = new JTable(modelo);
-//		resultados.setBorder(new LineBorder(new Color(0, 0, 0)));
-//		resultados.setPreferredScrollableViewportSize(new Dimension(500,70));
-//
-//		JScrollPane scrollPane = new JScrollPane(resultados);
-//		scrollPane.setBorder(resultadosBorder);		
-		///
 		
 		panelFrame.add(lblBuscarEstacion, BorderLayout.PAGE_START);
 		panelFrame.add(parametrosBusqueda, BorderLayout.LINE_START);
-//		panelFrame.add(scrollPane, BorderLayout.CENTER);
 		
-		this.getContentPane().add(panelFrame);
-		this.pack();
-		this.setLocationRelativeTo(null);
-		this.setSize(526,248);	
+  
 		JScrollPane scrollPane = new JScrollPane();
+
+
 		btnBuscar.addActionListener(e -> {
 	  		Map<String, String> atributos = new HashMap<String, String>();
 	  		try{
@@ -156,26 +142,43 @@ public class EstacionBusquedaGUI extends JFrame {
 	  			atributos.put("NOMBRE",tbxNombre.getText());
 				List<Estacion> ret = controller.buscar(atributos);
 				int tam = ret.size();
-				Object[][] tabla = new Object[tam][3];
+				tabla = new Object[tam][3];
 				for(int i=0; i<tam; i++) {
 					tabla[i][0] = ret.get(i).getId();
 					tabla[i][1] = ret.get(i).getNombre();
-					tabla[i][2] = ret.get(i).getEstado();
+					tabla[i][2] = (ret.get(i).getEstado() == 1) ? "Operativa":"En Mantenimiento";
 				}
+
 				String[] columnNames = {"ID", "Estacion", "Estado"};
-				DefaultTableModel dtm = new DefaultTableModel(tabla, columnNames);
-			    final JTable table = new JTable(dtm);
+
+			    table = new JTable();
 			    table.setPreferredScrollableViewportSize(new Dimension(250, 100));
-			    scrollPane.setViewportView(table);
+
+			
+				DefaultTableModel dtm = new DefaultTableModel(tabla, columnNames) {
+				    public boolean isCellEditable(int rowIndex,int columnIndex){return false;}
+				};
+				
+				table.setModel(dtm);
+				scrollPane.setViewportView(table);
 			    scrollPane.setBorder(resultadosBorder);	
 			    panelFrame.add(scrollPane, BorderLayout.CENTER);
 			    scrollPane.setVisible(true);
 			    SwingUtilities.updateComponentTreeUI(panelFrame);
 				
+
 			}catch(Exception e1) {
 				e1.printStackTrace();
 			}
 		});
+		
+		
+
+		this.getContentPane().add(panelFrame);
+		this.pack();
+		this.setLocationRelativeTo(null);
+		this.setSize(526,248);	
+		
 
 	}
 	

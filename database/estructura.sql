@@ -21,7 +21,7 @@ CREATE TABLE Boleto(
 CREATE TABLE Linea(
 	nombre varchar(50),
 	color varchar(50),
-	estado bit,
+	estado varchar(1),
 	CONSTRAINT nombre_pk PRIMARY KEY (nombre)
 );
 
@@ -40,6 +40,6 @@ CREATE TABLE Ruta(
 	distancia int,
 	tiempoViaje int,
 	maxPasajeros int,
-	estado bit,
+	estado varchar(1),
 	costo int
 );
