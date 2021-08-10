@@ -4,8 +4,11 @@ import java.util.ArrayList;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 
 import tp.Excepciones.DatosObligatoriosException;
+import tp.dao.EstacionDaoSQL;
+import tp.dao.LineaDaoSQL;
 import tp.dominio.Estacion;
 import tp.dominio.Linea;
 import tp.gui.LineaGUI;
@@ -33,7 +36,7 @@ public class LineaController {
 				throw new DatosObligatoriosException("Nombre", "El nombre de la linea es obligatorio");
 			}
 			if(this.lineagui.getTbxColor() != null && !this.lineagui.getTbxColor().getText().equals("")) {
-				linea.setColor(this.lineagui.getTbxNombre().getText());
+				linea.setColor(this.lineagui.getTbxColor().getText());
 			} else {
 				throw new DatosObligatoriosException("Color", "El color de la linea es obligatorio");
 			}
@@ -91,6 +94,12 @@ public class LineaController {
 	
 	public void eliminar(Linea l) {
 		this.lineaServicio.borrarLinea(l);		
+	}
+	
+	public List<Linea> buscar(Map<String, ?> datos) {
+		LineaDaoSQL lineaDAO = new LineaDaoSQL();
+		List<Linea> resultados = lineaDAO.buscarPorAtributos(datos);
+		return resultados;
 	}
 	
 

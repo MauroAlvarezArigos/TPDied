@@ -7,6 +7,9 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
@@ -21,18 +24,26 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.plaf.metal.MetalBorders.TextFieldBorder;
+import javax.swing.table.DefaultTableModel;
 
+import tp.controller.EstacionController;
+import tp.controller.LineaController;
+import tp.dominio.Estacion;
+import tp.dominio.Linea;
 import tp.modelosTabla.EstacionBusquedaTableModel;
 
 public class LineaBusquedaGUI extends JFrame {
 	private JTextField tbxNombre;
 	private JTextField tbxColor;
 	private JTable resultados;
+	private LineaController controller;
 	
 	public LineaBusquedaGUI() {
+		controller = new LineaController(null);
 		// al seleccionar nombre/color y a la vez estado, se seleccionan ambas xd
 		setResizable(false);
 		
@@ -146,18 +157,59 @@ public class LineaBusquedaGUI extends JFrame {
 		resultados.setBorder(new LineBorder(new Color(0, 0, 0)));
 		resultados.setPreferredScrollableViewportSize(new Dimension(500,70));
 	
-		JScrollPane scrollPane = new JScrollPane(resultados);
-		scrollPane.setBorder(resultadosBorder);		
+//		JScrollPane scrollPane = new JScrollPane(resultados);
+//		scrollPane.setBorder(resultadosBorder);		
 		///
 		
 		panelFrame.add(lblBuscarEstacion, BorderLayout.PAGE_START);
 		panelFrame.add(parametrosBusqueda, BorderLayout.LINE_START);
-		panelFrame.add(scrollPane, BorderLayout.CENTER);
+//		panelFrame.add(scrollPane, BorderLayout.CENTER);
 		
 		this.getContentPane().add(panelFrame);
 		this.pack();
 		this.setLocationRelativeTo(null);
 		this.setSize(526,248);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		btnBuscar.addActionListener(e -> {
+	  		Map<String, String> atributos = new HashMap<String, String>();
+	  		try{
+	  			
+	  			if(cbxEstado.getSelectedItem().toString() == "Activa"){
+	  				atributos.put("ESTADO","1");
+				}
+				else if(cbxEstado.getSelectedItem().toString() == "No Activa"){
+	  				atributos.put("ESTADO","0");
+				}
+	  			else {
+	  				atributos.put("ESTADO","Ambos");
+	  			}
+	  			//List<Estacion> lista = new ArrayList<Estacion>();
+	  			
+	  			atributos.put("NOMBRE",tbxNombre.getText());
+	  			atributos.put("COLOR", tbxColor.getText());
+				List<Linea> ret = controller.buscar(atributos);
+				int tam = ret.size();
+				Object[][] tabla = new Object[tam][3];
+				for(int i=0; i<tam; i++) {
+					tabla[i][0] = ret.get(i).getNombre();
+					tabla[i][1] = ret.get(i).getColor();
+					tabla[i][2] = ret.get(i).getEstado();
+				}
+				String[] columnNames = {"Nombre", "Color", "Estado"};
+				DefaultTableModel dtm = new DefaultTableModel(tabla, columnNames);
+			    final JTable table = new JTable(dtm);
+			    table.setPreferredScrollableViewportSize(new Dimension(250, 100));
+			    scrollPane.setViewportView(table);
+			    scrollPane.setBorder(resultadosBorder);	
+			    panelFrame.add(scrollPane, BorderLayout.CENTER);
+			    scrollPane.setVisible(true);
+			    SwingUtilities.updateComponentTreeUI(panelFrame);
+				
+			}catch(Exception e1) {
+				e1.printStackTrace();
+			}
+		});
 	}
 
 

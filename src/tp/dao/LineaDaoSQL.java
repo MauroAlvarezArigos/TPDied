@@ -52,7 +52,7 @@ public class LineaDaoSQL implements LineaDao{
 			pstmt = conn.prepareStatement(INSERT_LINEA);
 			
 			System.out.println("Modo INSERT");
-				
+			System.out.println("CHECK " + l.getNombre() + " " + l.getColor() + " ");
 			pstmt.setString(1, l.getNombre());
 			pstmt.setString(2, l.getColor());
 			pstmt.setString(3, Integer.toBinaryString(l.getEstado()));
@@ -250,41 +250,38 @@ public class LineaDaoSQL implements LineaDao{
 			e.printStackTrace();
 		}
 	}
-		System.out.println(lista);
 	return lista;
 	}
 	
 	private String prepararSentencia(Map<String, ?> atrib) {
-		String p1 = "SELECT * FROM LINEA L "
-				+ "WHERE L.NUMERO_LINEA = ?";
+		String p1 = "SELECT * FROM LINEA L";
 		String values = "";
+		boolean first = true;
 		for (Map.Entry<String,?> entry : atrib.entrySet()) {
+			if(entry.getKey() == "ESTADO" && entry.getValue() == "Ambos") continue;
+			if(first) values=values.concat(" WHERE");
+			else values=values.concat(" AND");
 			
 			switch(entry.getKey()) {
-				case "NUMERO_LINEA":
-					values = values.concat(" AND L.NUMERO_LINEA = "+entry.getValue());
+				case "NOMBRE":
+					values = values.concat(" L.NOMBRE LIKE '%"+entry.getValue() + "%'");
 					break;
 					
 				case "COLOR":
-					values = values.concat(" AND "+"L."+entry.getKey()+" LIKE '%"+entry.getValue() + "%'");
+					values = values.concat(" L.COLOR LIKE '%"+entry.getValue() + "%'");
 					break;
 					
 				case "ESTADO":
-					values = values.concat(" AND L.ESTADO = "+entry.getValue());
+					values = values.concat(" L.ESTADO = '"+entry.getValue()+"'");
 					break;
-					
-//				case "RECORRIDO":
-//					values = values.concat(" AND "+"L."+entry.getKey()+" LIKE '%"+entry.getValue() + "%'");
-//					break;
-//					
 				default:
 					if(entry!=null)
 					values = values.concat(" AND "+"L."+entry.getKey()+"='"+entry.getValue() + "'");
 					break;
 					
 			}
+			first=false;
 		}
-		System.out.println(p1  + values);
 		return p1.concat(values); 
 	}
 	
