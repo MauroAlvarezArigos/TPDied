@@ -24,7 +24,7 @@ public class EstacionDaoSQL implements EstacionDao{
 			+ " WHERE ID = ?";
 	
 	private static final String UPDATE_ESTACION =
-			"UPDATE ESTACION SET NOMBRE = ?, HORARIO_APERTURA = ?, HORARIO_CIERRE = ?,"
+			"UPDATE ESTACION SET NOMBRE = ?, HORARIOAPERTURA = ?, HORARIOCIERRE = ?,"
 			+ " ESTADO = ?"
 			+ " WHERE ID = ?";
 	
@@ -116,7 +116,7 @@ public class EstacionDaoSQL implements EstacionDao{
 		return null;
 	}
 	
-	private Boolean checkNull(Integer id, Connection conn) {
+	/*private Boolean checkNull(Integer id, Connection conn) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		Boolean ret = false;
@@ -147,8 +147,7 @@ public class EstacionDaoSQL implements EstacionDao{
 				e.printStackTrace();
 			}
 		}
-		return ret;
-	}
+		*/
 
 	@Override
 	public void borrar(Estacion es) {
@@ -221,8 +220,8 @@ public class EstacionDaoSQL implements EstacionDao{
 				Estacion es = new Estacion();
 				es.setId(rs.getInt("ID"));
 				es.setNombre(rs.getString("NOMBRE"));
-				es.setHorarioApertura(rs.getTimestamp("HORARIO_APERTURA"));
-				es.setHorarioCierre(rs.getTimestamp("HORARIO_CIERRE"));
+				es.setHorarioApertura(rs.getTimestamp("HORARIOAPERTURA"));
+				es.setHorarioCierre(rs.getTimestamp("HORARIOCIERRE"));
 			  	es.setEstado(rs.getBoolean("ESTADO"));
 			  	//Integer.toBinaryString(es.setEstado(rs.getBoolean("ESTADO")));
 				lista.add(es);
@@ -230,46 +229,29 @@ public class EstacionDaoSQL implements EstacionDao{
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}
-	finally {
-		try {
-		if(pstmt!=null) pstmt.close();
-		if(conn!=null) conn.close();
+		finally {
+			try {
+				if(pstmt!=null) pstmt.close();
+				if(conn!=null) conn.close();
+			}
+			catch(SQLException e) {
+				e.printStackTrace();
+			}
 		}
-		catch(SQLException e) {
-			e.printStackTrace();
-		}
-	}
-		System.out.println(lista);
-	return lista;
+		
+		System.out.println(lista.get(0).getNombre());
+		return lista;
 	}
 	
 	private String prepararSentencia(Map<String, ?> atrib) {
-		String p1 = "SELECT * FROM ESTACION E ";
-		String values = "";
-		
-		for (Map.Entry<String,?> entry : atrib.entrySet()) {
-			
-			switch(entry.getKey()) {
-					
-				case "NOMBRE":
-					values = values.concat("WHERE E.NOMBRE LIKE '%"+entry.getValue() + "%'");
-					break;
-										
-				case "ESTADO":{
-					if(entry.getValue() == "Ambos") break;
-					values = values.concat(" AND E.ESTADO = " + entry.getValue());
-					break;
-				}
-						
-				default:
-					if(entry!=null)
-					values = values.concat(" AND "+"E."+entry.getKey()+"='"+entry.getValue() + "'");
-					break;
-					
-			}
-		}
-		System.out.println(p1 + values);
-		return p1.concat(values); 
-	}
+        String p1 = "SELECT * FROM ESTACION E ";
+        String values = "";
+        values = values.concat("WHERE E.NOMBRE LIKE '%"+atrib.get("NOMBRE") + "%'");
+        if(atrib.get("ESTADO") != "Ambos") {
+            values = values.concat(" AND ESTADO = '" + atrib.get("ESTADO")+"'");
+        }
+        System.out.println(p1 + values);
+        return p1.concat(values); 
+    }
 
 }

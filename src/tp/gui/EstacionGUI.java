@@ -283,6 +283,7 @@ public class EstacionGUI extends JFrame {
 				}
 				
 				this.limpiarCampos();
+				this.setInitialState();
 			}
 			else if(flag == 2) {
 				try {
