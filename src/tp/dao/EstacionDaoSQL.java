@@ -116,7 +116,7 @@ public class EstacionDaoSQL implements EstacionDao{
 		return null;
 	}
 	
-	private Boolean checkNull(Integer id, Connection conn) {
+	/*private Boolean checkNull(Integer id, Connection conn) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		Boolean ret = false;
@@ -147,8 +147,7 @@ public class EstacionDaoSQL implements EstacionDao{
 				e.printStackTrace();
 			}
 		}
-		return ret;
-	}
+		*/
 
 	@Override
 	public void borrar(Estacion es) {
@@ -266,10 +265,6 @@ public class EstacionDaoSQL implements EstacionDao{
 				case "HORARIO_CIERRE":
 					values = values.concat(" AND E.HORARIO_CIERRE = " +entry.getValue());
 						break;
-						
-				case "ESTADO":
-					values = values.concat(" AND E.ESTADO = " + entry.getValue());
-					break;
 						
 				default:
 					if(entry!=null)
