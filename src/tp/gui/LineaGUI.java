@@ -8,6 +8,9 @@ import java.awt.Insets;
 
 import javax.swing.*;
 
+import tp.Excepciones.DatosObligatoriosException;
+import tp.controller.LineaController;
+
 public class LineaGUI extends JFrame {
 
 	private JTextField tbxNombre;
@@ -22,8 +25,10 @@ public class LineaGUI extends JFrame {
 	private JButton btnCancelar;
 	private JButton btnSalir;
 	private Byte flag;
+	private LineaController controller;
 
 	public LineaGUI() {
+		controller = new LineaController(this);
 		flag = 0;
 		JPanel panelFrame = new JPanel();
 		panelFrame.setLayout(new BorderLayout());
@@ -230,15 +235,28 @@ public class LineaGUI extends JFrame {
 		});
 		
 		btnGuardar.addActionListener(e -> {
+			
 			if(flag == 1) {
-				//Check that the values are correct
-				//Call handler and make an insert on DB
-				//On success show a dialog
+				System.out.println("WTF");
+				try {
+					controller.guardar();
+				} catch(DatosObligatoriosException e1) {
+					this.mostrarError("Error al guardar", e1.getMensaje());
+					System.out.println(e1.getMensaje());
+				} catch(Exception e2) {
+					this.mostrarError("Error al guardar", e2.getMessage());
+				}
+				
 			}
-			if(flag == 2) {
-				//Check that the values are correct
-				//Call handler and make an update on DB
-				//On success show a dialog
+			else if(flag == 2) {
+				try {
+					controller.modificar();
+				} catch(DatosObligatoriosException e1) {
+					this.mostrarError("Error al guardar", e1.getMensaje());
+					System.out.println(e1.getMensaje());
+				} catch(Exception e2) {
+					this.mostrarError("Error al guardar", e2.getMessage());
+				}
 			}
 		});
 		
@@ -249,7 +267,9 @@ public class LineaGUI extends JFrame {
 				setInitialState();
 			}
 		});
-				
+			
+		
+		
 		btnSalir.addActionListener(e -> dispose());
 		
 		panelFrame.add(datos, BorderLayout.CENTER);
@@ -337,4 +357,10 @@ public class LineaGUI extends JFrame {
 		this.flag = flag;
 	}
 
+	public void mostrarError(String titulo,String detalle) {
+		JFrame padre= (JFrame) SwingUtilities.getWindowAncestor(this);
+		JOptionPane.showMessageDialog(padre,
+			    detalle,titulo,
+			    JOptionPane.ERROR_MESSAGE);
+	}
 }

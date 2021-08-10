@@ -1,5 +1,9 @@
 package tp.dao;
 
+import java.sql.Array;
+
+
+
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,10 +16,10 @@ import java.util.Map;
 import tp.Excepciones.ExcepcionNoExisteElemento;
 import tp.dao.utils.DB;
 import tp.dominio.Linea;
-
+import tp.dominio.Ruta;
 
 public class LineaDaoSQL implements LineaDao{
-	//private Linea prueba;
+	private Linea prueba;
 	private static final String SELECT_ALL_LINEA = 
 			"SELECT * FROM LINEA L";
 	
@@ -24,7 +28,7 @@ public class LineaDaoSQL implements LineaDao{
 			+ " WHERE NOMBRE = ? ";
 	
 	private static final String UPDATE_LINEA =
-			"UPDATE LINEA SET NOMBRE = ?, COLOR = ?, ESTADO = ?"
+			"UPDATE LINEA SET NOMBRE = ?, COLOR = ?, ESTADO = ?,"
 			+ " WHERE NOMBRE = ? ";
 	
 	private static final String DELETE_LINEA =
@@ -32,7 +36,7 @@ public class LineaDaoSQL implements LineaDao{
 			+ " WHERE NOMBRE = ? ";
 	
 	private static final String INSERT_LINEA =
-			"INSERT INTO ESTACION(NOMBRE, COLOR, ESTADO)"
+			"INSERT INTO LINEA(NOMBRE, COLOR, ESTADO)"
 			+ " VALUES(?, ?, ?)";
 	
 	public LineaDaoSQL() {
@@ -52,6 +56,7 @@ public class LineaDaoSQL implements LineaDao{
 			pstmt.setString(1, l.getNombre());
 			pstmt.setString(2, l.getColor());
 			pstmt.setString(3, Integer.toBinaryString(l.getEstado()));
+		//	pstmt.setArray(4, l.getRecorrido());
 			
 			System.out.println("Psmt: "+pstmt.toString());
 			pstmt.executeUpdate();
@@ -85,6 +90,7 @@ public class LineaDaoSQL implements LineaDao{
 			pstmt.setString(1, l.getNombre());
 			pstmt.setString(2, l.getColor());
 			pstmt.setString(3, Integer.toBinaryString(l.getEstado()));
+			//pstmt.setArray(4, l.getRecorrido());
 			
 			System.out.println("Psmt: "+pstmt.toString());
 			pstmt.executeUpdate();
@@ -267,10 +273,10 @@ public class LineaDaoSQL implements LineaDao{
 					values = values.concat(" AND L.ESTADO = "+entry.getValue());
 					break;
 					
-				case "RECORRIDO":
-					values = values.concat(" AND "+"L."+entry.getKey()+" LIKE '%"+entry.getValue() + "%'");
-					break;
-					
+//				case "RECORRIDO":
+//					values = values.concat(" AND "+"L."+entry.getKey()+" LIKE '%"+entry.getValue() + "%'");
+//					break;
+//					
 				default:
 					if(entry!=null)
 					values = values.concat(" AND "+"L."+entry.getKey()+"='"+entry.getValue() + "'");
@@ -278,7 +284,7 @@ public class LineaDaoSQL implements LineaDao{
 					
 			}
 		}
-		System.out.println(p1 + values);
+		System.out.println(p1  + values);
 		return p1.concat(values); 
 	}
 	
