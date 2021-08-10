@@ -9,6 +9,7 @@ import tp.dominio.Estacion;
 import tp.gui.EstacionGUI;
 import tp.servicios.EstacionServicio;
 import tp.Excepciones.*;
+import tp.dao.EstacionDaoSQL;
 
 public class EstacionController {
 	private EstacionServicio estacionServicio;
@@ -73,6 +74,7 @@ public class EstacionController {
 			throw e;
 		}
 	}
+	
 	public Estacion guardar() throws DatosObligatoriosException {
 		try{
 			altaModelo();
@@ -89,6 +91,20 @@ public class EstacionController {
 	
 	public void eliminar(Estacion e) {
 		this.estacionServicio.borrarEstacion(e);		
+	}
+	
+	public List<Estacion> buscar(Map<String, ?> datos) {
+		EstacionDaoSQL estDAO = new EstacionDaoSQL();
+		List<Estacion> resultados = estDAO.buscarPorAtributos(datos);
+//		int tam = resultados.size();
+//		Object[][] tabla = new Object[tam][3];
+//		for(int i=0; i<tam; i++) {
+//			tabla[i][0] = resultados.get(i).getId();
+//			tabla[i][1] = resultados.get(i).getNombre();
+//			tabla[i][2] = resultados.get(i).getEstado(); // esto hay q modificarlo
+//		}
+		System.out.println(resultados.toString());
+		return resultados;
 	}
 	
 	public List<Estacion> listarTodos(){

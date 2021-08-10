@@ -5,11 +5,17 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
+import tp.controller.EstacionController;
+import tp.dominio.Estacion;
 import tp.modelosTabla.EstacionBusquedaTableModel;
 
 import javax.swing.border.BevelBorder;
@@ -21,9 +27,12 @@ import java.awt.FlowLayout;
 
 public class EstacionBusquedaGUI extends JFrame {
 	private JTextField tbxNombre;
-	private JTable resultados;	
-
+	private JTable resultados;
+	
+	private EstacionController controller;
+	
 	public EstacionBusquedaGUI() {
+		controller = new EstacionController(null);
 		setResizable(false);
 				
 		JPanel panelFrame = new JPanel();
@@ -44,20 +53,15 @@ public class EstacionBusquedaGUI extends JFrame {
 		JLabel lblBuscarEstacion = new JLabel("Buscar Estación");
 		lblBuscarEstacion.setHorizontalAlignment(SwingConstants.CENTER);
 		lblBuscarEstacion.setFont(new Font("Tahoma", Font.PLAIN, 22));
-			
-		ButtonGroup parametros = new ButtonGroup();
 		
-		JRadioButton rdbtnNombre = new JRadioButton("Nombre:");
-		rdbtnNombre.setSelected(true);
-		GridBagConstraints gbc_rdbtnNombre = new GridBagConstraints();
-		gbc_rdbtnNombre.anchor = GridBagConstraints.EAST;
-		gbc_rdbtnNombre.insets = new Insets(0, 0, 5, 5);
-		gbc_rdbtnNombre.gridx = 0;
-		gbc_rdbtnNombre.gridy = 0;
-		parametrosBusqueda.add(rdbtnNombre, gbc_rdbtnNombre);
-		
-		parametros.add(rdbtnNombre);
-		
+		JLabel lblNombre = new JLabel("Nombre:");
+		GridBagConstraints gbc_lblNombre = new GridBagConstraints();
+		gbc_lblNombre.anchor = GridBagConstraints.EAST;
+		gbc_lblNombre.insets = new Insets(0, 0, 5, 5);
+		gbc_lblNombre.gridx = 0;
+		gbc_lblNombre.gridy = 0;
+		parametrosBusqueda.add(lblNombre, gbc_lblNombre);
+
 		tbxNombre = new JTextField();
 		GridBagConstraints gbc_tbxNombre = new GridBagConstraints();
 		tbxNombre.setColumns(20);
@@ -68,18 +72,17 @@ public class EstacionBusquedaGUI extends JFrame {
 		gbc_tbxNombre.gridy = 0;
 		parametrosBusqueda.add(tbxNombre, gbc_tbxNombre);
 		
-		JRadioButton rdbtnEstado = new JRadioButton("Estado:");
-		GridBagConstraints gbc_rdbtnEstado = new GridBagConstraints();
-		gbc_rdbtnEstado.anchor = GridBagConstraints.EAST;
-		gbc_rdbtnEstado.insets = new Insets(0, 0, 5, 5);
-		gbc_rdbtnEstado.gridx = 0;
-		gbc_rdbtnEstado.gridy = 1;
-		parametrosBusqueda.add(rdbtnEstado, gbc_rdbtnEstado);
-		
-		parametros.add(rdbtnEstado);
+		JLabel lblEstado = new JLabel("Estado:");
+		GridBagConstraints gbc_lblEstado = new GridBagConstraints();
+		gbc_lblEstado.anchor = GridBagConstraints.EAST;
+		gbc_lblEstado.insets = new Insets(0, 0, 5, 5);
+		gbc_lblEstado.gridx = 0;
+		gbc_lblEstado.gridy = 1;
+		parametrosBusqueda.add(lblEstado, gbc_lblEstado);
 		
 		JComboBox<String> cbxEstado = new JComboBox<String>();
 		GridBagConstraints gbc_cbxEstado = new GridBagConstraints();
+		cbxEstado.addItem("Ambos");
 		cbxEstado.addItem("Operativa");
 		cbxEstado.addItem("En Mantenimiento");
 		gbc_cbxEstado.gridwidth = 2;
@@ -109,6 +112,31 @@ public class EstacionBusquedaGUI extends JFrame {
 		gbc_btnCancelar.gridx = 2;
 		gbc_btnCancelar.gridy = 2;
 		parametrosBusqueda.add(btnCancelar, gbc_btnCancelar);
+		
+		
+	  	btnBuscar.addActionListener(e -> {
+	  		Map<String, String> atributos = new HashMap<String, String>();
+	  		try{
+	  			if(cbxEstado.getSelectedItem().toString() == "Operativa"){
+	  				atributos.put("ESTADO","1");
+				}
+				else if(cbxEstado.getSelectedItem().toString() == "En Mantenimiento"){
+	  				atributos.put("ESTADO","0");
+				}
+	  			else {
+	  				atributos.put("ESTADO","Ambos");
+	  			}
+	  			//List<Estacion> lista = new ArrayList<Estacion>();
+	  			
+	  			atributos.put("NOMBRE",tbxNombre.getText());
+				controller.buscar(atributos);
+				
+				//System.out.println(lista.toString());
+			}catch(Exception e1) {
+				e1.printStackTrace();
+			}
+		});
+		
 		
 		btnCancelar.addActionListener(e -> dispose());
 		

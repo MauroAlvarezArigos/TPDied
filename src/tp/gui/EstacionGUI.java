@@ -30,7 +30,7 @@ public class EstacionGUI extends JFrame {
 	private JButton btnSalir;
 	private Byte flag;
 	
-	private EstacionController controller;
+	public EstacionController controller;
 	
 	public EstacionGUI() {
 		

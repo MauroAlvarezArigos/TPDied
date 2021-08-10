@@ -244,32 +244,22 @@ public class EstacionDaoSQL implements EstacionDao{
 	}
 	
 	private String prepararSentencia(Map<String, ?> atrib) {
-		String p1 = "SELECT * FROM ESTACION E "
-				+ "WHERE ID = ?";
+		String p1 = "SELECT * FROM ESTACION E ";
 		String values = "";
+		
 		for (Map.Entry<String,?> entry : atrib.entrySet()) {
 			
 			switch(entry.getKey()) {
 					
-				case "ID":
-				values = values.concat(" AND E.ID= "+entry.getValue());
-					break;
-				
 				case "NOMBRE":
-					values = values.concat(" AND "+"E."+entry.getKey()+" LIKE '%"+entry.getValue() + "%'");
+					values = values.concat("WHERE E.NOMBRE LIKE '%"+entry.getValue() + "%'");
 					break;
-				
-				case "HORARIO_APERTURA":
-					values = values.concat(" AND E.HORARIO_APERTURA = " +entry.getValue());
-						break;
-				
-				case "HORARIO_CIERRE":
-					values = values.concat(" AND E.HORARIO_CIERRE = " +entry.getValue());
-						break;
-						
-				case "ESTADO":
+										
+				case "ESTADO":{
+					if(entry.getValue() == "Ambos") break;
 					values = values.concat(" AND E.ESTADO = " + entry.getValue());
 					break;
+				}
 						
 				default:
 					if(entry!=null)
