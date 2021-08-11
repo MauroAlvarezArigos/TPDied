@@ -244,7 +244,7 @@ public class EstacionGUI extends JFrame {
 		
 		//Buttons Listeners
 		btnBuscar.addActionListener(e -> {
-			EstacionBusquedaGUI eb = new EstacionBusquedaGUI();
+			EstacionBusquedaGUI eb = new EstacionBusquedaGUI(this);
 			eb.setVisible(true);
 		});
 		
@@ -318,6 +318,9 @@ public class EstacionGUI extends JFrame {
 		this.setSize(500,300);	
 
 	}
+	public void update() {
+		SwingUtilities.updateComponentTreeUI(this);
+	}
 	
 	private void setInitialState() {
 		desactivarEdits();
@@ -372,6 +375,10 @@ public class EstacionGUI extends JFrame {
 	}
 	
 	//Getters and Setters
+	public EstacionController getController() {
+		return this.controller;
+	}
+	
 	public Byte getFlag() {
 		return this.flag;
 	}

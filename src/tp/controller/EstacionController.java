@@ -5,6 +5,8 @@ import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 import java.util.*;
 
+import javax.swing.JTextField;
+
 import tp.dominio.Estacion;
 import tp.gui.EstacionGUI;
 import tp.servicios.EstacionServicio;
@@ -104,6 +106,20 @@ public class EstacionController {
 		this.lista.addAll(estacionServicio.buscarTodas());
 		System.out.println("Resultado res "+lista);
 		return this.lista;
+	}
+	
+	public void cargarDatosEncontrados(Estacion es) {
+		System.out.println("Entre a cargar Datos");
+		
+		System.out.println(es.getNombre());
+		
+		estaciongui.getTbxNombre().setText(es.getNombre());
+		estaciongui.getTbxApertura().setText(es.getHorarioApertura().toString());
+		estaciongui.getTbxCierre().setText(es.getHorarioCierre().toString());
+
+		//Fijarse que cuando cargo el objeto en la tabla el estado sea un numero
+		estaciongui.getCbxEstado().setSelectedIndex(es.getEstado()); 
+
 	}
 	
 	public Timestamp getFormato(String s) {

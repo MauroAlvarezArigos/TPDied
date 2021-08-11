@@ -12,6 +12,8 @@ import java.util.Map;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 import tp.controller.EstacionController;
@@ -31,11 +33,15 @@ public class EstacionBusquedaGUI extends JFrame {
 	
 	private Object[][] tabla;
 	
-	
+	private Estacion estacion;
 	private EstacionController controller;
 	
-	public EstacionBusquedaGUI() {
-		controller = new EstacionController(null);
+	public EstacionBusquedaGUI(EstacionGUI es) {
+		controller = es.getController();
+		init();
+	}
+	
+	public void init() {
 		setResizable(false);
 				
 		JPanel panelFrame = new JPanel();
@@ -166,20 +172,34 @@ public class EstacionBusquedaGUI extends JFrame {
 			    scrollPane.setVisible(true);
 			    SwingUtilities.updateComponentTreeUI(panelFrame);
 				
+			    table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+				    @Override
+				    public void valueChanged(ListSelectionEvent event) {
+				        if (table.getSelectedRow() > -1) {
+				        	estacion = new Estacion();
+				    		estacion.setNombre("TU MAMA");
+				    		controller.cargarDatosEncontrados(estacion);
+				    		dispose();
+				        }
+				    }
+
+				});
+			    
 
 			}catch(Exception e1) {
 				e1.printStackTrace();
 			}
 		});
-		
+    	
 		
 
 		this.getContentPane().add(panelFrame);
 		this.pack();
 		this.setLocationRelativeTo(null);
-		this.setSize(526,248);	
-		
-
+		this.setSize(526,248);
 	}
 	
+	public Estacion getEstacion() {
+		return this.estacion;
+	}
 }
