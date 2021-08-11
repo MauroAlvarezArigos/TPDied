@@ -13,6 +13,10 @@ public class Ruta {
 	long[] datos = new long[4]; // 0 tiempo, 1 dist, 2 costo, 3 flow;
 	
 	//Constructor
+	public Ruta() {
+		super();
+	}
+	
 	public Ruta(Estacion origen, Estacion destino, Integer distancia, Integer tiempoViaje, Integer maxPasajeros,
 			Boolean estado, Integer costo, Integer orden) {
 		super();
@@ -44,6 +48,7 @@ public class Ruta {
 		this.datos[3]=maxPasajeros;
 	}
 
+	
 	//Getters and Setters
 	public Linea getId() {
 		return id;

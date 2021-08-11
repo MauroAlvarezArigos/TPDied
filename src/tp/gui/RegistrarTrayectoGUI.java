@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 
 import javax.swing.*;
 
+import tp.Excepciones.DatosObligatoriosException;
 import tp.controller.BoletoController;
 import tp.controller.TrayectoController;
 import tp.dominio.Estacion;
@@ -222,6 +223,16 @@ public class RegistrarTrayectoGUI extends JFrame {
 		gbc_agregarItem.gridy = 5;
 		panel.add(agregarItem, gbc_agregarItem);
 		
+		agregarItem.addActionListener(e->{
+			try{
+				controller.agregarItem();
+			}
+			catch(DatosObligatoriosException e1) {
+				e1.printStackTrace();
+				this.mostrarError("Error al cargar", e1.getMensaje());
+			}
+		});
+		
 		JButton guardar = new JButton("Guardar");
 		GridBagConstraints gbc_guardar = new GridBagConstraints();
 		gbc_guardar.anchor = GridBagConstraints.LINE_END;
@@ -235,7 +246,9 @@ public class RegistrarTrayectoGUI extends JFrame {
 		gbc_cancelar.gridx = 4;
 		gbc_cancelar.gridy = 6;
 		panel.add(cancelar, gbc_cancelar);
-		
+		guardar.addActionListener(e->{
+			controller.imprimir();
+		});
 		cancelar.addActionListener(e -> dispose());
 		
 		
@@ -245,7 +258,13 @@ public class RegistrarTrayectoGUI extends JFrame {
 		this.setSize(600,300);
 		
 		
-	} 
+	}
+	public void mostrarError(String titulo,String detalle) {
+		JFrame padre= (JFrame) SwingUtilities.getWindowAncestor(this);
+		JOptionPane.showMessageDialog(padre,
+			    detalle,titulo,
+			    JOptionPane.ERROR_MESSAGE);
+	}
 
 	public JComboBox<Estacion> getCbxOrigen() {
 		return cbxOrigen;
@@ -259,4 +278,38 @@ public class RegistrarTrayectoGUI extends JFrame {
 	public void setCbxDestino(JComboBox<Estacion> cbxDestino) {
 		this.cbxDestino = cbxDestino;
 	}
+
+	public JTextField getTbxDistancia() {
+		return tbxDistancia;
+	}
+
+	public void setTbxDistancia(JTextField tbxDistancia) {
+		this.tbxDistancia = tbxDistancia;
+	}
+
+	public JTextField getTbxDurViaje() {
+		return tbxDurViaje;
+	}
+
+	public void setTbxDurViaje(JTextField tbxDurViaje) {
+		this.tbxDurViaje = tbxDurViaje;
+	}
+
+	public JTextField getTbxCMPasajeros() {
+		return tbxCMPasajeros;
+	}
+
+	public void setTbxCMPasajeros(JTextField tbxCMPasajeros) {
+		this.tbxCMPasajeros = tbxCMPasajeros;
+	}
+
+	public JTextField getTbxCosto() {
+		return tbxCosto;
+	}
+
+	public void setTbxCosto(JTextField tbxCosto) {
+		this.tbxCosto = tbxCosto;
+	}
+	
+	
 }
