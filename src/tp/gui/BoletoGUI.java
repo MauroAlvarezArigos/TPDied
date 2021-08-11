@@ -1,10 +1,15 @@
 package tp.gui;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.TitledBorder;
+import javax.swing.table.DefaultTableModel;
 
 import tp.Excepciones.DatosObligatoriosException;
 import tp.controller.BoletoController;
@@ -236,6 +241,7 @@ public class BoletoGUI extends JFrame {
 		gbc_btnCalcular.gridx = 0;
 		gbc_btnCalcular.gridy = 3;
 		panelEstacion.add(btnCalcular, gbc_btnCalcular);
+		JScrollPane scrollPane = new JScrollPane();
 		btnCalcular.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){  
 						long INF = 100000009;
@@ -248,22 +254,47 @@ public class BoletoGUI extends JFrame {
 						ArrayList<ArrayList<Ruta>> grafo = auxg.getGrafo();
 						Pair val;
 						Boolean posible = false;
+						Dijkstra dijk = new Dijkstra();
+						ArrayList<String> caminoUsado;
 						if(selected == "El más rápido") {
-							val = Dijkstra.getDijkstra(estOrigen.getId(), estDestino.getId(), 0, grafo, grafo.size());
+							val = dijk.getDijkstra(estOrigen.getId(), estDestino.getId(), 0, grafo, grafo.size());
 							if(val.getVal() < INF) lblValor.setText("Tiempo: " + val.getVal());
 							else lblValor.setText("Costo: inalcanzable");
 						}
 						else if(selected == "El de menor distancia") {
-							val = Dijkstra.getDijkstra(estOrigen.getId(), estDestino.getId(), 1, grafo, grafo.size());
+							val = dijk.getDijkstra(estOrigen.getId(), estDestino.getId(), 1, grafo, grafo.size());
 							if(val.getVal() < INF) lblValor.setText("Distancia: " + val.getVal());
 							else lblValor.setText("Costo: inalcanzable");
 						}
 						else {
-							val = Dijkstra.getDijkstra(estOrigen.getId(), estDestino.getId(), 2, grafo, grafo.size());
+							val = dijk.getDijkstra(estOrigen.getId(), estDestino.getId(), 2, grafo, grafo.size());
 							if(val.getVal() < INF) lblValor.setText("Costo: " + val.getVal());
 							else lblValor.setText("Costo: inalcanzable");
 						}
 						if(val.getCost() < INF) {
+							caminoUsado = dijk.getCamino();
+							
+							//
+							
+							
+							JPanel panelFrame = new JPanel();
+							panelFrame.setLayout(new BorderLayout());
+							int tam = caminoUsado.size();
+							System.out.println("tam " + tam);
+							Object[][] tabla = new Object[tam][1];
+							for(int i=0; i<tam; i++) tabla[i][0] = caminoUsado.get(i);
+							String[] columnNames = {"Recorrido"};
+							DefaultTableModel dtm = new DefaultTableModel(tabla, columnNames);
+						    final JTable table = new JTable(dtm);
+						    table.setPreferredScrollableViewportSize(new Dimension(3333, 330));
+						    scrollPane.setViewportView(table);
+						    panelFrame.add(scrollPane, BorderLayout.WEST);
+						    scrollPane.setVisible(true);
+						    SwingUtilities.updateComponentTreeUI(panelFrame);
+						    
+						    
+							//
+							
 							posible=true;
 							costo = val.getCost();
 							lblCosto.setText("Precio: " + val.getCost()); //PONE ACA LO QUE CALCULASTE

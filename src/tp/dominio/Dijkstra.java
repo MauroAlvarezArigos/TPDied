@@ -6,8 +6,9 @@ import java.util.PriorityQueue;
 
 
 public class Dijkstra {
-	
-	public static Pair getDijkstra(int src, int to, int tipo, ArrayList<ArrayList<Ruta>> grafo, int N) {
+	private static ArrayList<String> caminoUsado;
+	public Pair getDijkstra(int src, int to, int tipo, ArrayList<ArrayList<Ruta>> grafo, int N) {
+
 		long INF = 100000009; // me gustaria que sea const, averiguar si se puede. no me deja static
 		long[] dist = new long[N];
 		Ruta[] dad = new Ruta[N];
@@ -42,11 +43,17 @@ public class Dijkstra {
 			}
 			//tengo que imprimir la ruta al reves
 			Collections.reverse(camino);
-			//System.out.println("Imprimo el camino de " + src + " to " + to);
-			for(Ruta r : camino) {
-				costoTotal += r.getCosto();
-				//System.out.println(r.getOrigen().getId() + " " + r.getDestino().getId());
+			for(Ruta r: camino) {
+				System.out.println("TRAMO " + r.getOrigen().getNombre() + " " + r.getDestino().getNombre());
 			}
+			for(Ruta r : camino) costoTotal += r.getCosto();
+			caminoUsado = new ArrayList<String>();
+			String last = "";
+			for(Ruta r : camino) {
+				caminoUsado.add(r.getOrigen().getNombre());
+				last = r.getDestino().getNombre();
+			}
+			caminoUsado.add(last);
 			//System.out.println("El costo total es " + costoTotal);
 		}
 		else {
@@ -56,23 +63,27 @@ public class Dijkstra {
 		return new Pair(dist[to], costoTotal);
 	}
 	
+	public  ArrayList<String> getCamino() {
+		return caminoUsado;
+	}
+	
 	public static void main(String[] args) {
 		
 		GenerarGrafo aux = new GenerarGrafo();
 		ArrayList<ArrayList<Ruta>> grafo = aux.getGrafo();
 		int N = grafo.size();
 		
-		for(int i=0; i<N; i++) {
-			if(grafo.get(i).size() > 0) {
-				System.out.println("Dijkstra para el nodo (por tiempo) " + i);
-				for(int j=0; j<N;j++) if(j!=i) System.out.println("To " + j + " dist " + getDijkstra(i,j,0,grafo,N));
-				System.out.println("Dijkstra para el nodo (por dist) " + i);
-				for(int j=0; j<N;j++) if(j!=i) System.out.println("To " + j + " dist " + getDijkstra(i,j,1,grafo,N));
-				System.out.println("Dijkstra para el nodo (por costo) " + i);
-				for(int j=0; j<N;j++) if(j!=i) System.out.println("To " + j + " dist " + getDijkstra(i,j,2,grafo,N));
-				break;
-			}
-		}
+//		for(int i=0; i<N; i++) {
+//			if(grafo.get(i).size() > 0) {
+//				System.out.println("Dijkstra para el nodo (por tiempo) " + i);
+//				for(int j=0; j<N;j++) if(j!=i) System.out.println("To " + j + " dist " + getDijkstra(i,j,0,grafo,N));
+//				System.out.println("Dijkstra para el nodo (por dist) " + i);
+//				for(int j=0; j<N;j++) if(j!=i) System.out.println("To " + j + " dist " + getDijkstra(i,j,1,grafo,N));
+//				System.out.println("Dijkstra para el nodo (por costo) " + i);
+//				for(int j=0; j<N;j++) if(j!=i) System.out.println("To " + j + " dist " + getDijkstra(i,j,2,grafo,N));
+//				break;
+//			}
+//		}
 //		
 	}
 }
