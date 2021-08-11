@@ -41,7 +41,7 @@ import tp.modelosTabla.EstacionBusquedaTableModel;
 public class LineaBusquedaGUI extends JFrame {
 	private JTextField tbxNombre;
 	private JTextField tbxColor;
-	private JTable resultados;
+
 	private LineaController controller;
 	private Linea linea;
 	
@@ -73,18 +73,15 @@ public class LineaBusquedaGUI extends JFrame {
 		lblBuscarEstacion.setHorizontalAlignment(SwingConstants.CENTER);
 		lblBuscarEstacion.setFont(new Font("Tahoma", Font.PLAIN, 22));
 			
-		ButtonGroup parametros = new ButtonGroup();
 		
-		JRadioButton rdbtnNombre = new JRadioButton("Nombre:");
-		rdbtnNombre.setSelected(true);
-		GridBagConstraints gbc_rdbtnNombre = new GridBagConstraints();
-		gbc_rdbtnNombre.anchor = GridBagConstraints.EAST;
-		gbc_rdbtnNombre.insets = new Insets(0, 0, 5, 5);
-		gbc_rdbtnNombre.gridx = 0;
-		gbc_rdbtnNombre.gridy = 0;
-		parametrosBusqueda.add(rdbtnNombre, gbc_rdbtnNombre);
+		JLabel lblNombre = new JLabel("Nombre:");
+		GridBagConstraints gbc_lblNombre = new GridBagConstraints();
+		gbc_lblNombre.anchor = GridBagConstraints.EAST;
+		gbc_lblNombre.insets = new Insets(0, 0, 5, 5);
+		gbc_lblNombre.gridx = 0;
+		gbc_lblNombre.gridy = 0;
+		parametrosBusqueda.add(lblNombre, gbc_lblNombre);
 		
-		parametros.add(rdbtnNombre);
 		
 		tbxNombre = new JTextField();
 		GridBagConstraints gbc_tbxNombre = new GridBagConstraints();
@@ -96,15 +93,14 @@ public class LineaBusquedaGUI extends JFrame {
 		gbc_tbxNombre.gridy = 0;
 		parametrosBusqueda.add(tbxNombre, gbc_tbxNombre);
 		
-		JRadioButton rdbtnColor = new JRadioButton("Color:");
-		GridBagConstraints gbc_rdbtnColor = new GridBagConstraints();
-		gbc_rdbtnColor.anchor = GridBagConstraints.EAST;
-		gbc_rdbtnColor.insets = new Insets(0, 0, 5, 5);
-		gbc_rdbtnColor.gridx = 0;
-		gbc_rdbtnColor.gridy = 1;
-		parametrosBusqueda.add(rdbtnColor, gbc_rdbtnColor);
+		JLabel lblColor = new JLabel("Color:");
+		GridBagConstraints gbc_lblColor = new GridBagConstraints();
+		gbc_lblColor.anchor = GridBagConstraints.EAST;
+		gbc_lblColor.insets = new Insets(0, 0, 5, 5);
+		gbc_lblColor.gridx = 0;
+		gbc_lblColor.gridy = 1;
+		parametrosBusqueda.add(lblColor, gbc_lblColor);
 		
-		parametros.add(rdbtnColor);
 		
 		tbxColor = new JTextField();
 		GridBagConstraints gbc_tbxColor = new GridBagConstraints();
@@ -116,18 +112,17 @@ public class LineaBusquedaGUI extends JFrame {
 		gbc_tbxColor.gridy = 1;
 		parametrosBusqueda.add(tbxColor, gbc_tbxColor);
 		
-		JRadioButton rdbtnEstado = new JRadioButton("Estado:");
-		GridBagConstraints gbc_rdbtnEstado = new GridBagConstraints();
-		gbc_rdbtnEstado.anchor = GridBagConstraints.EAST;
-		gbc_rdbtnEstado.insets = new Insets(0, 0, 5, 5);
-		gbc_rdbtnEstado.gridx = 0;
-		gbc_rdbtnEstado.gridy = 2;
-		parametrosBusqueda.add(rdbtnEstado, gbc_rdbtnEstado);
-		
-		parametros.add(rdbtnEstado);
+		JLabel lblEstado = new JLabel("Estado:");
+		GridBagConstraints gbc_lblEstado = new GridBagConstraints();
+		gbc_lblEstado.anchor = GridBagConstraints.EAST;
+		gbc_lblEstado.insets = new Insets(0, 0, 5, 5);
+		gbc_lblEstado.gridx = 0;
+		gbc_lblEstado.gridy = 2;
+		parametrosBusqueda.add(lblEstado, gbc_lblEstado);
 				
 		JComboBox<String> cbxEstado = new JComboBox<String>();
 		GridBagConstraints gbc_cbxEstado = new GridBagConstraints();
+		cbxEstado.addItem("Ambos");
 		cbxEstado.addItem("Activa");
 		cbxEstado.addItem("No Activa");
 		gbc_cbxEstado.gridwidth = 2;
@@ -158,20 +153,9 @@ public class LineaBusquedaGUI extends JFrame {
 		gbc_btnCancelar.gridy = 3;
 		parametrosBusqueda.add(btnCancelar, gbc_btnCancelar);
 		
-		/// CREAR TABLA
-		EstacionBusquedaTableModel modelo = new EstacionBusquedaTableModel();
-		resultados = new JTable(modelo);
-		resultados.setBorder(new LineBorder(new Color(0, 0, 0)));
-		resultados.setPreferredScrollableViewportSize(new Dimension(500,70));
-	
-//		JScrollPane scrollPane = new JScrollPane(resultados);
-//		scrollPane.setBorder(resultadosBorder);		
-		///
-		
 		panelFrame.add(lblBuscarEstacion, BorderLayout.PAGE_START);
 		panelFrame.add(parametrosBusqueda, BorderLayout.LINE_START);
-//		panelFrame.add(scrollPane, BorderLayout.CENTER);
-		
+	
 		this.getContentPane().add(panelFrame);
 		this.pack();
 		this.setLocationRelativeTo(null);
@@ -201,7 +185,7 @@ public class LineaBusquedaGUI extends JFrame {
 				for(int i=0; i<tam; i++) {
 					tabla[i][0] = ret.get(i).getNombre();
 					tabla[i][1] = ret.get(i).getColor();
-					tabla[i][2] = ret.get(i).getEstado();
+					tabla[i][2] = ret.get(i).getEstado() == 1 ? "Activa":"No Activa";
 				}
 				String[] columnNames = {"Nombre", "Color", "Estado"};
 				DefaultTableModel dtm = new DefaultTableModel(tabla, columnNames);
@@ -229,6 +213,8 @@ public class LineaBusquedaGUI extends JFrame {
 				e1.printStackTrace();
 			}
 		});
+		
+		btnCancelar.addActionListener(e -> dispose());
 	}
 
 

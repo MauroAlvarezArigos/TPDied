@@ -70,8 +70,6 @@ public class LineaController {
 			altaLinea();
 			System.out.println("INICIADO "+linea.toString());
 			lineaServicio.crearLinea(linea);
-			this.lista.clear();
-			this.lista.addAll(lineaServicio.buscarTodas());
 			return linea;
 		}catch(DatosObligatoriosException e) {
 			System.out.println(e.getMensaje());
