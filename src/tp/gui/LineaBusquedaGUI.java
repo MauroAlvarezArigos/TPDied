@@ -45,7 +45,7 @@ public class LineaBusquedaGUI extends JFrame {
 	private LineaController controller;
 	private Linea linea;
 	
-	public LineaBusquedaGUI(LineaGUI lin ) {
+	public LineaBusquedaGUI(LineaGUI lin) {
 		controller = lin.getController();
 		init();
 	}
