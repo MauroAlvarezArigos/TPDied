@@ -21,10 +21,10 @@ public class RegistrarTrayectoGUI extends JFrame {
 	private JTextField tbxDurViaje;
 	private JTextField tbxCMPasajeros;
 	private JTextField tbxCosto;
-	
-	JComboBox<Estacion> cbxDestino;
-	JComboBox<Estacion> cbxOrigen;
-	TrayectoController controller;
+	private JComboBox<String> cbxEstado;
+	private JComboBox<Estacion> cbxDestino;
+	private JComboBox<Estacion> cbxOrigen;
+	private TrayectoController controller;
 	
 	public RegistrarTrayectoGUI() {
 		
@@ -203,7 +203,7 @@ public class RegistrarTrayectoGUI extends JFrame {
 		gbc_lblEstado.gridy = 4;
 		panel.add(lblEstado, gbc_lblEstado);
 		
-		JComboBox<String> cbxEstado = new JComboBox<String>();
+		cbxEstado = new JComboBox<String>();
 		GridBagConstraints gbc_cbxEstado = new GridBagConstraints();
 		gbc_cbxEstado.anchor = GridBagConstraints.WEST;
 		gbc_cbxEstado.insets = new Insets(0, 0, 5, 5);
@@ -239,6 +239,15 @@ public class RegistrarTrayectoGUI extends JFrame {
 		gbc_guardar.gridx = 3;
 		gbc_guardar.gridy = 6;
 		panel.add(guardar, gbc_guardar);
+		guardar.addActionListener(e->{
+			try {
+				controller.guardar();
+			}
+			catch(Exception e2) {
+				e2.printStackTrace();
+				this.mostrarError("Error al guardar", "Fallo al guardar");
+			};
+		});
 	
 		JButton cancelar = new JButton("Cancelar");
 		GridBagConstraints gbc_cancelar = new GridBagConstraints();
@@ -309,6 +318,12 @@ public class RegistrarTrayectoGUI extends JFrame {
 
 	public void setTbxCosto(JTextField tbxCosto) {
 		this.tbxCosto = tbxCosto;
+	}
+	public JComboBox<String> getCbxEstado() {
+		return cbxEstado;
+	}
+	public void setCbxEstado(JComboBox<String> cbxEstado) {
+		this.cbxEstado = cbxEstado;
 	}
 	
 	

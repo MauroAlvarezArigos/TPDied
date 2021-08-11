@@ -15,6 +15,7 @@ import tp.gui.BoletoGUI;
 import tp.gui.RegistrarTrayectoGUI;
 import tp.servicios.BoletoServicio;
 import tp.servicios.EstacionServicio;
+import tp.servicios.RutaServicio;
 
 public class TrayectoController {
 	private List<Estacion> lista;
@@ -25,6 +26,7 @@ public class TrayectoController {
 	private Set<Integer> usadas;
 	private Integer orden = 0;
 	private int lastAdded = -1;
+	private RutaServicio rutaservicio;
 	
 	public TrayectoController(RegistrarTrayectoGUI t) {
 		this.estacionServicio = new EstacionServicio();
@@ -33,6 +35,7 @@ public class TrayectoController {
 		this.rutas = new ArrayList<Ruta>();
 		this.r = new Ruta();
 		this.usadas = new HashSet<Integer>();
+		this.rutaservicio = new RutaServicio();
 	}
 	
 	public void cargarEstaciones(){
@@ -102,6 +105,7 @@ public class TrayectoController {
 				orden++;
 			}
 			else throw new DatosObligatoriosException("Origen es igual a destino", "El origen tiene que ser distinto del Destino");
+			this.r.setEstado(this.registrartrayectogui.getCbxEstado().getSelectedItem().equals("Activa")? true : false);
 			
 		}
 		catch(DatosObligatoriosException e){
@@ -129,5 +133,16 @@ public class TrayectoController {
 		for(Ruta r : rutas) {
 			System.out.println(r.getOrigen().getNombre() + " " + r.getDestino().getNombre());
 		}
+	}
+	public void guardar() throws Exception {
+			for(Ruta r : rutas) {
+				try {
+					rutaservicio.crearRuta(r);
+				}
+				catch(Exception e){
+					 e.printStackTrace();
+					 throw e;
+				}
+			}
 	}
 }

@@ -35,11 +35,12 @@ CREATE TABLE Mantenimiento(
 );
 
 CREATE TABLE Ruta(
-	origen int;
-	destino int;
+	origen int,
+	destino int,
 	distancia int,
 	tiempoViaje int,
 	maxPasajeros int,
 	estado varchar(1),
-	costo int
+	costo int,
+	orden int
 );
