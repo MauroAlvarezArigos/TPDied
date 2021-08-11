@@ -76,11 +76,11 @@ public class GeneradorRutasRandom {
 		for(int i=0; i<N; i++) grafo.add(new ArrayList<Ruta>());
 		 
 		for(Linea l : lineas) {
-			if(l.getEstado()) { // si la linea esta activa
+			if(l.getEstado2()) { // si la linea esta activa
 				ArrayList<Ruta> recorrido = l.getRecorrido();
 				Boolean activas = true; // rutas y estaciones activas?
 				for(Ruta r : recorrido) {
-					activas&=r.getEstado();
+					activas&=r.getEstado2();
 					activas&=r.getOrigen().getEstado2();
 					activas&=r.getDestino().getEstado2();
 				}
