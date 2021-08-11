@@ -219,11 +219,19 @@ public class RegistrarTrayectoGUI extends JFrame {
 		gbc_agregarItem.insets = new Insets(0, 0, 0, 5);
 		gbc_agregarItem.anchor = GridBagConstraints.EAST;
 		gbc_agregarItem.gridx = 3;
-		gbc_agregarItem.gridy = 6;
+		gbc_agregarItem.gridy = 5;
 		panel.add(agregarItem, gbc_agregarItem);
 		
+		JButton guardar = new JButton("Guardar");
+		GridBagConstraints gbc_guardar = new GridBagConstraints();
+		gbc_guardar.anchor = GridBagConstraints.LINE_END;
+		gbc_guardar.gridx = 3;
+		gbc_guardar.gridy = 6;
+		panel.add(guardar, gbc_guardar);
+	
 		JButton cancelar = new JButton("Cancelar");
 		GridBagConstraints gbc_cancelar = new GridBagConstraints();
+		gbc_cancelar.anchor = GridBagConstraints.LINE_START;
 		gbc_cancelar.gridx = 4;
 		gbc_cancelar.gridy = 6;
 		panel.add(cancelar, gbc_cancelar);
