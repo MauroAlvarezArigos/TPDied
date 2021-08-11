@@ -73,11 +73,9 @@ public class BoletoController {
 		JComboBox<Estacion> cbxOrigen = new JComboBox<Estacion>();
 		JComboBox<Estacion> cbxDestino = new JComboBox<Estacion>();
 		
-		for(Estacion e : lista) System.out.println(e.toString());
 		for(Estacion e : lista) cbxOrigen.addItem(e);
 		for(Estacion e : lista) cbxDestino.addItem(e);
 		
-		System.out.println(cbxOrigen.toString());
 		
 		boletogui.setCbxOrigen(cbxOrigen);
 		boletogui.setCbxDestino(cbxDestino);

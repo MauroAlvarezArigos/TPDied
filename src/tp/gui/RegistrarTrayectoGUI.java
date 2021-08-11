@@ -3,10 +3,17 @@ package tp.gui;
 import java.awt.BorderLayout;
 
 import javax.swing.*;
+
+import tp.controller.BoletoController;
+import tp.controller.TrayectoController;
+import tp.dominio.Estacion;
+
 import java.awt.Font;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class RegistrarTrayectoGUI extends JFrame {
 	private JTextField tbxDistancia;
@@ -14,7 +21,14 @@ public class RegistrarTrayectoGUI extends JFrame {
 	private JTextField tbxCMPasajeros;
 	private JTextField tbxCosto;
 	
+	JComboBox<Estacion> cbxDestino;
+	JComboBox<Estacion> cbxOrigen;
+	TrayectoController controller;
+	
 	public RegistrarTrayectoGUI() {
+		
+		this.controller = new TrayectoController(this);
+		controller.cargarEstaciones();
 
 		JPanel panelFrame = new JPanel();
 		panelFrame.setLayout(new BorderLayout());
@@ -45,7 +59,6 @@ public class RegistrarTrayectoGUI extends JFrame {
 		gbc_lblOrigen.gridy = 1;
 		panel.add(lblOrigen, gbc_lblOrigen);
 		
-		JComboBox<String> cbxOrigen = new JComboBox<String>();
 		GridBagConstraints gbc_cbxOrigen = new GridBagConstraints();
 		gbc_cbxOrigen.insets = new Insets(0, 0, 5, 5);
 		gbc_cbxOrigen.fill = GridBagConstraints.HORIZONTAL;
@@ -69,6 +82,17 @@ public class RegistrarTrayectoGUI extends JFrame {
 		gbc_tbxDurViaje.gridy = 1;
 		panel.add(tbxDurViaje, gbc_tbxDurViaje);
 		tbxDurViaje.setColumns(10);
+		tbxDurViaje.addKeyListener(new KeyAdapter() {
+		    public void keyTyped(KeyEvent e) {
+		      char c = e.getKeyChar();
+		      if (!((c >= '0') && (c <= '9') ||
+		         (c == KeyEvent.VK_BACK_SPACE) ||
+		         (c == KeyEvent.VK_DELETE))) {
+		        getToolkit().beep();
+		        e.consume();
+		      }
+		    }
+		  });
 		
 		JLabel lblDestino = new JLabel("Destino:");
 		GridBagConstraints gbc_lblDestino = new GridBagConstraints();
@@ -78,7 +102,7 @@ public class RegistrarTrayectoGUI extends JFrame {
 		gbc_lblDestino.gridy = 2;
 		panel.add(lblDestino, gbc_lblDestino);
 		
-		JComboBox<String> cbxDestino = new JComboBox<String>();
+		
 		GridBagConstraints gbc_cbxDestino = new GridBagConstraints();
 		gbc_cbxDestino.insets = new Insets(0, 0, 5, 5);
 		gbc_cbxDestino.fill = GridBagConstraints.HORIZONTAL;
@@ -102,6 +126,17 @@ public class RegistrarTrayectoGUI extends JFrame {
 		gbc_tbxCMPasajeros.gridx = 4;
 		gbc_tbxCMPasajeros.gridy = 2;
 		panel.add(tbxCMPasajeros, gbc_tbxCMPasajeros);
+		tbxCMPasajeros.addKeyListener(new KeyAdapter() {
+		    public void keyTyped(KeyEvent e) {
+		      char c = e.getKeyChar();
+		      if (!((c >= '0') && (c <= '9') ||
+		         (c == KeyEvent.VK_BACK_SPACE) ||
+		         (c == KeyEvent.VK_DELETE))) {
+		        getToolkit().beep();
+		        e.consume();
+		      }
+		    }
+		  });
 		
 		JLabel lblDistancia = new JLabel("Distancia");
 		GridBagConstraints gbc_lblDistancia = new GridBagConstraints();
@@ -119,6 +154,17 @@ public class RegistrarTrayectoGUI extends JFrame {
 		gbc_tbxDistancia.gridy = 3;
 		panel.add(tbxDistancia, gbc_tbxDistancia);
 		tbxDistancia.setColumns(10);
+		tbxDistancia.addKeyListener(new KeyAdapter() {
+		    public void keyTyped(KeyEvent e) {
+		      char c = e.getKeyChar();
+		      if (!((c >= '0') && (c <= '9') ||
+		         (c == KeyEvent.VK_BACK_SPACE) ||
+		         (c == KeyEvent.VK_DELETE))) {
+		        getToolkit().beep();
+		        e.consume();
+		      }
+		    }
+		  });
 		
 		JLabel lblCosto = new JLabel("Costo ($):");
 		GridBagConstraints gbc_lblCosto = new GridBagConstraints();
@@ -136,6 +182,17 @@ public class RegistrarTrayectoGUI extends JFrame {
 		gbc_tbxCosto.gridx = 4;
 		gbc_tbxCosto.gridy = 3;
 		panel.add(tbxCosto, gbc_tbxCosto);
+		tbxCosto.addKeyListener(new KeyAdapter() {
+		    public void keyTyped(KeyEvent e) {
+		      char c = e.getKeyChar();
+		      if (!((c >= '0') && (c <= '9') ||
+		         (c == KeyEvent.VK_BACK_SPACE) ||
+		         (c == KeyEvent.VK_DELETE))) {
+		        getToolkit().beep();
+		        e.consume();
+		      }
+		    }
+		  });
 		
 		JLabel lblEstado = new JLabel("Estado:");
 		GridBagConstraints gbc_lblEstado = new GridBagConstraints();
@@ -180,7 +237,18 @@ public class RegistrarTrayectoGUI extends JFrame {
 		this.setSize(600,300);
 		
 		
-		
 	} 
 
+	public JComboBox<Estacion> getCbxOrigen() {
+		return cbxOrigen;
+	}
+	public void setCbxOrigen(JComboBox<Estacion> cbxOrigen) {
+		this.cbxOrigen = cbxOrigen;
+	}
+	public JComboBox<Estacion> getCbxDestino() {
+		return cbxDestino;
+	}
+	public void setCbxDestino(JComboBox<Estacion> cbxDestino) {
+		this.cbxDestino = cbxDestino;
+	}
 }
