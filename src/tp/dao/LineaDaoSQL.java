@@ -28,7 +28,7 @@ public class LineaDaoSQL implements LineaDao{
 			+ " WHERE NOMBRE = ? ";
 	
 	private static final String UPDATE_LINEA =
-			"UPDATE LINEA SET NOMBRE = ?, COLOR = ?, ESTADO = ?,"
+			"UPDATE LINEA SET NOMBRE = ?, COLOR = ?, ESTADO = ? "
 			+ " WHERE NOMBRE = ? ";
 	
 	private static final String DELETE_LINEA =
@@ -77,7 +77,7 @@ public class LineaDaoSQL implements LineaDao{
 	}
 	
 	@Override
-	public Linea modify(Linea l) {
+	public Linea modify(Linea l, String pk) {
 		Connection conn = DB.getConexion();
 		PreparedStatement pstmt = null;
 		System.out.println("Entre a Update");
@@ -90,7 +90,7 @@ public class LineaDaoSQL implements LineaDao{
 			pstmt.setString(1, l.getNombre());
 			pstmt.setString(2, l.getColor());
 			pstmt.setString(3, Integer.toBinaryString(l.getEstado()));
-			//pstmt.setArray(4, l.getRecorrido());
+			pstmt.setString(4, pk);
 			
 			System.out.println("Psmt: "+pstmt.toString());
 			pstmt.executeUpdate();
@@ -102,6 +102,7 @@ public class LineaDaoSQL implements LineaDao{
 			try {
 				if(pstmt!=null) pstmt.close();
 				if(conn!=null) conn.close();
+				System.out.println("Conexion cerrada");
 			}
 			catch(SQLException e) {
 				e.printStackTrace();
@@ -111,30 +112,6 @@ public class LineaDaoSQL implements LineaDao{
 		return null;
 	}
 	
-	/*private boolean checkNull(String nombre, Connection conn) {
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		Boolean ret = false;
-		try {
-			pstmt = conn.prepareStatement(SELECT_LINEA, ResultSet.TYPE_SCROLL_INSENSITIVE,	ResultSet.CONCUR_UPDATABLE);
-			pstmt.setString(1,nombre);
-			rs = pstmt.executeQuery();
-			ret = rs.first();
-		}
-		catch(SQLException e) {
-			e.printStackTrace();
-		}
-		finally {
-			try {
-				if(pstmt!=null) pstmt.close();
-			}
-			catch(SQLException e) {
-				e.printStackTrace();
-			}
-		}
-		return ret;
-	}*/
-
 	@Override
 	public void borrarLinea(Linea l) {
 		Connection conn = DB.getConexion();

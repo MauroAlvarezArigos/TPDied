@@ -9,7 +9,7 @@ import tp.dominio.Linea;
 public interface LineaDao {
 	
 	public Linea insert(Linea l);
-	public Linea modify(Linea l); 
+	public Linea modify(Linea l, String pk); 
 	public void borrarLinea(Linea l);
 	public Linea buscarLinea (String nombre);
 	public List<Linea> buscarTodas();

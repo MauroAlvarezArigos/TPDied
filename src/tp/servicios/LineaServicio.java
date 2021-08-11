@@ -19,8 +19,8 @@ private LineaDao lineadao;
 	public Linea crearLinea(Linea l) {
 		return this.lineadao.insert(l);
 	}
-	public Linea modificarLinea(Linea l) {
-		return this.lineadao.modify(l);
+	public Linea modificarLinea(Linea l, String pk) {
+		return this.lineadao.modify(l,pk);
 	}
 	
 	public Linea buscarLinea(Linea l) {

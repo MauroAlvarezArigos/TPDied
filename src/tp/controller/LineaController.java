@@ -21,6 +21,7 @@ public class LineaController {
 	private LineaGUI lineagui;
 	private Linea linea;
 	private List<Linea> lista;
+	private String pk;
 	
 	public LineaController(LineaGUI lg) {
 		this.lineaServicio = new LineaServicio();
@@ -49,28 +50,14 @@ public class LineaController {
 		}
 	}
 	
-	public Linea modificarLinea() throws DatosObligatoriosException{
-		try {
-			altaLinea();
-			System.out.println("MODIFICADO "+ linea.toString());
-			lineaServicio.crearLinea(linea);
-			this.lista.clear();
-			this.lista.addAll(lineaServicio.buscarTodas());
-			return linea;
-		}catch(DatosObligatoriosException e) {
-			System.out.println(e.getMensaje());
-			throw e;
-		}
-	}
-	
-	
+		
 	public Linea modificar() throws DatosObligatoriosException{
 		try {
+			pk = linea.getNombre();
+			System.out.println("pk: "+pk);
 			altaLinea();
 			System.out.println("Modificado "+ linea.toString());
-			lineaServicio.modificarLinea(linea);
-			this.lista.clear();
-			this.lista.addAll(lineaServicio.buscarTodas());
+			lineaServicio.modificarLinea(linea, pk);
 			return linea;
 		}catch(DatosObligatoriosException e) {
 			System.out.println(e.getMensaje());
@@ -92,8 +79,8 @@ public class LineaController {
 		}
 	}
 	
-	public void eliminar(Linea l) {
-		this.lineaServicio.borrarLinea(l);		
+	public void eliminar() {
+		this.lineaServicio.borrarLinea(linea);		
 	}
 	
 	public List<Linea> buscar(Map<String, ?> datos) {
@@ -106,10 +93,12 @@ public class LineaController {
 		System.out.println("Entre a cargar Datos");
 		System.out.println(lin.getNombre());
 		
+		linea = lin;
+		
 		lineagui.getTbxNombre().setText(lin.getNombre());
 		lineagui.getTbxColor().setText(lin.getColor());
 		lineagui.getCbxEstado().setSelectedIndex(lin.getEstado() == 1 ? 0 : 1); 
-
+		lineagui.setModifyDeleteState();
 	}
 	
 

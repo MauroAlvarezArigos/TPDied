@@ -267,9 +267,10 @@ public class EstacionGUI extends JFrame {
 			int n = JOptionPane.showConfirmDialog(this, "¿Estas seguro de eliminar la estación?", "CUIDADO!", JOptionPane.YES_NO_OPTION);
 			if(n == 0) {
 				controller.eliminar();
-				setInitialState();
 				System.out.println("Eliminando elemento de la base de datos...");
 			}
+			limpiarCampos();
+			setInitialState();
 		});
 		
 		btnGuardar.addActionListener(e -> {

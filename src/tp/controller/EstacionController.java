@@ -7,6 +7,7 @@ import java.util.*;
 
 import javax.swing.JTextField;
 
+import tp.dominio.ComboItem;
 import tp.dominio.Estacion;
 import tp.gui.EstacionGUI;
 import tp.servicios.EstacionServicio;
@@ -155,8 +156,9 @@ public class EstacionController {
 		estacion = es;
 		
 		estaciongui.getTbxNombre().setText(es.getNombre());
-		estaciongui.getTbxApertura().setText(es.getHorarioApertura().toString());
-		estaciongui.getTbxCierre().setText(es.getHorarioCierre().toString());
+		
+		estaciongui.getTbxApertura().setText(ComboItem.getHoraString(es.getHorarioApertura()));
+		estaciongui.getTbxCierre().setText(ComboItem.getHoraString(es.getHorarioCierre()));
 		estaciongui.getCbxEstado().setSelectedIndex(es.getEstado() == 1 ? 0 : 1);
 		estaciongui.setModifyDeleteState();
 

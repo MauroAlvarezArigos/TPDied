@@ -233,7 +233,9 @@ public class LineaGUI extends JFrame {
 		btnBaja.addActionListener(e -> {
 			int n = JOptionPane.showConfirmDialog(this, "¿Estas seguro de eliminar la estación?", "CUIDADO!", JOptionPane.YES_NO_OPTION);
 			if(n == 0) {
-				//Llamar al handler y eliminar elemento de la DB
+				controller.eliminar();
+				this.limpiarCampos();
+				this.setInitialState();
 				System.out.println("Eliminando elemento de la base de datos...");
 			}
 		});
@@ -262,6 +264,9 @@ public class LineaGUI extends JFrame {
 					this.mostrarError("Error al guardar", e2.getMessage());
 				}
 			}
+			
+			this.limpiarCampos();
+			this.setInitialState();
 		});
 		
 		btnCancelar.addActionListener(e -> {
@@ -285,11 +290,12 @@ public class LineaGUI extends JFrame {
 		this.getContentPane().add(panelFrame);
 		this.pack();
 		this.setLocationRelativeTo(null);
-		this.setSize(500,300);
+		this.setSize(600,300);
 
 	}
 	
 	private void setInitialState() {
+		desactivarEdits();
 		btnBuscar.setEnabled(true);
 		btnTrayectos.setEnabled(false);
 		btnAlta.setEnabled(true);
@@ -309,6 +315,17 @@ public class LineaGUI extends JFrame {
 		btnGuardar.setEnabled(true);
 		btnCancelar.setEnabled(true);
 		btnSalir.setEnabled(false);
+	}
+	
+	public void setModifyDeleteState(){
+		btnBuscar.setEnabled(false);
+		btnAlta.setEnabled(false);
+		btnTrayectos.setEnabled(true);
+		btnModificar.setEnabled(true);
+		btnBaja.setEnabled(true);
+		btnGuardar.setEnabled(false);
+		btnCancelar.setEnabled(false);
+		btnSalir.setEnabled(true);
 	}
 	
 	private void limpiarCampos() {
