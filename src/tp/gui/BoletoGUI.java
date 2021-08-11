@@ -281,7 +281,7 @@ public class BoletoGUI extends JFrame {
 							
 							
 							int tam = caminoUsado.size();
-							System.out.println("tam " + tam);
+							//System.out.println("tam " + tam);
 							Object[][] tabla = new Object[tam][1];
 							for(int i=0; i<tam; i++) tabla[i][0] = caminoUsado.get(i);
 							String[] columnNames = {"Recorrido"};

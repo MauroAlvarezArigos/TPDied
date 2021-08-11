@@ -20,11 +20,11 @@ public class GeneradorRutasRandom {
 		
 		ArrayList<Linea> lineas = new ArrayList<Linea>(); // pedir a la BD que me de todas las lineas 
 		
-		//genero 2 lineas
-		lineas.add(new Linea("linea 1", "azul", true));
-		lineas.add(new Linea("linea 2", "verde", true));
-		lineas.add(new Linea("linea 3", "roja", true));
-		
+//		//genero 2 lineas
+//		lineas.add(new Linea("linea 1", "azul", true));
+//		lineas.add(new Linea("linea 2", "verde", true));
+//		lineas.add(new Linea("linea 3", "roja", true));
+//		
 		//genero 8 estaciones
 		ArrayList<Estacion> e = new ArrayList<Estacion>();
 		for(int i=0; i<8; i++) {
