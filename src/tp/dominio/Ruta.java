@@ -22,8 +22,6 @@ public class Ruta {
 		super();
 		this.origen = origen;
 		this.destino = destino;
-		//al crear una ruta se debe consultar tanto para el origen como para el destino
-		//si ya existen dichas estaciones, en cuyo caso utilizar la info que tenemos
 		this.distancia = distancia;
 		this.tiempoViaje = tiempoViaje;
 		this.maxPasajeros = maxPasajeros;
@@ -46,6 +44,9 @@ public class Ruta {
 		super();
 		this.maxPasajeros=maxPasajeros;
 		this.datos[3]=maxPasajeros;
+	}
+	public Ruta() {
+		
 	}
 
 	
