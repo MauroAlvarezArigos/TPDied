@@ -95,5 +95,9 @@ public class LineaController {
 		lineagui.setModifyDeleteState();
 	}
 	
+	public Linea getLinea() {
+		return this.linea;
+	}
+	
 
 }

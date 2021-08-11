@@ -9,6 +9,7 @@ import tp.controller.BoletoController;
 import tp.controller.LineaController;
 import tp.controller.TrayectoController;
 import tp.dominio.Estacion;
+import tp.dominio.Linea;
 
 import java.awt.Font;
 import java.awt.GridBagLayout;
@@ -27,7 +28,11 @@ public class RegistrarTrayectoGUI extends JFrame {
 	private JComboBox<Estacion> cbxOrigen;
 	private TrayectoController controller;
 	
-	public RegistrarTrayectoGUI() {
+	private Linea linea;
+	
+	public RegistrarTrayectoGUI(Linea linea) {
+		
+		this.linea = linea;
 		
 		this.controller = new TrayectoController(this);
 		controller.cargarEstaciones();
@@ -325,6 +330,10 @@ public class RegistrarTrayectoGUI extends JFrame {
 	}
 	public void setCbxEstado(JComboBox<String> cbxEstado) {
 		this.cbxEstado = cbxEstado;
+	}
+	
+	public Linea getLinea() {
+		return this.linea;
 	}
 	
 	

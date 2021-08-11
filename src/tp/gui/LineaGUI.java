@@ -211,7 +211,7 @@ public class LineaGUI extends JFrame {
 		});
 		
 		btnTrayectos.addActionListener(e -> {
-			RegistrarTrayectoGUI rt = new RegistrarTrayectoGUI();
+			RegistrarTrayectoGUI rt = new RegistrarTrayectoGUI(controller.getLinea());
 			rt.setVisible(true);
 		});
 			
