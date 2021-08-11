@@ -13,29 +13,19 @@ public class PageRank {
 				int N=grafo.size();
 				int[] pageRank = new int[N];
 				for(int i=0; i<N; i++) pageRank[i]=0;
-//				for(int i=0; i<N; i++) {
-//					System.out.println("PrankGRAFO " + i);
-//					for(Ruta r : grafo.get(i)) {
-//						System.out.println("ruta " + r.getOrigen().getNombre() + " " + r.getDestino().getNombre());
-//					}
-//				}
 				//actualizo pagerank segun corresponda
-				for(int i=0; i<N;i++) for(Ruta r : grafo.get(i)) pageRank[r.getDestino().getId()]++;
+				for(int i=0; i<N;i++) for(Ruta r : grafo.get(i)) pageRank[r.getDestino().getId()-1]++;
 //				System.out.println("PAGE RANK");
 //				for(int i=0; i<N;i++) {
 //					System.out.println(pageRank[i]);
 //				}
 				ArrayList<Pair> pRank= new ArrayList<Pair>();
-				for(Estacion e : estaciones) pRank.add(new Pair(pageRank[e.getId()], e));
+				for(Estacion e : estaciones) pRank.add(new Pair(pageRank[e.getId()-1], e));
 				//printeo estaciones por indice
 //				System.out.println(" SIN ORDENAR ");
 //				for(Pair p : pRank) 	System.out.println(p.first + " " + p.second.getId());
 				//ordeno
 				pRank.sort((o1,o2) -> o1.comparator(o1,o2));
-				//printeo las estaciones x pagerank
-//				System.out.println(" ORDENADO ");
-//				for(Pair p : pRank) System.out.println(p.first + " " + p.second.getId() + " " + p.second.getNombre());
-		 	
 		return pRank;
 	}
 	public static void main(String[] args) {

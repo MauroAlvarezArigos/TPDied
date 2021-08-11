@@ -1,5 +1,6 @@
 package tp.servicios;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -29,6 +30,9 @@ private LineaDao lineadao;
 	
 	public List<Linea> buscarTodas(){
 		return lineadao.buscarTodas();	
+	}
+	public HashMap<Integer,Linea> buscarTodasMap(){
+		return lineadao.buscarTodasMap();	
 	}
 	
 	public List<Linea> buscarPorAtributos(Map<String, ?> atributos)	{

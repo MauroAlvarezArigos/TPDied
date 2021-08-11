@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -174,6 +175,41 @@ public class EstacionDaoSQL implements EstacionDao{
 		return lista;
 	}
 
+	@Override
+	public HashMap<Integer,Estacion> buscarTodasMap() {
+		HashMap<Integer,Estacion>  lista = new HashMap<Integer,Estacion> ();
+		Connection conn = DB.getConexion();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Estacion es = null;
+		try {
+			pstmt = conn.prepareStatement(SELECT_ALL_ESTACION);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				es = new Estacion ();
+				es.setId(rs.getInt("ID"));
+				es.setNombre(rs.getString("NOMBRE"));
+				es.setHorarioApertura(rs.getTimestamp("HORARIOAPERTURA"));
+				es.setHorarioCierre(rs.getTimestamp("HORARIOCIERRE"));
+			  	es.setEstado(rs.getBoolean("ESTADO"));
+				lista.put(es.getId(), es);
+			}
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				if(pstmt!=null) pstmt.close();
+				if(conn!=null) conn.close();
+			}
+			catch(SQLException e) {
+				e.printStackTrace();
+			}
+	}
+		return lista;
+	}
+	
 	@Override
 	public List<Estacion> buscarPorAtributos(Map<String, ?> atributos) {
 		List<Estacion> lista = new ArrayList<Estacion>();

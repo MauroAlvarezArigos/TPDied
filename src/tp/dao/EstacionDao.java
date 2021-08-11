@@ -1,8 +1,7 @@
 package tp.dao;
 
 import java.sql.Connection;
-
-
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -15,6 +14,7 @@ public interface EstacionDao {
 	public void borrar(Estacion e);
 	public List<Estacion> buscarPorAtributos(Map<String, ?> atributos);
 	public List<Estacion> buscarTodas();
+	public HashMap<Integer,Estacion> buscarTodasMap();
 	public void crearMantenimiento(Integer estacion, String obs);
 	public void finalizarMantenimiento(Integer estacion, String obs);
 

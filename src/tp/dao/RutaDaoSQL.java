@@ -6,7 +6,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import tp.dao.utils.DB;
 import tp.dominio.Estacion;
@@ -67,17 +69,17 @@ public class RutaDaoSQL implements RutaDao{
 		ResultSet rs = null;
 		Ruta r = null;
 		EstacionServicio estacionservicio = new EstacionServicio();
-		List<Estacion> estaciones = estacionservicio.buscarTodas();
+		HashMap<Integer,Estacion> estaciones = estacionservicio.buscarTodasMap();
 		LineaServicio lineaservicio = new LineaServicio();
-		List<Linea> lineas =  lineaservicio.buscarTodas();
+		HashMap<Integer,Linea> lineas =  lineaservicio.buscarTodasMap();
 		
 		try {
 			pstmt = conn.prepareStatement(SELECT_ALL_RUTA);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				r = new Ruta ();
-				r.setOrigen(estaciones.get(rs.getInt("ORIGEN")-1));
-				r.setDestino(estaciones.get(rs.getInt("DESTINO")-1));
+				r.setOrigen(estaciones.get(rs.getInt("ORIGEN")));
+				r.setDestino(estaciones.get(rs.getInt("DESTINO")));
 				r.setDistancia(rs.getInt("DISTANCIA"));
 				r.setTiempoViaje(rs.getInt("TIEMPOVIAJE"));
 				r.setMaxPasajeros(rs.getInt("MAXPASAJEROS"));

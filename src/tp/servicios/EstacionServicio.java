@@ -1,5 +1,6 @@
 package tp.servicios;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -26,6 +27,10 @@ public class EstacionServicio {
 	public List<Estacion> buscarTodas(){
 		return estacionDao.buscarTodas();
 	}
+	public HashMap<Integer,Estacion> buscarTodasMap(){
+		return estacionDao.buscarTodasMap();
+	}
+	
 	public List<Estacion> buscarPorAtriburtos (Map<String, ?> atributos) {
 		return estacionDao.buscarPorAtributos(atributos);
 	}

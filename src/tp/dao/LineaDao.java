@@ -1,5 +1,6 @@
 package tp.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -13,6 +14,7 @@ public interface LineaDao {
 	public void borrarLinea(Linea l);
 	public Linea buscarLinea (String nombre);
 	public List<Linea> buscarTodas();
+	public HashMap<Integer,Linea> buscarTodasMap();
 	public List<Linea> buscarPorAtributos(Map<String, ?> atributos);
 
 }

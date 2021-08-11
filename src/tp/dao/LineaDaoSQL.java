@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -184,6 +185,41 @@ public class LineaDaoSQL implements LineaDao{
 		return lista;
 	}
 
+	@Override
+	public HashMap<Integer,Linea> buscarTodasMap() {
+		HashMap<Integer,Linea> lista = new HashMap<Integer,Linea>();
+		Connection conn = DB.getConexion();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Linea l = null;
+		try {
+			pstmt = conn.prepareStatement(SELECT_ALL_LINEA);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				l = new Linea ();
+				l.setId(rs.getInt("IDLINEA"));
+				l.setEstado(rs.getBoolean("ESTADO"));
+				l.setNombre(rs.getString("NOMBRE"));
+				l.setColor(rs.getString("COLOR"));
+				lista.put(l.getId(), l);
+			}
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				if(pstmt!=null) pstmt.close();
+				if(conn!=null) conn.close();
+			}
+			catch(SQLException e) {
+				e.printStackTrace();
+			}
+	}
+		return lista;
+	}
+
+	
 	@Override
 	public List<Linea> buscarPorAtributos(Map<String, ?> atributos) {
 		List<Linea> lista = new ArrayList<Linea>();
