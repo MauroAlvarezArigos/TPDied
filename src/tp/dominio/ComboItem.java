@@ -1,5 +1,7 @@
 package tp.dominio;
 
+import java.sql.Timestamp;
+
 public class ComboItem {
 	
 	Estacion estacion;
@@ -17,12 +19,21 @@ public class ComboItem {
 		return this.estacion;
 	}
 	
-//	public String getHoraString() {
-//		Timestamp ts = new Timestamp();
-//	}
-//	
-//	public void main() {
-//		
-//	}
-//	
+	public static String getHoraString(Timestamp ts) {
+		String ret = "";
+		long aux = ts.getTime()%86400;
+		long hora = aux/3600;
+		long min = (aux%3600)/60;
+		System.out.println(hora);
+		if(hora < 10) { ret +='0'; ret+=(char)(hora+'0');}
+		else {ret += (char)((hora/10)+'0'); ret += (char)((hora%10)+'0');}
+		ret+=':';
+		if(min < 10) { ret +='0'; ret+=(char)(min+'0');}
+		else {ret += (char)((min/10)+'0'); ret += (char)((min%10)+'0');}
+		return ret;
+	}
+	
+	public static void main(String[] args) {
+	}
+	
 }
