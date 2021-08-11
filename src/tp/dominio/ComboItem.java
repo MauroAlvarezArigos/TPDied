@@ -17,5 +17,12 @@ public class ComboItem {
 		return this.estacion;
 	}
 	
-	
+//	public String getHoraString() {
+//		Timestamp ts = new Timestamp();
+//	}
+//	
+//	public void main() {
+//		
+//	}
+//	
 }

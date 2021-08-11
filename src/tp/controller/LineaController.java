@@ -104,7 +104,6 @@ public class LineaController {
 	
 	public void cargarDatosEncontrados(Linea lin) {
 		System.out.println("Entre a cargar Datos");
-		
 		System.out.println(lin.getNombre());
 		
 		lineagui.getTbxNombre().setText(lin.getNombre());
