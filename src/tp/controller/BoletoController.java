@@ -43,7 +43,6 @@ public class BoletoController {
 				throw new DatosObligatoriosException("Email", "El email del Cliente es Obligatorio");
 			}
 			boleto.setCosto((int) this.boletogui.getCosto());
-			System.out.println(boleto.getCosto());
 			boleto.setFechaVenta(new java.sql.Date(new java.util.Date().getTime()));
 			boleto.setOrigen(this.boletogui.getCbxOrigen().getSelectedItem().toString());
 			boleto.setDestino(this.boletogui.getCbxDestino().getSelectedItem().toString());
@@ -73,11 +72,8 @@ public class BoletoController {
 		JComboBox<Estacion> cbxOrigen = new JComboBox<Estacion>();
 		JComboBox<Estacion> cbxDestino = new JComboBox<Estacion>();
 		
-		for(Estacion e : lista) System.out.println(e.toString());
 		for(Estacion e : lista) cbxOrigen.addItem(e);
 		for(Estacion e : lista) cbxDestino.addItem(e);
-		
-		System.out.println(cbxOrigen.toString());
 		
 		boletogui.setCbxOrigen(cbxOrigen);
 		boletogui.setCbxDestino(cbxDestino);

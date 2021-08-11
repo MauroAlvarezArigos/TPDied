@@ -177,7 +177,6 @@ public class LineaGUI extends JFrame {
 		gbc_btnGuardar.gridy = 0;
 		botones.add(btnGuardar, gbc_btnGuardar);
 		
-		//LLamar a la capa de servicio y validar todo, luego guardar en bd
 		
 		btnCancelar = new JButton();
 		btnCancelar.setIcon(new ImageIcon(".\\res\\cancelar.png"));
@@ -243,7 +242,6 @@ public class LineaGUI extends JFrame {
 		btnGuardar.addActionListener(e -> {
 			
 			if(flag == 1) {
-				System.out.println("WTF");
 				try {
 					controller.guardar();
 				} catch(DatosObligatoriosException e1) {
