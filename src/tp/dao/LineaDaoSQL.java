@@ -46,19 +46,12 @@ public class LineaDaoSQL implements LineaDao{
 	public Linea insert(Linea l) {
 		Connection conn = DB.getConexion();
 		PreparedStatement pstmt = null;
-		System.out.println("Entre a Insert");
-		
 		try{
 			pstmt = conn.prepareStatement(INSERT_LINEA);
-			
-			System.out.println("Modo INSERT");
 			System.out.println("CHECK " + l.getNombre() + " " + l.getColor() + " ");
 			pstmt.setString(1, l.getNombre());
 			pstmt.setString(2, l.getColor());
 			pstmt.setString(3, Integer.toBinaryString(l.getEstado()));
-		//	pstmt.setArray(4, l.getRecorrido());
-			
-			System.out.println("Psmt: "+pstmt.toString());
 			pstmt.executeUpdate();
 		}
 		catch(SQLException e){
@@ -80,19 +73,12 @@ public class LineaDaoSQL implements LineaDao{
 	public Linea modify(Linea l, String pk) {
 		Connection conn = DB.getConexion();
 		PreparedStatement pstmt = null;
-		System.out.println("Entre a Update");
-		
 		try {
 			pstmt = conn.prepareStatement(UPDATE_LINEA);
-			
-			System.out.println("Modo Update");
-			
 			pstmt.setString(1, l.getNombre());
 			pstmt.setString(2, l.getColor());
 			pstmt.setString(3, Integer.toBinaryString(l.getEstado()));
 			pstmt.setString(4, pk);
-			
-			System.out.println("Psmt: "+pstmt.toString());
 			pstmt.executeUpdate();
 	
 		}catch(SQLException e) {
@@ -102,7 +88,6 @@ public class LineaDaoSQL implements LineaDao{
 			try {
 				if(pstmt!=null) pstmt.close();
 				if(conn!=null) conn.close();
-				System.out.println("Conexion cerrada");
 			}
 			catch(SQLException e) {
 				e.printStackTrace();
@@ -212,7 +197,6 @@ public class LineaDaoSQL implements LineaDao{
 				l.setNombre(rs.getString("NOMBRE"));
 				l.setColor(rs.getString("COLOR"));
 				l.setEstado(rs.getBoolean("ESTADO"));
-				//l.setRecorrido((ArrayList<Ruta>) rs.getArray("RECORRIDO"));
 			  	lista.add(l);
 			}
 		}catch(SQLException e) {

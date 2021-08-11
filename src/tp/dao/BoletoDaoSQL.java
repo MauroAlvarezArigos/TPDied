@@ -49,30 +49,6 @@ public class BoletoDaoSQL implements BoletoDao{
 		return null;
 	}
 
-	/*private boolean checkNull(int numeroBoleto, Connection conn) {
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		Boolean ret = false;
-		try {
-			pstmt = conn.prepareStatement(SELECT_BOLETO, ResultSet.TYPE_SCROLL_INSENSITIVE,	ResultSet.CONCUR_UPDATABLE);
-			pstmt.setInt(1, numeroBoleto);
-			rs = pstmt.executeQuery();
-			ret = rs.first();
-		}
-		catch(SQLException e) {
-			e.printStackTrace();
-		}
-		finally {
-			try {
-				if(pstmt!=null) pstmt.close();
-			}
-			catch(SQLException e) {
-				e.printStackTrace();
-			}
-		}
-		return ret;
-	}*/
-
 }
 	
 

@@ -16,22 +16,10 @@ import tp.dominio.Estacion;
 public class App extends JFrame {
 	
 	public static void main(String[] args) {
-		/*
-		DB.getConexion();
 		
-		Timestamp time1 = new Timestamp (System.currentTimeMillis());
-		Timestamp time2 = new Timestamp (System.currentTimeMillis()+60000);
-		Estacion esta = new Estacion(2, "estacion2", time1, time2, true);
-		System.out.println(esta.toString());
-		
-		EstacionDaoSQL est = new EstacionDaoSQL();
+		//DB.getConexion();
 		
 		
-		est.borrar(esta);
-
-		est.saveOrUpdate(esta);
-		
-		*/
 		
 		JFrame frame = new JFrame("Mi JFrame");
 		frame.setDefaultCloseOperation(EXIT_ON_CLOSE);

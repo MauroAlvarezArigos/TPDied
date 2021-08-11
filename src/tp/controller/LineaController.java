@@ -44,7 +44,6 @@ public class LineaController {
 			this.linea.setEstado(this.lineagui.getCbxEstado().getSelectedItem().equals("Activa")? true : false);
 			
 		} catch (DatosObligatoriosException e) {
-			System.out.println("hola");
 			e.printStackTrace();
 			throw e;
 		}
@@ -88,7 +87,6 @@ public class LineaController {
 	}
 	
 	public void cargarDatosEncontrados(Linea lin) {
-		System.out.println("Entre a cargar Datos");
 		System.out.println(lin.getNombre());
 		
 		linea = lin;

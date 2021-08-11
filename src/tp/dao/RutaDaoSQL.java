@@ -33,8 +33,6 @@ public class RutaDaoSQL implements RutaDao{
 			pstmt.setString(6, Integer.toBinaryString(r.getEstado()));
 			pstmt.setInt(7, r.getCosto());
 			pstmt.setInt(8,  r.getOrden());
-			
-			System.out.println("Psmt: "+pstmt.toString());
 			pstmt.executeUpdate();
 		}
 		catch(SQLException e){

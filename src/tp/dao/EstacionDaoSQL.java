@@ -50,19 +50,13 @@ public class EstacionDaoSQL implements EstacionDao{
 	public Estacion insert(Estacion es) {
 		Connection conn = DB.getConexion();
 		PreparedStatement pstmt = null;
-		System.out.println("Entre a Insert");
 		
 		try{
 			pstmt = conn.prepareStatement(INSERT_ESTACION);
-			
-			System.out.println("Modo INSERT");
-				
 			pstmt.setString(1, es.getNombre());
 			pstmt.setTimestamp(2, es.getHorarioApertura());
 			pstmt.setTimestamp(3, es.getHorarioCierre());
 			pstmt.setString(4, Integer.toBinaryString(es.getEstado()));
-			
-			System.out.println("Psmt: "+pstmt.toString());
 			pstmt.executeUpdate();
 		}
 		catch(SQLException e){
@@ -84,12 +78,8 @@ public class EstacionDaoSQL implements EstacionDao{
 	public Estacion modify(Estacion es) {
 		Connection conn = DB.getConexion();
 		PreparedStatement pstmt = null;
-		System.out.println("Entre a Update");
-		
 		try {
 			pstmt = conn.prepareStatement(UPDATE_ESTACION);
-			
-			System.out.println("Modo Update");
 			System.out.println(es.getId());
 			
 			pstmt.setString(1, es.getNombre());
@@ -97,8 +87,6 @@ public class EstacionDaoSQL implements EstacionDao{
 			pstmt.setTimestamp(3, es.getHorarioCierre());
 			pstmt.setString(4, Integer.toBinaryString(es.getEstado()));
 			pstmt.setInt(5, es.getId());
-			
-			System.out.println("Psmt: "+pstmt.toString());
 			pstmt.executeUpdate();
 	
 		}catch(SQLException e) {
@@ -124,7 +112,6 @@ public class EstacionDaoSQL implements EstacionDao{
 		try {
 			pstmt = conn.prepareStatement(DELETE_ESTACION);
 			pstmt.setInt(1, es.getId());
-			System.out.println("pstmt: "+pstmt.toString());
 			pstmt.execute();
 		}
 		catch(SQLException e) {
@@ -191,7 +178,6 @@ public class EstacionDaoSQL implements EstacionDao{
 				es.setHorarioApertura(rs.getTimestamp("HORARIOAPERTURA"));
 				es.setHorarioCierre(rs.getTimestamp("HORARIOCIERRE"));
 			  	es.setEstado(rs.getBoolean("ESTADO"));
-			  	//Integer.toBinaryString(es.setEstado(rs.getBoolean("ESTADO")));
 				lista.add(es);
 			}
 		}catch(SQLException e) {
