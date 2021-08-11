@@ -59,7 +59,6 @@ public class EstacionController {
 			this.estacion.setEstado(this.estaciongui.getCbxEstado().getSelectedItem().equals("Operativa")? true : false);
 			
 		} catch (DatosObligatoriosException e) {
-			System.out.println("hola");
 			e.printStackTrace();
 			throw e;
 		}
@@ -95,7 +94,6 @@ public class EstacionController {
 			this.estacion.setEstado(this.estaciongui.getCbxEstado().getSelectedItem().equals("Operativa")? true : false);
 			
 		} catch (DatosObligatoriosException e) {
-			System.out.println("hola");
 			e.printStackTrace();
 			throw e;
 		}
@@ -149,7 +147,6 @@ public class EstacionController {
 	}
 	
 	public void cargarDatosEncontrados(Estacion es) {
-		System.out.println("Entre a cargar Datos");
 		
 		System.out.println(es.getNombre());
 		

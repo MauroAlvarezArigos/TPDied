@@ -16,7 +16,6 @@ public class Flujo {
 		visited[src] = true;
 		while(!q.isEmpty()) {
 			int aux = q.getLast();
-			//System.out.println("Procesando " + aux);
 			q.pollLast();
 			for(Ruta nxt : grafo.get(aux)) ret.get(aux).add(nxt);
 			for(Ruta nxt : grafo.get(aux)) {
@@ -57,9 +56,7 @@ public class Flujo {
 				q.pollLast();
 				if(u==SNK) break;
 				for(Ruta r : grafo.get(u)) {
-					//System.out.println(" PROCESO " + u + " " + r.getDestino().getId() + " " + r.getDato(3));
 					if(r.getDato(3) > 0 && !used[r.getDestino().getId()]) {
-						//System.out.println("ENTRE " + r.getDestino().getId());
 						used[r.getDestino().getId()] = true;
 						q.push(r.getDestino().getId());
 						p[r.getDestino().getId()] = u;
@@ -69,7 +66,6 @@ public class Flujo {
 			class Local{
 				int f;
 				public void aumentar(int v, int minE){
-					//System.out.println("aumentar " + v + " " + minE + " " + f);
 					if(v==SRC) f=minE;
 					else if(p[v] != -1) {
 						int index = 0;
@@ -101,7 +97,6 @@ public class Flujo {
 			aux.aumentar(SNK, INF);
 			Mf+=aux.f;
 			f=aux.f;
-			//System.out.println("FIN " + f + " " + Mf);
 		} while(f > 0);
 		return Mf;
 	}
