@@ -27,6 +27,8 @@ import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.plaf.metal.MetalBorders.TextFieldBorder;
 import javax.swing.table.DefaultTableModel;
 
@@ -41,9 +43,14 @@ public class LineaBusquedaGUI extends JFrame {
 	private JTextField tbxColor;
 	private JTable resultados;
 	private LineaController controller;
+	private Linea linea;
 	
-	public LineaBusquedaGUI() {
-		controller = new LineaController(null);
+	public LineaBusquedaGUI(LineaGUI lin ) {
+		controller = lin.getController();
+		init();
+	}
+	
+	public void init() {
 		// al seleccionar nombre/color y a la vez estado, se seleccionan ambas xd
 		setResizable(false);
 		
@@ -205,6 +212,18 @@ public class LineaBusquedaGUI extends JFrame {
 			    panelFrame.add(scrollPane, BorderLayout.CENTER);
 			    scrollPane.setVisible(true);
 			    SwingUtilities.updateComponentTreeUI(panelFrame);
+			    
+			    table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+				    @Override
+				    public void valueChanged(ListSelectionEvent event) {
+				        if (table.getSelectedRow() > -1) {
+				        	linea = ret.get(table.getSelectedRow());
+				        	controller.cargarDatosEncontrados(linea);
+				    		dispose();
+				        }
+				    }
+
+				});
 				
 			}catch(Exception e1) {
 				e1.printStackTrace();

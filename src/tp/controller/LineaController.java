@@ -102,5 +102,16 @@ public class LineaController {
 		return resultados;
 	}
 	
+	public void cargarDatosEncontrados(Linea lin) {
+		System.out.println("Entre a cargar Datos");
+		
+		System.out.println(lin.getNombre());
+		
+		lineagui.getTbxNombre().setText(lin.getNombre());
+		lineagui.getTbxColor().setText(lin.getColor());
+		lineagui.getCbxEstado().setSelectedIndex(lin.getEstado() == 1 ? 0 : 1); 
+
+	}
+	
 
 }

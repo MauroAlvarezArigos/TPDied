@@ -26,6 +26,10 @@ public class LineaGUI extends JFrame {
 	private JButton btnSalir;
 	private Byte flag;
 	private LineaController controller;
+	
+	public LineaController getController() {
+		return this.controller;
+	}
 
 	public LineaGUI() {
 		controller = new LineaController(this);
@@ -203,7 +207,7 @@ public class LineaGUI extends JFrame {
 		
 		//Buttons Listeners
 		btnBuscar.addActionListener(e -> {
-			LineaBusquedaGUI lb = new LineaBusquedaGUI();
+			LineaBusquedaGUI lb = new LineaBusquedaGUI(this);
 			lb.setVisible(true);
 		});
 		
