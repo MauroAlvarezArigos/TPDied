@@ -55,6 +55,7 @@ public class RutaDaoSQL implements RutaDao{
 		return null;
 	}
 	
+	
 	@Override
 	public List<Ruta> buscarTodas() {
 		List<Ruta> lista = new ArrayList<Ruta>();

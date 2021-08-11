@@ -45,9 +45,6 @@ public class Ruta {
 		this.maxPasajeros=maxPasajeros;
 		this.datos[3]=maxPasajeros;
 	}
-	public Ruta() {
-		
-	}
 
 	
 	//Getters and Setters
