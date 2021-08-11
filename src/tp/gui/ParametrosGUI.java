@@ -44,7 +44,6 @@ public class ParametrosGUI extends JFrame {
 	
 	public ParametrosGUI() {
 		estacionservicio = new EstacionServicio();
-		this.setUndecorated(true); 
 		this.setResizable(false);
 		
 		JPanel panelFrame = new JPanel();

@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
@@ -63,7 +64,7 @@ public class BoletoGUI extends JFrame {
 		
 		JPanel contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5,5,5,5));
-		contentPane.setLayout(new BorderLayout(0, 0));
+		contentPane.setLayout(new BorderLayout());
 		this.setContentPane(contentPane);
 		
 		JLabel lblBoletos = new JLabel("Venta Boletos");
@@ -227,7 +228,7 @@ public class BoletoGUI extends JFrame {
 		
 		btnCancelar = new JButton("Cancelar");
 		GridBagConstraints gbc_btnCancelar = new GridBagConstraints();
-		gbc_btnCancelar.anchor = GridBagConstraints.EAST;
+		gbc_btnCancelar.anchor = GridBagConstraints.CENTER;
 		gbc_btnCancelar.insets = new Insets(0, 0, 0, 5);
 		gbc_btnCancelar.gridx = 2;
 		gbc_btnCancelar.gridy = 3;
@@ -241,7 +242,9 @@ public class BoletoGUI extends JFrame {
 		gbc_btnCalcular.gridx = 0;
 		gbc_btnCalcular.gridy = 3;
 		panelEstacion.add(btnCalcular, gbc_btnCalcular);
+		
 		JScrollPane scrollPane = new JScrollPane();
+		
 		btnCalcular.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){  
 						long INF = 100000009;
@@ -277,8 +280,6 @@ public class BoletoGUI extends JFrame {
 							//
 							
 							
-							JPanel panelFrame = new JPanel();
-							panelFrame.setLayout(new BorderLayout());
 							int tam = caminoUsado.size();
 							System.out.println("tam " + tam);
 							Object[][] tabla = new Object[tam][1];
@@ -286,11 +287,14 @@ public class BoletoGUI extends JFrame {
 							String[] columnNames = {"Recorrido"};
 							DefaultTableModel dtm = new DefaultTableModel(tabla, columnNames);
 						    final JTable table = new JTable(dtm);
-						    table.setPreferredScrollableViewportSize(new Dimension(3333, 330));
+						    table.setPreferredScrollableViewportSize(new Dimension(150, 300));
 						    scrollPane.setViewportView(table);
-						    panelFrame.add(scrollPane, BorderLayout.WEST);
+							GridBagConstraints gbc_table = new GridBagConstraints();
+							gbc_table.gridx = 1;
+							gbc_table.gridy = 4;
+						
+						    contentPane.add(scrollPane, BorderLayout.EAST);
 						    scrollPane.setVisible(true);
-						    SwingUtilities.updateComponentTreeUI(panelFrame);
 						    
 						    
 							//
@@ -338,7 +342,7 @@ public class BoletoGUI extends JFrame {
 
 		this.pack();
 		this.setLocationRelativeTo(null);
-		this.setSize(550,300);			
+		this.setSize(800,300);			
 		
 	}
 	
