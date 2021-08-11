@@ -8,8 +8,8 @@ import java.util.PriorityQueue;
 public class Dijkstra {
 	private static ArrayList<String> caminoUsado;
 	public Pair getDijkstra(int src, int to, int tipo, ArrayList<ArrayList<Ruta>> grafo, int N) {
-
 		long INF = 100000009; // me gustaria que sea const, averiguar si se puede. no me deja static
+		if(to>=N) N=to+1;
 		long[] dist = new long[N];
 		Ruta[] dad = new Ruta[N];
 		for(int i=0; i<N; i++) dist[i] = INF;
@@ -34,7 +34,7 @@ public class Dijkstra {
 		//descomentar esto para obtener el recorrido
 		ArrayList<Ruta> camino = new ArrayList<Ruta>();
 		long costoTotal;
-		if(dist[to] < INF) {
+		if(to < N && dist[to] < INF ) {
 			costoTotal = (long)0;
 			int actual = to;
 			while(dad[actual] != null) {

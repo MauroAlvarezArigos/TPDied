@@ -132,6 +132,7 @@ public class ParametrosGUI extends JFrame {
 		panel.setVisible(false);
 		flujoMax.add(panel, gbc_panel);
 		
+		
 		JLabel lblFlujoMax = new JLabel("");
 		panel.add(lblFlujoMax);
 		lblFlujoMax.setFont(new Font("Tahoma", Font.PLAIN, 32));

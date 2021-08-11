@@ -10,15 +10,13 @@ public class PageRank {
 				ArrayList<ArrayList<Ruta>> grafo = aux.getGrafo();
 				
 				// inicializo pagerank en 0
-				int N=grafo.size();
+				int N=1;
+				for(Estacion e : estaciones) 	N = Math.max(N, e.getId()+1);
+
 				int[] pageRank = new int[N];
 				for(int i=0; i<N; i++) pageRank[i]=0;
 				//actualizo pagerank segun corresponda
-				for(int i=0; i<N;i++) for(Ruta r : grafo.get(i)) pageRank[r.getDestino().getId()-1]++;
-//				System.out.println("PAGE RANK");
-//				for(int i=0; i<N;i++) {
-//					System.out.println(pageRank[i]);
-//				}
+				for(int i=0; i<grafo.size();i++) for(Ruta r : grafo.get(i)) pageRank[r.getDestino().getId()-1]++;
 				ArrayList<Pair> pRank= new ArrayList<Pair>();
 				for(Estacion e : estaciones) pRank.add(new Pair(pageRank[e.getId()-1], e));
 				//printeo estaciones por indice
