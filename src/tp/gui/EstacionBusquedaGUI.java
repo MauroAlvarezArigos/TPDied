@@ -176,9 +176,8 @@ public class EstacionBusquedaGUI extends JFrame {
 				    @Override
 				    public void valueChanged(ListSelectionEvent event) {
 				        if (table.getSelectedRow() > -1) {
-				        	estacion = new Estacion();
-				    		estacion.setNombre("TU MAMA");
-				    		controller.cargarDatosEncontrados(estacion);
+				        	estacion = ret.get(table.getSelectedRow());
+				        	controller.cargarDatosEncontrados(estacion);
 				    		dispose();
 				        }
 				    }

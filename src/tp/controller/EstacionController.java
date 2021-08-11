@@ -116,9 +116,7 @@ public class EstacionController {
 		estaciongui.getTbxNombre().setText(es.getNombre());
 		estaciongui.getTbxApertura().setText(es.getHorarioApertura().toString());
 		estaciongui.getTbxCierre().setText(es.getHorarioCierre().toString());
-
-		//Fijarse que cuando cargo el objeto en la tabla el estado sea un numero
-		estaciongui.getCbxEstado().setSelectedIndex(es.getEstado()); 
+		estaciongui.getCbxEstado().setSelectedIndex(es.getEstado() == 1 ? 0 : 1); 
 
 	}
 	
