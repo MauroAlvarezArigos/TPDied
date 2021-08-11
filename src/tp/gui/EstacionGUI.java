@@ -6,6 +6,7 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.lang.ModuleLayer.Controller;
 
 import javax.swing.*;
 
@@ -265,7 +266,7 @@ public class EstacionGUI extends JFrame {
 		btnBaja.addActionListener(e -> {
 			int n = JOptionPane.showConfirmDialog(this, "¿Estas seguro de eliminar la estación?", "CUIDADO!", JOptionPane.YES_NO_OPTION);
 			if(n == 0) {
-				//Llamar al handler y eliminar elemento de la DB
+				controller.eliminar();
 				System.out.println("Eliminando elemento de la base de datos...");
 			}
 		});
@@ -282,8 +283,6 @@ public class EstacionGUI extends JFrame {
 					this.mostrarError("Error al guardar", e2.getMessage());
 				}
 				
-				this.limpiarCampos();
-				this.setInitialState();
 			}
 			else if(flag == 2) {
 				try {
@@ -295,6 +294,10 @@ public class EstacionGUI extends JFrame {
 					this.mostrarError("Error al guardar", e2.getMessage());
 				}
 			}
+			
+			this.limpiarCampos();
+			this.setInitialState();
+
 		});
 		
 		btnCancelar.addActionListener(e -> {
@@ -318,6 +321,17 @@ public class EstacionGUI extends JFrame {
 		this.setSize(500,300);	
 
 	}
+	
+	public void setModifyDeleteState(){
+		btnBuscar.setEnabled(false);
+		btnAlta.setEnabled(false);
+		btnModificar.setEnabled(true);
+		btnBaja.setEnabled(true);
+		btnGuardar.setEnabled(false);
+		btnCancelar.setEnabled(false);
+		btnSalir.setEnabled(true);
+	}
+	
 	public void update() {
 		SwingUtilities.updateComponentTreeUI(this);
 	}

@@ -90,6 +90,7 @@ public class EstacionDaoSQL implements EstacionDao{
 			pstmt = conn.prepareStatement(UPDATE_ESTACION);
 			
 			System.out.println("Modo Update");
+			System.out.println(es.getId());
 			
 			pstmt.setString(1, es.getNombre());
 			pstmt.setTimestamp(2, es.getHorarioApertura());
@@ -115,39 +116,6 @@ public class EstacionDaoSQL implements EstacionDao{
 		
 		return null;
 	}
-	
-	/*private Boolean checkNull(Integer id, Connection conn) {
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		Boolean ret = false;
-		System.out.println("entre a checknull");
-
-		try {
-			pstmt = conn.prepareStatement(SELECT_ESTACION, ResultSet.TYPE_SCROLL_INSENSITIVE,	ResultSet.CONCUR_UPDATABLE);
-			System.out.println("1");
-			pstmt.setInt(1,id);
-			System.out.println("2");
-			rs = pstmt.executeQuery();
-			System.out.println("3");
-			ret = rs.first();
-			System.out.println(ret);
-
-		}
-		catch(SQLException e) {
-			System.out.println("1 en catch");
-			e.printStackTrace();
-		}
-		finally {
-			try {
-				System.out.println("entre al finally");
-				if(pstmt!=null) pstmt.close();
-			}
-			catch(SQLException e) {
-				System.out.println("2");
-				e.printStackTrace();
-			}
-		}
-		*/
 
 	@Override
 	public void borrar(Estacion es) {

@@ -63,9 +63,48 @@ public class EstacionController {
 			throw e;
 		}
 	}
+	
+	public void modificarModelo() throws DatosObligatoriosException{
+		try{
+			if((this.estaciongui).getTbxNombre() != null && !this.estaciongui.getTbxNombre().getText().equals("")) {
+				estacion.setNombre(this.estaciongui.getTbxNombre().getText());
+			} else {
+				throw new DatosObligatoriosException("Nombre", "El Nombre de la Estacion es Obligatorio");
+			}
+			if(this.estaciongui.getTbxApertura() != null && !this.estaciongui.getTbxApertura().getText().equals("")) {
+				ts = getFormato(this.estaciongui.getTbxApertura().getText());
+				if(ts != null) {
+					this.estacion.setHorarioApertura(ts);
+				} else {
+					throw new DatosObligatoriosException("Formato Invalido", "El formato del horario de Apertura es incorrecto HH:MM");
+				}
+			} else {
+				throw new DatosObligatoriosException("Horario Apertura", "El Horario de Apertura es Obligatorio");
+			}
+			if(this.estaciongui.getTbxCierre() != null && !this.estaciongui.getTbxCierre().getText().equals("")) {
+				ts = getFormato(this.estaciongui.getTbxCierre().getText());
+				if(ts != null) {
+					this.estacion.setHorarioCierre(ts);
+				} else {
+					throw new DatosObligatoriosException("Formato Invalido", "El formato del horario de Cierre es incorrecto HH:MM");
+				}
+			} else {
+				throw new DatosObligatoriosException("Horario Cierre", "El Horario de Cierre es Obligatorio");
+			}
+			this.estacion.setEstado(this.estaciongui.getCbxEstado().getSelectedItem().equals("Operativa")? true : false);
+			
+		} catch (DatosObligatoriosException e) {
+			System.out.println("hola");
+			e.printStackTrace();
+			throw e;
+		}
+		
+	}
+	
 	public Estacion modificar() throws DatosObligatoriosException{
 		try {
-			altaModelo();
+			System.out.println(estacion.getId());
+			modificarModelo();
 			System.out.println("Modificado "+ estacion.toString());
 			estacionServicio.modificarEstacion(estacion);
 			this.lista.clear();
@@ -91,8 +130,8 @@ public class EstacionController {
 		}
 	}
 	
-	public void eliminar(Estacion e) {
-		this.estacionServicio.borrarEstacion(e);		
+	public void eliminar() {
+		this.estacionServicio.borrarEstacion(estacion);		
 	}
 	
 	public List<Estacion> buscar(Map<String, ?> datos) {
@@ -113,10 +152,13 @@ public class EstacionController {
 		
 		System.out.println(es.getNombre());
 		
+		estacion = es;
+		
 		estaciongui.getTbxNombre().setText(es.getNombre());
 		estaciongui.getTbxApertura().setText(es.getHorarioApertura().toString());
 		estaciongui.getTbxCierre().setText(es.getHorarioCierre().toString());
-		estaciongui.getCbxEstado().setSelectedIndex(es.getEstado() == 1 ? 0 : 1); 
+		estaciongui.getCbxEstado().setSelectedIndex(es.getEstado() == 1 ? 0 : 1);
+		estaciongui.setModifyDeleteState();
 
 	}
 	
