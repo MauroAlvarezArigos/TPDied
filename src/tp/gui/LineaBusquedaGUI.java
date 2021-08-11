@@ -52,7 +52,8 @@ public class LineaBusquedaGUI extends JFrame {
 	
 	public void init() {
 
-		setResizable(false);
+		this.setUndecorated(true); 
+		this.setResizable(false);
 		
 		JPanel panelFrame = new JPanel();
 		GridBagLayout gridBagLayout = new GridBagLayout();
@@ -203,6 +204,7 @@ public class LineaBusquedaGUI extends JFrame {
 				        if (table.getSelectedRow() > -1) {
 				        	linea = ret.get(table.getSelectedRow());
 				        	controller.cargarDatosEncontrados(linea);
+				        	controller.mostrarGUI();
 				    		dispose();
 				        }
 				    }
@@ -214,7 +216,10 @@ public class LineaBusquedaGUI extends JFrame {
 			}
 		});
 		
-		btnCancelar.addActionListener(e -> dispose());
+		btnCancelar.addActionListener(e -> {
+        	controller.mostrarGUI();
+        	dispose();
+		});
 	}
 
 

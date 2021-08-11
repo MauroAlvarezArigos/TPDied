@@ -15,5 +15,7 @@ public interface EstacionDao {
 	public void borrar(Estacion e);
 	public List<Estacion> buscarPorAtributos(Map<String, ?> atributos);
 	public List<Estacion> buscarTodas();
+	public void crearMantenimiento(Integer estacion, String obs);
+	public void finalizarMantenimiento(Integer estacion, String obs);
 
 }

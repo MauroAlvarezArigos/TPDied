@@ -27,8 +27,8 @@ CREATE TABLE Linea(
 
 CREATE TABLE Mantenimiento(
 	estacion int,
-	inicio time,
-	fin time,
+	inicio timestamp,
+	fin timestamp,
 	observaciones varchar (100),
 	CONSTRAINT estacion_fk FOREIGN KEY (estacion) REFERENCES Estacion (id),
 	CONSTRAINT estacion_pk PRIMARY KEY (estacion)

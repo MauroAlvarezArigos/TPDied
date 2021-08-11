@@ -20,6 +20,8 @@ public class EstacionController {
 	private List<Estacion> lista;
 	private EstacionGUI estaciongui;
 	private Timestamp ts;
+
+	private Integer estado;
 	
 	public EstacionController(EstacionGUI eg) {
 		this.estacionServicio = new EstacionServicio();
@@ -91,6 +93,12 @@ public class EstacionController {
 			} else {
 				throw new DatosObligatoriosException("Horario Cierre", "El Horario de Cierre es Obligatorio");
 			}
+			//VER ESTA LOGICA
+			estado = this.estaciongui.getCbxEstado().getSelectedItem().equals("Operativa")? 1 : 0;
+			
+			if(this.estacion.getEstado() != estado) {
+				mantenimiento(estacion);
+			}
 			this.estacion.setEstado(this.estaciongui.getCbxEstado().getSelectedItem().equals("Operativa")? true : false);
 			
 		} catch (DatosObligatoriosException e) {
@@ -98,6 +106,22 @@ public class EstacionController {
 			throw e;
 		}
 		
+	}
+	
+	public void mantenimiento(Estacion es) {
+		try{
+			System.out.println("Estado = "+estado);
+			if(estado == 0) {
+				//Crea el mantenimiento
+				estacionServicio.crearMantenimiento(es.getId(), this.estaciongui.getEditorObservaciones().getText());
+			}
+			else {
+				//Finaliza el mantenimiento
+				estacionServicio.finalizarMantenimiento(es.getId(), this.estaciongui.getEditorObservaciones().getText());
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public Estacion modificar() throws DatosObligatoriosException{
@@ -127,6 +151,9 @@ public class EstacionController {
 			System.out.println(e.getMensaje());
 			throw e;
 		}
+	}
+	public void mostrarGUI() {
+		this.estaciongui.setVisible(true);
 	}
 	
 	public void eliminar() {

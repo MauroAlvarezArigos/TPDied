@@ -32,6 +32,9 @@ public class LineaGUI extends JFrame {
 	}
 
 	public LineaGUI() {
+		this.setUndecorated(true); 
+		this.setResizable(false);
+		
 		controller = new LineaController(this);
 		flag = 0;
 		JPanel panelFrame = new JPanel();
@@ -208,6 +211,7 @@ public class LineaGUI extends JFrame {
 		btnBuscar.addActionListener(e -> {
 			LineaBusquedaGUI lb = new LineaBusquedaGUI(this);
 			lb.setVisible(true);
+			this.setVisible(false);
 		});
 		
 		btnTrayectos.addActionListener(e -> {

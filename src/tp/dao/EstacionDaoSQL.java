@@ -7,7 +7,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -35,6 +37,14 @@ public class EstacionDaoSQL implements EstacionDao{
 	private static final String INSERT_ESTACION =
 			" INSERT INTO ESTACION (NOMBRE, HORARIOAPERTURA, HORARIOCIERRE,  ESTADO) "
 			+ " VALUES(?, ?, ?, ?)";
+	
+	private static final String INSERT_MANTENIMIENTO =
+			" INSERT INTO MANTENIMIENTO (ESTACION, INICIO, OBSERVACIONES) "
+			+ " VALUES(?, ?, ?)";
+	
+	private static final String UPDATE_MANTENIMIENTO =
+			" UPDATE MANTENIMIENTO SET FIN = ?, OBSERVACIONES = ? "
+			+ " WHERE ESTACION = ?";
 	
 	// información que permita consultar para cada estación, el historial de mantenimientos 
 	private static final String SELECT_ESTACION_M =
@@ -206,5 +216,65 @@ public class EstacionDaoSQL implements EstacionDao{
         System.out.println(p1 + values);
         return p1.concat(values); 
     }
+
+	@Override
+	public void crearMantenimiento(Integer estacion, String obs) {
+		System.out.println("Estacion crearMant: "+estacion);
+		System.out.println("OBS: "+obs);
+		
+		Connection conn = DB.getConexion();
+		PreparedStatement pstmt = null;
+		try {
+			pstmt = conn.prepareStatement(INSERT_MANTENIMIENTO);
+			
+			pstmt.setInt(1, estacion);
+			pstmt.setTimestamp(2, new Timestamp(System.currentTimeMillis()));
+			pstmt.setString(3, obs);
+			pstmt.executeUpdate();
+	
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				if(pstmt!=null) pstmt.close();
+				if(conn!=null) conn.close();
+			}
+			catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+	}
+
+	@Override
+	public void finalizarMantenimiento(Integer estacion, String obs) {
+		System.out.println("Estacion finMant: "+estacion);
+		System.out.println("OBS: "+obs);
+		
+		Connection conn = DB.getConexion();
+		PreparedStatement pstmt = null;
+		try {
+			pstmt = conn.prepareStatement(UPDATE_MANTENIMIENTO);
+			
+			pstmt.setTimestamp(1, new Timestamp(System.currentTimeMillis()));
+			pstmt.setString(2, obs);
+			pstmt.setInt(3, estacion);
+
+			pstmt.executeUpdate();
+	
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				if(pstmt!=null) pstmt.close();
+				if(conn!=null) conn.close();
+			}
+			catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
 
 }

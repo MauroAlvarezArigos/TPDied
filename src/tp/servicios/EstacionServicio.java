@@ -33,6 +33,14 @@ public class EstacionServicio {
 	public void borrarEstacion(Estacion es) {
 		estacionDao.borrar(es);
 	}
+
+	public void crearMantenimiento(Integer estacion, String obs) {
+		this.estacionDao.crearMantenimiento(estacion, obs);
+	}
+
+	public void finalizarMantenimiento(Integer estacion, String obs) {
+		this.estacionDao.finalizarMantenimiento(estacion, obs);
+	}
 	
 	
 

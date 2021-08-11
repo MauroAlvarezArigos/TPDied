@@ -20,6 +20,7 @@ public class LineaController {
 	private LineaGUI lineagui;
 	private Linea linea;
 	private String pk;
+
 	
 	public LineaController(LineaGUI lg) {
 		this.lineaServicio = new LineaServicio();
@@ -93,6 +94,10 @@ public class LineaController {
 		lineagui.getTbxColor().setText(lin.getColor());
 		lineagui.getCbxEstado().setSelectedIndex(lin.getEstado() == 1 ? 0 : 1); 
 		lineagui.setModifyDeleteState();
+	}
+	
+	public void mostrarGUI() {
+		this.lineagui.setVisible(true);
 	}
 	
 	public Linea getLinea() {

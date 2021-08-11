@@ -34,6 +34,8 @@ public class EstacionGUI extends JFrame {
 	public EstacionController controller;
 	
 	public EstacionGUI() {
+		this.setUndecorated(true); 
+		this.setResizable(false);
 		
 		this.controller = new EstacionController(this);
 		
@@ -247,6 +249,7 @@ public class EstacionGUI extends JFrame {
 		btnBuscar.addActionListener(e -> {
 			EstacionBusquedaGUI eb = new EstacionBusquedaGUI(this);
 			eb.setVisible(true);
+			this.setVisible(false);
 		});
 		
 		btnAlta.addActionListener(e -> {

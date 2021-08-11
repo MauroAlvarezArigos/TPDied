@@ -42,7 +42,8 @@ public class EstacionBusquedaGUI extends JFrame {
 	}
 	
 	public void init() {
-		setResizable(false);
+		this.setUndecorated(true); 
+		this.setResizable(false);
 				
 		JPanel panelFrame = new JPanel();
 		GridBagLayout gridBagLayout = new GridBagLayout();
@@ -121,7 +122,10 @@ public class EstacionBusquedaGUI extends JFrame {
 		gbc_btnCancelar.gridy = 2;
 		parametrosBusqueda.add(btnCancelar, gbc_btnCancelar);
 		
-		btnCancelar.addActionListener(e -> dispose());
+		btnCancelar.addActionListener(e -> {
+			controller.mostrarGUI();
+			dispose();
+		});
 		
 		panelFrame.add(lblBuscarEstacion, BorderLayout.PAGE_START);
 		panelFrame.add(parametrosBusqueda, BorderLayout.LINE_START);
@@ -178,6 +182,7 @@ public class EstacionBusquedaGUI extends JFrame {
 				        if (table.getSelectedRow() > -1) {
 				        	estacion = ret.get(table.getSelectedRow());
 				        	controller.cargarDatosEncontrados(estacion);
+				        	controller.mostrarGUI();
 				    		dispose();
 				        }
 				    }

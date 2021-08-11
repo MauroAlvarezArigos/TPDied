@@ -51,6 +51,7 @@ public class TrayectoController {
 		
 		registrartrayectogui.setCbxOrigen(cbxOrigen);
 		registrartrayectogui.setCbxDestino(cbxDestino);
+		registrartrayectogui.refresh();
 		
 	}
 	

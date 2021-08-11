@@ -1,6 +1,7 @@
 package tp.gui;
 
 import java.awt.BorderLayout;
+import java.awt.FlowLayout;
 
 import javax.swing.*;
 
@@ -31,6 +32,8 @@ public class RegistrarTrayectoGUI extends JFrame {
 	private Linea linea;
 	
 	public RegistrarTrayectoGUI(Linea linea) {
+		this.setUndecorated(true); 
+		this.setResizable(false);
 		
 		this.linea = linea;
 		
@@ -49,11 +52,7 @@ public class RegistrarTrayectoGUI extends JFrame {
 
 		JPanel panel = new JPanel();
 		panelFrame.add(panel, BorderLayout.CENTER);
-		GridBagLayout gbl_panel = new GridBagLayout();
-		gbl_panel.columnWeights = new double[]{0.0, 0.0, 1.0, 0.0, 0.0};
-		gbl_panel.rowHeights = new int[]{0, 0, 0, 0, 17, 31, 0};
-		gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0};
-		panel.setLayout(gbl_panel);
+		panel.setLayout(new GridBagLayout());
 		panel.setBorder(BorderFactory.createTitledBorder("Datos"));
 		
 		//Con un for cargar las lineas guardadas en la Base de datos, pero solo el nombre
@@ -62,33 +61,34 @@ public class RegistrarTrayectoGUI extends JFrame {
 		GridBagConstraints gbc_lblOrigen = new GridBagConstraints();
 		gbc_lblOrigen.anchor = GridBagConstraints.EAST;
 		gbc_lblOrigen.insets = new Insets(0, 0, 5, 5);
-		gbc_lblOrigen.gridx = 1;
-		gbc_lblOrigen.gridy = 1;
+		gbc_lblOrigen.gridx = 0;
+		gbc_lblOrigen.gridy = 0;
 		panel.add(lblOrigen, gbc_lblOrigen);
 		
 		GridBagConstraints gbc_cbxOrigen = new GridBagConstraints();
+		gbc_cbxOrigen.anchor = GridBagConstraints.WEST;
 		gbc_cbxOrigen.insets = new Insets(0, 0, 5, 5);
-		gbc_cbxOrigen.fill = GridBagConstraints.HORIZONTAL;
-		gbc_cbxOrigen.gridx = 2;
-		gbc_cbxOrigen.gridy = 1;
+		gbc_cbxOrigen.gridx = 1;
+		gbc_cbxOrigen.gridy = 0;
 		panel.add(cbxOrigen, gbc_cbxOrigen);
 		
 		JLabel lblDurViaje = new JLabel("Duraci\u00F3n del Viaje:");
 		GridBagConstraints gbc_lblDurViaje = new GridBagConstraints();
 		gbc_lblDurViaje.anchor = GridBagConstraints.EAST;
 		gbc_lblDurViaje.insets = new Insets(0, 0, 5, 5);
-		gbc_lblDurViaje.gridx = 3;
-		gbc_lblDurViaje.gridy = 1;
+		gbc_lblDurViaje.gridx = 2;
+		gbc_lblDurViaje.gridy = 0;
 		panel.add(lblDurViaje, gbc_lblDurViaje);
 		
 		tbxDurViaje = new JTextField();
 		GridBagConstraints gbc_tbxDurViaje = new GridBagConstraints();
-		gbc_tbxDurViaje.insets = new Insets(0, 0, 5, 0);
-		gbc_tbxDurViaje.fill = GridBagConstraints.HORIZONTAL;
-		gbc_tbxDurViaje.gridx = 4;
-		gbc_tbxDurViaje.gridy = 1;
+		gbc_tbxDurViaje.anchor = GridBagConstraints.WEST;
+		gbc_tbxDurViaje.insets = new Insets(0, 0, 5, 5);
+		gbc_tbxDurViaje.gridx = 3;
+		gbc_tbxDurViaje.gridy = 0;
 		panel.add(tbxDurViaje, gbc_tbxDurViaje);
 		tbxDurViaje.setColumns(10);
+		
 		tbxDurViaje.addKeyListener(new KeyAdapter() {
 		    public void keyTyped(KeyEvent e) {
 		      char c = e.getKeyChar();
@@ -105,34 +105,35 @@ public class RegistrarTrayectoGUI extends JFrame {
 		GridBagConstraints gbc_lblDestino = new GridBagConstraints();
 		gbc_lblDestino.anchor = GridBagConstraints.EAST;
 		gbc_lblDestino.insets = new Insets(0, 0, 5, 5);
-		gbc_lblDestino.gridx = 1;
-		gbc_lblDestino.gridy = 2;
+		gbc_lblDestino.gridx = 0;
+		gbc_lblDestino.gridy = 1;
 		panel.add(lblDestino, gbc_lblDestino);
 		
 		
 		GridBagConstraints gbc_cbxDestino = new GridBagConstraints();
+		gbc_cbxDestino.anchor = GridBagConstraints.WEST;
 		gbc_cbxDestino.insets = new Insets(0, 0, 5, 5);
-		gbc_cbxDestino.fill = GridBagConstraints.HORIZONTAL;
-		gbc_cbxDestino.gridx = 2;
-		gbc_cbxDestino.gridy = 2;
+		gbc_cbxDestino.gridx = 1;
+		gbc_cbxDestino.gridy = 1;
 		panel.add(cbxDestino, gbc_cbxDestino);
 		
 		JLabel lblCMPasajeros = new JLabel("Cantidad m\u00E1xima de Pasajeros:");
 		GridBagConstraints gbc_lblCMPasajeros = new GridBagConstraints();
 		gbc_lblCMPasajeros.anchor = GridBagConstraints.EAST;
 		gbc_lblCMPasajeros.insets = new Insets(0, 0, 5, 5);
-		gbc_lblCMPasajeros.gridx = 3;
-		gbc_lblCMPasajeros.gridy = 2;
+		gbc_lblCMPasajeros.gridx = 2;
+		gbc_lblCMPasajeros.gridy = 1;
 		panel.add(lblCMPasajeros, gbc_lblCMPasajeros);
 		
 		tbxCMPasajeros = new JTextField();
 		tbxCMPasajeros.setColumns(10);
 		GridBagConstraints gbc_tbxCMPasajeros = new GridBagConstraints();
-		gbc_tbxCMPasajeros.insets = new Insets(0, 0, 5, 0);
-		gbc_tbxCMPasajeros.fill = GridBagConstraints.HORIZONTAL;
-		gbc_tbxCMPasajeros.gridx = 4;
-		gbc_tbxCMPasajeros.gridy = 2;
+		gbc_tbxCMPasajeros.anchor = GridBagConstraints.WEST;
+		gbc_tbxCMPasajeros.insets = new Insets(0, 0, 5, 5);
+		gbc_tbxCMPasajeros.gridx = 3;
+		gbc_tbxCMPasajeros.gridy = 1;
 		panel.add(tbxCMPasajeros, gbc_tbxCMPasajeros);
+		
 		tbxCMPasajeros.addKeyListener(new KeyAdapter() {
 		    public void keyTyped(KeyEvent e) {
 		      char c = e.getKeyChar();
@@ -149,18 +150,19 @@ public class RegistrarTrayectoGUI extends JFrame {
 		GridBagConstraints gbc_lblDistancia = new GridBagConstraints();
 		gbc_lblDistancia.anchor = GridBagConstraints.EAST;
 		gbc_lblDistancia.insets = new Insets(0, 0, 5, 5);
-		gbc_lblDistancia.gridx = 1;
-		gbc_lblDistancia.gridy = 3;
+		gbc_lblDistancia.gridx = 0;
+		gbc_lblDistancia.gridy = 2;
 		panel.add(lblDistancia, gbc_lblDistancia);
 		
 		tbxDistancia = new JTextField();
 		GridBagConstraints gbc_tbxDistancia = new GridBagConstraints();
-		gbc_tbxDistancia.fill = GridBagConstraints.HORIZONTAL;
+		gbc_tbxDistancia.anchor = GridBagConstraints.WEST;
 		gbc_tbxDistancia.insets = new Insets(0, 0, 5, 5);
-		gbc_tbxDistancia.gridx = 2;
-		gbc_tbxDistancia.gridy = 3;
+		gbc_tbxDistancia.gridx = 1;
+		gbc_tbxDistancia.gridy = 2;
 		panel.add(tbxDistancia, gbc_tbxDistancia);
 		tbxDistancia.setColumns(10);
+		
 		tbxDistancia.addKeyListener(new KeyAdapter() {
 		    public void keyTyped(KeyEvent e) {
 		      char c = e.getKeyChar();
@@ -177,17 +179,17 @@ public class RegistrarTrayectoGUI extends JFrame {
 		GridBagConstraints gbc_lblCosto = new GridBagConstraints();
 		gbc_lblCosto.anchor = GridBagConstraints.EAST;
 		gbc_lblCosto.insets = new Insets(0, 0, 5, 5);
-		gbc_lblCosto.gridx = 3;
-		gbc_lblCosto.gridy = 3;
+		gbc_lblCosto.gridx = 2;
+		gbc_lblCosto.gridy = 2;
 		panel.add(lblCosto, gbc_lblCosto);
 		
 		tbxCosto = new JTextField();
 		tbxCosto.setColumns(10);
 		GridBagConstraints gbc_tbxCosto = new GridBagConstraints();
-		gbc_tbxCosto.insets = new Insets(0, 0, 5, 0);
-		gbc_tbxCosto.fill = GridBagConstraints.HORIZONTAL;
-		gbc_tbxCosto.gridx = 4;
-		gbc_tbxCosto.gridy = 3;
+		gbc_tbxCosto.anchor = GridBagConstraints.WEST;
+		gbc_tbxCosto.insets = new Insets(0, 0, 5, 5);
+		gbc_tbxCosto.gridx = 3;
+		gbc_tbxCosto.gridy = 2;
 		panel.add(tbxCosto, gbc_tbxCosto);
 		tbxCosto.addKeyListener(new KeyAdapter() {
 		    public void keyTyped(KeyEvent e) {
@@ -205,7 +207,7 @@ public class RegistrarTrayectoGUI extends JFrame {
 		GridBagConstraints gbc_lblEstado = new GridBagConstraints();
 		gbc_lblEstado.anchor = GridBagConstraints.EAST;
 		gbc_lblEstado.insets = new Insets(0, 0, 5, 5);
-		gbc_lblEstado.gridx = 2;
+		gbc_lblEstado.gridx = 0;
 		gbc_lblEstado.gridy = 4;
 		panel.add(lblEstado, gbc_lblEstado);
 		
@@ -213,7 +215,7 @@ public class RegistrarTrayectoGUI extends JFrame {
 		GridBagConstraints gbc_cbxEstado = new GridBagConstraints();
 		gbc_cbxEstado.anchor = GridBagConstraints.WEST;
 		gbc_cbxEstado.insets = new Insets(0, 0, 5, 5);
-		gbc_cbxEstado.gridx = 3;
+		gbc_cbxEstado.gridx = 1;
 		gbc_cbxEstado.gridy = 4;
 		cbxEstado.addItem("Activa");
 		cbxEstado.addItem("No Activa");
@@ -221,13 +223,15 @@ public class RegistrarTrayectoGUI extends JFrame {
 		
 		panelFrame.add(panel, BorderLayout.CENTER);
 		
-		JButton agregarItem = new JButton("Agregar Trayecto");
-		GridBagConstraints gbc_agregarItem = new GridBagConstraints();
-		gbc_agregarItem.insets = new Insets(0, 0, 0, 5);
-		gbc_agregarItem.anchor = GridBagConstraints.EAST;
-		gbc_agregarItem.gridx = 3;
-		gbc_agregarItem.gridy = 5;
-		panel.add(agregarItem, gbc_agregarItem);
+		JPanel botones = new JPanel();
+		botones.setLayout(new FlowLayout());
+		
+		JButton agregarItem = new JButton("Agregar");
+		agregarItem.setIcon(new ImageIcon(".\\res\\ruta.png")); 
+		agregarItem.setMargin(new Insets(0, 0, 0, 0));             
+		agregarItem.setHorizontalTextPosition(SwingConstants.CENTER);
+		agregarItem.setVerticalTextPosition(SwingConstants.BOTTOM);
+		botones.add(agregarItem);
 		
 		agregarItem.addActionListener(e->{
 			try{
@@ -240,11 +244,12 @@ public class RegistrarTrayectoGUI extends JFrame {
 		});
 		
 		JButton guardar = new JButton("Guardar");
-		GridBagConstraints gbc_guardar = new GridBagConstraints();
-		gbc_guardar.anchor = GridBagConstraints.LINE_END;
-		gbc_guardar.gridx = 3;
-		gbc_guardar.gridy = 6;
-		panel.add(guardar, gbc_guardar);
+		guardar.setIcon(new ImageIcon(".\\res\\guardar.png"));
+		guardar.setMargin(new Insets(0, 0, 0, 0));
+		guardar.setHorizontalTextPosition(SwingConstants.CENTER);    
+		guardar.setVerticalTextPosition(SwingConstants.BOTTOM);      
+		botones.add(guardar);
+		
 		guardar.addActionListener(e->{
 			try {
 				controller.guardar();
@@ -256,16 +261,18 @@ public class RegistrarTrayectoGUI extends JFrame {
 		});
 	
 		JButton cancelar = new JButton("Cancelar");
-		GridBagConstraints gbc_cancelar = new GridBagConstraints();
-		gbc_cancelar.anchor = GridBagConstraints.LINE_START;
-		gbc_cancelar.gridx = 4;
-		gbc_cancelar.gridy = 6;
-		panel.add(cancelar, gbc_cancelar);
+		cancelar.setIcon(new ImageIcon(".\\res\\cancelar.png"));
+		cancelar.setMargin(new Insets(0, 0, 0, 0));
+		cancelar.setHorizontalTextPosition(SwingConstants.CENTER);    
+		cancelar.setVerticalTextPosition(SwingConstants.BOTTOM);      
+		botones.add(cancelar);
+		
 		guardar.addActionListener(e->{
 			controller.imprimir();
 		});
 		cancelar.addActionListener(e -> dispose());
 		
+		panelFrame.add(botones, BorderLayout.SOUTH);
 		
 		this.getContentPane().add(panelFrame);
 		this.pack();
@@ -274,6 +281,11 @@ public class RegistrarTrayectoGUI extends JFrame {
 		
 		
 	}
+	
+	public void refresh() {
+		SwingUtilities.updateComponentTreeUI(this);
+	}
+	
 	public void mostrarError(String titulo,String detalle) {
 		JFrame padre= (JFrame) SwingUtilities.getWindowAncestor(this);
 		JOptionPane.showMessageDialog(padre,

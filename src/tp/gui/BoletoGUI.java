@@ -51,6 +51,8 @@ public class BoletoGUI extends JFrame {
 	private JButton btnCancelar;
 	
 	public BoletoGUI() {
+		this.setUndecorated(true); 
+		this.setResizable(false);
 		this.controller = new BoletoController(this);
 		controller.cargarEstaciones();
 		

@@ -40,6 +40,9 @@ import tp.modelosTabla.PageRankTableModel;
 public class ParametrosGUI extends JFrame {
 	
 	public ParametrosGUI() {
+		this.setUndecorated(true); 
+		this.setResizable(false);
+		
 		JPanel panelFrame = new JPanel();
 		panelFrame.setLayout(new BorderLayout());
 		
