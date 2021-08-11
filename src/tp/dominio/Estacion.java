@@ -50,8 +50,7 @@ public class Estacion {
 		this.horarioCierre = horarioCierre;
 	}
 	public Integer getEstado() {
-		if(this.estado) return 1;
-		else return 0;
+		return this.estado ? 1 : 0;
 	}
 	public void setEstado(Boolean estado) {
 		this.estado = estado;
