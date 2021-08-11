@@ -3,14 +3,16 @@ package tp.dominio;
 import java.util.ArrayList;
 
 public class Linea {
+	Integer id;
 	String nombre;
 	String color;
 	Boolean estado; // 0 No activa, 1 Activa
 	ArrayList<Ruta> recorrido = new ArrayList<Ruta>();
 	
 	//Constructor
-	public Linea(String nombre, String color, Boolean estado) {
+	public Linea(Integer id, String nombre, String color, Boolean estado) {
 		super();
+		this.id = id;
 		this.nombre = nombre;
 		this.color = color;
 		this.estado = estado;
@@ -56,6 +58,14 @@ public class Linea {
 
 	public void setEstado(Boolean estado) {
 		this.estado = estado;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 	
 	

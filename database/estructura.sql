@@ -42,5 +42,6 @@ CREATE TABLE Ruta(
 	maxPasajeros int,
 	estado varchar(1),
 	costo int,
-	orden int
+	orden int,
+	linea int
 );

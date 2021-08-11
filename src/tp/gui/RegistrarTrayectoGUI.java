@@ -6,6 +6,7 @@ import javax.swing.*;
 
 import tp.Excepciones.DatosObligatoriosException;
 import tp.controller.BoletoController;
+import tp.controller.LineaController;
 import tp.controller.TrayectoController;
 import tp.dominio.Estacion;
 

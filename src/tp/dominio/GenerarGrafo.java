@@ -3,8 +3,12 @@ package tp.dominio;
 import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.List;
+
+import tp.servicios.RutaServicio;
 
 public class GenerarGrafo {
+	private RutaServicio rutaservicio;
 	
 	public static Boolean isNumber(char x) {
 		if(x >= '0' && x<='9') return true;
@@ -30,7 +34,7 @@ public class GenerarGrafo {
 	
 	
 	public ArrayList<ArrayList<Ruta>> getGrafo(){
-		ArrayList<Linea> lineas = new ArrayList<Linea>(); // pedir a la BD que me de todas las lineas 
+//		ArrayList<Linea> lineas = new ArrayList<Linea>(); // pedir a la BD que me de todas las lineas 
 //		//genero 3 lineas
 //		lineas.add(new Linea("linea 1", "azul", true));
 //		lineas.add(new Linea("linea 2", "verde", true));
@@ -61,27 +65,47 @@ public class GenerarGrafo {
 //		recorridoLinea.add(new Ruta(estaciones.get(4), estaciones.get(5), 65, 96,17,true,49,1));
 //		recorridoLinea.add(new Ruta(estaciones.get(5), estaciones.get(3), 40, 52,22,true,29,2));
 //		lineas.get(2).setRecorrido(recorridoLinea);
-		int N = 1;
-		for(Linea l :lineas) {
-			ArrayList<Ruta> recorrido = l.getRecorrido();
-			for(Ruta r : recorrido) {
-				N = Math.max(N, r.getOrigen().getId()+1);
-				N = Math.max(N, r.getDestino().getId()+1);
-			}
+//		int N = 1;
+//		for(Linea l :lineas) {
+//			ArrayList<Ruta> recorrido = l.getRecorrido();
+//			for(Ruta r : recorrido) {
+//				N = Math.max(N, r.getOrigen().getId()+1);
+//				N = Math.max(N, r.getDestino().getId()+1);
+//			}
+//		}
+		rutaservicio = new RutaServicio();
+		List<Ruta> rutas = rutaservicio.obtenerTodas();
+		int N = 1; 
+		for(Ruta r : rutas) {
+			N = Math.max(N, r.getOrigen().getId()+1);
+			N = Math.max(N, r.getDestino().getId()+1);
 		}
 		ArrayList<ArrayList<Ruta>> grafo = new ArrayList<ArrayList<Ruta>>();
+		
 		for(int i=0; i<N; i++) grafo.add(new ArrayList<Ruta>());
-		for(Linea l : lineas) {
-			if(l.getEstado2()) { // si la linea esta activa
-				ArrayList<Ruta> recorrido = l.getRecorrido();
+		
+//		for(Linea l : lineas) {
+//			if(l.getEstado2()) { // si la linea esta activa
+//				ArrayList<Ruta> recorrido = l.getRecorrido();
+//				Boolean activas = true; // rutas y estaciones activas?
+//				for(Ruta r : recorrido) {
+//					activas&=r.getEstado2();
+//					activas&=r.getOrigen().getEstado2();
+//					activas&=r.getDestino().getEstado2();
+//				}
+//				if(!activas) continue;
+//				for(Ruta r : recorrido) grafo.get(r.getOrigen().getId()).add(r);
+//			}
+//		}
+		for(Ruta r : rutas) {
+			if(r.getLinea().getEstado2()) { // si la linea esta activa
+				
 				Boolean activas = true; // rutas y estaciones activas?
-				for(Ruta r : recorrido) {
-					activas&=r.getEstado2();
-					activas&=r.getOrigen().getEstado2();
-					activas&=r.getDestino().getEstado2();
-				}
+				activas&=r.getEstado2();
+				activas&=r.getOrigen().getEstado2();
+				activas&=r.getDestino().getEstado2();
 				if(!activas) continue;
-				for(Ruta r : recorrido) grafo.get(r.getOrigen().getId()).add(r);
+				grafo.get(r.getOrigen().getId()).add(r);
 			}
 		}
 		return grafo;

@@ -8,7 +8,7 @@ public class Ruta {
 	Integer maxPasajeros;
 	Boolean estado;
 	Integer costo;
-	Linea id;
+	Linea linea;
 	Integer orden; // define el orden de la ruta, es para la BD
 	long[] datos = new long[4]; // 0 tiempo, 1 dist, 2 costo, 3 flow;
 	
@@ -18,7 +18,7 @@ public class Ruta {
 	}
 	
 	public Ruta(Estacion origen, Estacion destino, Integer distancia, Integer tiempoViaje, Integer maxPasajeros,
-			Boolean estado, Integer costo, Integer orden) {
+			Boolean estado, Integer costo, Linea linea, Integer orden) {
 		super();
 		this.origen = origen;
 		this.destino = destino;
@@ -48,12 +48,12 @@ public class Ruta {
 
 	
 	//Getters and Setters
-	public Linea getId() {
-		return id;
+	public Linea getLinea() {
+		return linea;
 	}
 	
-	public void setId(Linea id) {
-		this.id = id;
+	public void setLinea(Linea id) {
+		this.linea = id;
 	}
 	public Estacion getOrigen() {
 		return origen;

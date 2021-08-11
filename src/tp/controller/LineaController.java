@@ -17,10 +17,8 @@ import tp.servicios.LineaServicio;
 public class LineaController {
 	
 	private LineaServicio lineaServicio;
-	HashSet<Integer> visited = new HashSet<Integer>();
 	private LineaGUI lineagui;
 	private Linea linea;
-	private List<Linea> lista;
 	private String pk;
 	
 	public LineaController(LineaGUI lg) {
@@ -28,6 +26,7 @@ public class LineaController {
 		this.lineagui = lg;
 		linea = new Linea();
 	}
+	
 	
 	public void altaLinea() throws DatosObligatoriosException {
 		try{
@@ -90,7 +89,6 @@ public class LineaController {
 		System.out.println(lin.getNombre());
 		
 		linea = lin;
-		
 		lineagui.getTbxNombre().setText(lin.getNombre());
 		lineagui.getTbxColor().setText(lin.getColor());
 		lineagui.getCbxEstado().setSelectedIndex(lin.getEstado() == 1 ? 0 : 1); 

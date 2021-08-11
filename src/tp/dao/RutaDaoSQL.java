@@ -10,8 +10,10 @@ import java.util.List;
 
 import tp.dao.utils.DB;
 import tp.dominio.Estacion;
+import tp.dominio.Linea;
 import tp.dominio.Ruta;
 import tp.servicios.EstacionServicio;
+import tp.servicios.LineaServicio;
 
 public class RutaDaoSQL implements RutaDao{
 	
@@ -37,7 +39,8 @@ public class RutaDaoSQL implements RutaDao{
 			pstmt.setInt(5, r.getMaxPasajeros());
 			pstmt.setString(6, Integer.toBinaryString(r.getEstado()));
 			pstmt.setInt(7, r.getCosto());
-			pstmt.setInt(8,  r.getOrden());
+			pstmt.setInt(8, r.getLinea().getId());
+			pstmt.setInt(9, r.getOrden());
 			pstmt.executeUpdate();
 		}
 		catch(SQLException e){
@@ -65,6 +68,8 @@ public class RutaDaoSQL implements RutaDao{
 		Ruta r = null;
 		EstacionServicio estacionservicio = new EstacionServicio();
 		List<Estacion> estaciones = estacionservicio.buscarTodas();
+		LineaServicio lineaservicio = new LineaServicio();
+		List<Linea> lineas =  lineaservicio.buscarTodas();
 		
 		try {
 			pstmt = conn.prepareStatement(SELECT_ALL_RUTA);
@@ -79,6 +84,7 @@ public class RutaDaoSQL implements RutaDao{
 				r.setEstado(rs.getBoolean("ESTADO"));
 				r.setCosto(rs.getInt("COSTO"));
 				r.setOrden(rs.getInt("ORDEN"));
+				r.setLinea(lineas.get(rs.getInt("LINEA")));
 				lista.add(r);
 			}
 		}

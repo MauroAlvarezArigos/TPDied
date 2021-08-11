@@ -10,6 +10,7 @@ import javax.swing.JComboBox;
 import tp.Excepciones.DatosObligatoriosException;
 import tp.dominio.Boleto;
 import tp.dominio.Estacion;
+import tp.dominio.Linea;
 import tp.dominio.Ruta;
 import tp.gui.BoletoGUI;
 import tp.gui.RegistrarTrayectoGUI;
@@ -102,6 +103,7 @@ public class TrayectoController {
 				r.setOrigen(estOrigen);
 				r.setDestino(estDestino);
 				r.setOrden(orden);
+				
 				orden++;
 			}
 			else throw new DatosObligatoriosException("Origen es igual a destino", "El origen tiene que ser distinto del Destino");
@@ -117,7 +119,8 @@ public class TrayectoController {
 	public void agregarItem() throws DatosObligatoriosException{
 		try {
 			checkItem();
-			Ruta auxRuta = new Ruta(r.getOrigen(), r.getDestino(), r.getDistancia(), r.getTiempoViaje(), r.getMaxPasajeros(), r.getEstado2(), r.getCosto(), r.getOrden());
+			System.out.println("TODO " + r.getLinea().getId());
+			Ruta auxRuta = new Ruta(r.getOrigen(), r.getDestino(), r.getDistancia(), r.getTiempoViaje(), r.getMaxPasajeros(), r.getEstado2(), r.getCosto(), r.getLinea(), r.getOrden());
 			rutas.add(auxRuta);
 //			for(int i = 0; i < rutas.size(); i++) {
 //				System.out.println("AGREGOX " + rutas.get(i).getOrigen().getNombre() + " " + rutas.get(i).getDestino().getNombre()); 
@@ -131,7 +134,7 @@ public class TrayectoController {
 	}
 	public void imprimir() {
 		for(Ruta r : rutas) {
-			System.out.println(r.getOrigen().getNombre() + " " + r.getDestino().getNombre());
+			System.out.println(r.getOrigen().getNombre() + " " + r.getDestino().getNombre() + " " + r.getLinea().getId());
 		}
 	}
 	public void guardar() throws Exception {
