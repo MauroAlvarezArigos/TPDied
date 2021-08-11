@@ -127,7 +127,13 @@ public class Ruta {
 	public long getDato(int tipo) {
 		return this.datos[tipo];
 	}
-	
+	public void actualizarDatos() {
+		this.datos[0] = this.tiempoViaje;
+		this.datos[1] = this.distancia;
+		this.datos[2] = this.costo;
+		this.datos[3] = this.maxPasajeros;
+
+	}
 	public void changeFlow(int delta) {
 		this.maxPasajeros += delta;
 		this.datos[3] += delta;

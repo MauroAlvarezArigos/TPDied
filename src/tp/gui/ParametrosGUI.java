@@ -19,6 +19,7 @@ import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
 
@@ -36,10 +37,13 @@ import tp.dominio.PageRank;
 import tp.dominio.Pair;
 import tp.dominio.Ruta;
 import tp.modelosTabla.PageRankTableModel;
+import tp.servicios.EstacionServicio;
 
 public class ParametrosGUI extends JFrame {
+	private EstacionServicio estacionservicio;
 	
 	public ParametrosGUI() {
+		estacionservicio = new EstacionServicio();
 		this.setUndecorated(true); 
 		this.setResizable(false);
 		
@@ -90,12 +94,13 @@ public class ParametrosGUI extends JFrame {
 		gbc_cbxDestino.gridy = 2;
 		
 		// pido las estaciones
-		ArrayList<Estacion> estaciones = new ArrayList<Estacion>();
-		Timestamp time1 = new Timestamp(System.currentTimeMillis());
-		Timestamp time2 = new Timestamp(System.currentTimeMillis()+60000);
-		estaciones.add(new Estacion(0, "Est 0", time1, time2, true));
-		estaciones.add(new Estacion(1, "Est 1", time1, time2, true));
-		estaciones.add(new Estacion(2, "Est 2", time1, time2, true));
+//		ArrayList<Estacion> estaciones = new ArrayList<Estacion>();
+//		Timestamp time1 = new Timestamp(System.currentTimeMillis());
+//		Timestamp time2 = new Timestamp(System.currentTimeMillis()+60000);
+//		estaciones.add(new Estacion(0, "Est 0", time1, time2, true));
+//		estaciones.add(new Estacion(1, "Est 1", time1, time2, true));
+//		estaciones.add(new Estacion(2, "Est 2", time1, time2, true));
+		ArrayList<Estacion> estaciones = (ArrayList<Estacion>)estacionservicio.buscarTodas();
 		for(Estacion e : estaciones) {
 			cbxOrigen.addItem(e);
 			cbxDestino.addItem(e);
@@ -179,9 +184,6 @@ public class ParametrosGUI extends JFrame {
 		mant.setLayout(gbl_mant);
 		
 		
-		//ESTO HAY QUE CAMBIARLO POR UN PEDIDO A LA BASE DE DATO DE LAS ESTACIONES
-//		ArrayList<Estacion> estaciones = new ArrayList<Estacion>();
-//		
 		int N = estaciones.size();
 		for(int i=0; i<N; i++) estaciones.get(i).setUltimoMantenimiento(new Timestamp(System.currentTimeMillis()+70000*i));
 		estaciones.get(2).setUltimoMantenimiento(new Timestamp(System.currentTimeMillis() - 100000));

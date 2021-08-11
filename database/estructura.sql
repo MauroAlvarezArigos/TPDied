@@ -19,10 +19,11 @@ CREATE TABLE Boleto(
 );
 
 CREATE TABLE Linea(
+	idlinea serial,
 	nombre varchar(50),
 	color varchar(50),
 	estado varchar(1),
-	CONSTRAINT nombre_pk PRIMARY KEY (nombre)
+	CONSTRAINT idlinea_pk PRIMARY KEY (idlinea)
 );
 
 CREATE TABLE Mantenimiento(

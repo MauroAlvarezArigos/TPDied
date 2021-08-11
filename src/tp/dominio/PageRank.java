@@ -13,12 +13,20 @@ public class PageRank {
 				int N=grafo.size();
 				int[] pageRank = new int[N];
 				for(int i=0; i<N; i++) pageRank[i]=0;
-				
+//				for(int i=0; i<N; i++) {
+//					System.out.println("PrankGRAFO " + i);
+//					for(Ruta r : grafo.get(i)) {
+//						System.out.println("ruta " + r.getOrigen().getNombre() + " " + r.getDestino().getNombre());
+//					}
+//				}
 				//actualizo pagerank segun corresponda
 				for(int i=0; i<N;i++) for(Ruta r : grafo.get(i)) pageRank[r.getDestino().getId()]++;
+//				System.out.println("PAGE RANK");
+//				for(int i=0; i<N;i++) {
+//					System.out.println(pageRank[i]);
+//				}
 				ArrayList<Pair> pRank= new ArrayList<Pair>();
 				for(Estacion e : estaciones) pRank.add(new Pair(pageRank[e.getId()], e));
-				
 				//printeo estaciones por indice
 //				System.out.println(" SIN ORDENAR ");
 //				for(Pair p : pRank) 	System.out.println(p.first + " " + p.second.getId());

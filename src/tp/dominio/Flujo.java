@@ -43,7 +43,6 @@ public class Flujo {
 		grafo.get(SRC).add(new Ruta(e, INF));
 		Estacion e2 = new Estacion(SNK, null, null, null, true);
 		grafo.get(snk).add(new Ruta(e2, INF));
-
 		do {
 			f=0;
 			Boolean[] used = new Boolean[N];
@@ -102,6 +101,7 @@ public class Flujo {
 	}
 	
 	public long getMaxFlow(int src, int snk, ArrayList<ArrayList<Ruta>> grafo) {
+
 		return maxFlow(src,snk, grafoValido(src, grafo));
 	}
 	

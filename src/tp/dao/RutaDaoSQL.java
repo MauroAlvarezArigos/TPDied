@@ -19,8 +19,8 @@ public class RutaDaoSQL implements RutaDao{
 	
 	
 	private static final String INSERT_RUTA =
-			" INSERT INTO RUTA (ORIGEN, DESTINO, DISTANCIA,  TIEMPOVIAJE, MAXPASAJEROS, ESTADO, COSTO, ORDEN) "
-			+ " VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
+			" INSERT INTO RUTA (ORIGEN, DESTINO, DISTANCIA,  TIEMPOVIAJE, MAXPASAJEROS, ESTADO, COSTO, ORDEN, LINEA) "
+			+ " VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	
 	private static final String SELECT_ALL_RUTA =
 			"SELECT * FROM RUTA";
@@ -76,8 +76,8 @@ public class RutaDaoSQL implements RutaDao{
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				r = new Ruta ();
-				r.setOrigen(estaciones.get(rs.getInt("ORIGEN")));
-				r.setDestino(estaciones.get(rs.getInt("DESTINO")));
+				r.setOrigen(estaciones.get(rs.getInt("ORIGEN")-1));
+				r.setDestino(estaciones.get(rs.getInt("DESTINO")-1));
 				r.setDistancia(rs.getInt("DISTANCIA"));
 				r.setTiempoViaje(rs.getInt("TIEMPOVIAJE"));
 				r.setMaxPasajeros(rs.getInt("MAXPASAJEROS"));
@@ -85,6 +85,7 @@ public class RutaDaoSQL implements RutaDao{
 				r.setCosto(rs.getInt("COSTO"));
 				r.setOrden(rs.getInt("ORDEN"));
 				r.setLinea(lineas.get(rs.getInt("LINEA")));
+				r.actualizarDatos();
 				lista.add(r);
 			}
 		}

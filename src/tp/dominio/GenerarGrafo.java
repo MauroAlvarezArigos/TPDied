@@ -77,6 +77,9 @@ public class GenerarGrafo {
 		List<Ruta> rutas = rutaservicio.obtenerTodas();
 		int N = 1; 
 		for(Ruta r : rutas) {
+			System.out.println("RUTA " + r.getOrigen().getId() + " " + r.getOrigen().getId());
+		}
+		for(Ruta r : rutas) {
 			N = Math.max(N, r.getOrigen().getId()+1);
 			N = Math.max(N, r.getDestino().getId()+1);
 		}
@@ -108,6 +111,12 @@ public class GenerarGrafo {
 				grafo.get(r.getOrigen().getId()).add(r);
 			}
 		}
+//		for(int i=0; i<N; i++) {
+//			System.out.println("GRAFO " + i);
+//			for(Ruta r : grafo.get(i)) {
+//				System.out.println("ruta " + r.getOrigen().getNombre() + " " + r.getDestino().getNombre());
+//			}
+//		}
 		return grafo;
 	}
 	

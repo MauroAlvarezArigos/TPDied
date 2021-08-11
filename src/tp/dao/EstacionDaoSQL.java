@@ -153,6 +153,9 @@ public class EstacionDaoSQL implements EstacionDao{
 				es = new Estacion ();
 				es.setId(rs.getInt("ID"));
 				es.setNombre(rs.getString("NOMBRE"));
+				es.setHorarioApertura(rs.getTimestamp("HORARIOAPERTURA"));
+				es.setHorarioCierre(rs.getTimestamp("HORARIOCIERRE"));
+			  	es.setEstado(rs.getBoolean("ESTADO"));
 				lista.add(es);
 			}
 		}

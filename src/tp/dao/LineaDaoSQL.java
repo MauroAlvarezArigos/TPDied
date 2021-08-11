@@ -78,7 +78,7 @@ public class LineaDaoSQL implements LineaDao{
 			pstmt.setString(1, l.getNombre());
 			pstmt.setString(2, l.getColor());
 			pstmt.setString(3, Integer.toBinaryString(l.getEstado()));
-			pstmt.setString(4, pk);
+		//	pstmt.setString(4, pk);
 			pstmt.executeUpdate();
 	
 		}catch(SQLException e) {
@@ -162,6 +162,8 @@ public class LineaDaoSQL implements LineaDao{
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				l = new Linea ();
+				l.setId(rs.getInt("IDLINEA"));
+				l.setEstado(rs.getBoolean("ESTADO"));
 				l.setNombre(rs.getString("NOMBRE"));
 				l.setColor(rs.getString("COLOR"));
 				lista.add(l);
@@ -194,6 +196,7 @@ public class LineaDaoSQL implements LineaDao{
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				Linea l = new Linea();
+				l.setId(rs.getInt("IDLINEA"));
 				l.setNombre(rs.getString("NOMBRE"));
 				l.setColor(rs.getString("COLOR"));
 				l.setEstado(rs.getBoolean("ESTADO"));
