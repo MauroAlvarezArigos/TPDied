@@ -200,6 +200,7 @@ public class EstacionController {
 		long segxmin = 60000;
 		long hora = (s.charAt(0)-'0')*10 + s.charAt(1)-'0';
 		long min = (s.charAt(3)-'0')*10 + s.charAt(4)-'0';
+		if(hora>=24 || min>=60) return null;
 		ts.setTime((long) segxmin * 60 * 3 + (long) segxmin * min + hora*segxmin*60); 
 		return ts;
 	}
