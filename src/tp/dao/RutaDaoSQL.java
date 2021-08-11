@@ -41,8 +41,8 @@ public class RutaDaoSQL implements RutaDao{
 			pstmt.setInt(5, r.getMaxPasajeros());
 			pstmt.setString(6, Integer.toBinaryString(r.getEstado()));
 			pstmt.setInt(7, r.getCosto());
-			pstmt.setInt(8, r.getLinea().getId());
-			pstmt.setInt(9, r.getOrden());
+			pstmt.setInt(8, r.getOrden());
+			pstmt.setInt(9, r.getLinea().getId());
 			pstmt.executeUpdate();
 		}
 		catch(SQLException e){
@@ -72,11 +72,15 @@ public class RutaDaoSQL implements RutaDao{
 		HashMap<Integer,Estacion> estaciones = estacionservicio.buscarTodasMap();
 		LineaServicio lineaservicio = new LineaServicio();
 		HashMap<Integer,Linea> lineas =  lineaservicio.buscarTodasMap();
-		
+//		System.out.println("IDS");
+//		for (Map.Entry<Integer,Linea> entry : lineas.entrySet()) {
+//			System.out.println(entry.getKey());
+//		}
 		try {
 			pstmt = conn.prepareStatement(SELECT_ALL_RUTA);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
+				//System.out.println(rs.getInt("Linea") + " " + lineas.size());
 				r = new Ruta ();
 				r.setOrigen(estaciones.get(rs.getInt("ORIGEN")));
 				r.setDestino(estaciones.get(rs.getInt("DESTINO")));

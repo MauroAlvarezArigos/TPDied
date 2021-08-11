@@ -105,8 +105,6 @@ public class TrayectoController {
 				r.setDestino(estDestino);
 				r.setOrden(orden);
 				r.setLinea(registrartrayectogui.getLinea());
-				System.out.println("Regtra tiene linea con id " + registrartrayectogui.getLinea().getId());
-				System.out.println("Ruta tiene linea con id " + r.getLinea().getId());
 				
 				orden++;
 			}
@@ -128,10 +126,6 @@ public class TrayectoController {
 			Ruta auxRuta = new Ruta(r.getOrigen(), r.getDestino(), r.getDistancia(), r.getTiempoViaje(), r.getMaxPasajeros(), r.getEstado2(), r.getCosto(), null, r.getOrden());
 			Linea auxLinea = new Linea(r.getLinea().getId(), r.getLinea().getNombre(), r.getLinea().getColor(), r.getLinea().getEstado2());
 			auxRuta.setLinea(auxLinea);
-			System.out.println("PRINTEO " + r.getLinea().getNombre());
-			System.out.println("PRINTEO 4 " + r.getLinea().getId());
-			System.out.println("PRINTEO 2 " + auxRuta.getLinea().getNombre());
-			System.out.println("PRINTEO 33 " + auxRuta.getLinea().getId());
 			rutas.add(auxRuta);
 		}
 		catch(DatosObligatoriosException e){
@@ -146,9 +140,7 @@ public class TrayectoController {
 	}
 	public void guardar() throws Exception {
 			for(Ruta r : rutas) {
-					System.out.println("probando r " + r.getOrigen().getNombre() + " " + r.getDestino().getNombre() + " " + r.getLinea().getNombre());
-					System.out.println("probando?? " + r.getLinea().getId());
-
+					
 				try {
 					rutaservicio.crearRuta(r);
 				}

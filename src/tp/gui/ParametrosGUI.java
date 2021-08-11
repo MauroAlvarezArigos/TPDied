@@ -149,7 +149,9 @@ public class ParametrosGUI extends JFrame {
 				lblFlujoMax.setText("-");
 			}
 			else {
-				lblFlujoMax.setText("" + new Flujo().getMaxFlow(estOrigen.getId(), estDestino.getId(), grafo)); //PONE ACA LO QUE CALCULASTE 	
+				long maxFlow =  new Flujo().getMaxFlow(estOrigen.getId(), estDestino.getId(), grafo);
+				if(maxFlow >= 100000000) maxFlow=0;
+				lblFlujoMax.setText("" + maxFlow); //PONE ACA LO QUE CALCULASTE 	
 				panel.setVisible(true);
 			}
 		});
