@@ -58,7 +58,10 @@ public class PageRank {
 //					System.out.println("Estacion " + i + " :" + (100/div)*pr[i]);
 //				}
 				ArrayList<Dpair> pRank= new ArrayList<Dpair>();
-				for(Estacion e : estaciones) pRank.add(new Dpair((100/div * pr[e.getId()-1]), e));
+				for(Estacion e : estaciones) {
+					int auxx = (int)((100/div * pr[e.getId()-1])*100);
+					pRank.add(new Dpair(auxx/100.0, e));
+				}
 //				printeo estaciones por indice
 //				System.out.println(" SIN ORDENAR ");
 //				for(Pair p : pRank) 	System.out.println(p.first + " " + p.second.getId());

@@ -168,7 +168,7 @@ public class ParametrosGUI extends JFrame {
 		
 		
 		
-		String[] columnNames = {"Estacion", "Caminos"};
+		String[] columnNames = {"Estacion", "PageRank"};
 		DefaultTableModel dtm = new DefaultTableModel(tabla, columnNames);
 	    final JTable table = new JTable(dtm);
 	    table.setPreferredScrollableViewportSize(new Dimension(250, 100));
