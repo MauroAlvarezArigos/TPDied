@@ -29,6 +29,7 @@ import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
+import tp.dominio.Dpair;
 import tp.dominio.Estacion;
 import tp.dominio.Flujo;
 import tp.dominio.GenerarGrafo;
@@ -157,7 +158,7 @@ public class ParametrosGUI extends JFrame {
 		});
 		
 		//PageRank
-		ArrayList<Pair> pRank = new PageRank().getRank(estaciones);
+		ArrayList<Dpair> pRank = new PageRank().getRank(estaciones);
 		int tam = pRank.size();
 		Object[][] tabla = new Object[tam][2];
 		for(int i=0; i<tam; i++) {

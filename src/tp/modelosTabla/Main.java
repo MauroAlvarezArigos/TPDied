@@ -13,6 +13,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import tp.dominio.Dpair;
 import tp.dominio.Estacion;
 import tp.dominio.PageRank;
 import tp.dominio.Pair;
@@ -33,7 +34,7 @@ public class Main extends JFrame {
 		estaciones.add(new Estacion(0, "Est 0", time1, time2, true));
 		estaciones.add(new Estacion(1, "Est 1", time1, time2, true));
 		estaciones.add(new Estacion(2, "Est 2", time1, time2, true));
-        ArrayList<Pair> pRank = new PageRank().getRank(estaciones);
+        ArrayList<Dpair> pRank = new PageRank().getRank(estaciones);
 		int tam = pRank.size();
 		Object[][] tabla = new Object[tam][2];
 		for(int i=0; i<tam; i++) {
